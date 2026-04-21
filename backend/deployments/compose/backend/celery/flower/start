@@ -3,7 +3,5 @@
 set -o errexit
 set -o nounset
 
-# wait for RabbitMQ server to start
-sleep 10
-
+echo "Starting Flower monitoring..."
 celery -A core --broker="${CELERY_BROKER}" flower
