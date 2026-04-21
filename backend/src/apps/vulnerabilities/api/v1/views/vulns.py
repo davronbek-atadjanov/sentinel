@@ -1,6 +1,7 @@
 from django.db.models import Count, Q
 from rest_framework.decorators import action
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateModelMixin
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
@@ -16,15 +17,13 @@ from apps.vulnerabilities.models.vulnerabilities import Vulnerability
 class VulnerabilityViewSet(ListModelMixin, RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
     serializer_class = VulnerabilitySerializer
     pagination_class = CustomPagination
+    permission_classes = [IsAuthenticated]
     filterset_class = VulnerabilityFilter
     search_fields = ("title", "description", "category", "cve_id")
     ordering_fields = ("severity", "status", "cvss_score", "created_at")
 
     def get_queryset(self):
-        return (
-            Vulnerability.objects.filter(scan__user=self.request.user)
-            .select_related("scan", "assigned_to")
-        )
+        return Vulnerability.objects.filter(scan__user=self.request.user).select_related("scan", "assigned_to")
 
     def get_serializer_class(self):
         if self.action in ("partial_update", "update"):
@@ -40,16 +39,18 @@ class VulnerabilityViewSet(ListModelMixin, RetrieveModelMixin, UpdateModelMixin,
         open_count = qs.filter(status="OPEN").count()
         resolved_count = qs.filter(status="RESOLVED").count()
 
-        return Response({
-            "success": True,
-            "data": {
-                "total": total,
-                "open": open_count,
-                "resolved": resolved_count,
-                "by_severity": {item["severity"]: item["count"] for item in by_severity},
-                "by_status": {item["status"]: item["count"] for item in by_status},
-            },
-        })
+        return Response(
+            {
+                "success": True,
+                "data": {
+                    "total": total,
+                    "open": open_count,
+                    "resolved": resolved_count,
+                    "by_severity": {item["severity"]: item["count"] for item in by_severity},
+                    "by_status": {item["status"]: item["count"] for item in by_status},
+                },
+            }
+        )
 
     @action(detail=False, methods=["get"], url_path="by-category")
     def by_category(self, request):
