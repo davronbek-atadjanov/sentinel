@@ -1,0 +1,214 @@
+import logging
+from urllib.parse import urlparse
+
+from celery import shared_task
+from django.utils import timezone
+
+logger = logging.getLogger(__name__)
+
+
+@shared_task(bind=True, max_retries=2)
+def run_scan(self, scan_id: int):
+    """
+    Master skan task — scan_type ga qarab tegishli skanerlarni ishlatadi.
+    Progress real-time yangilanadi (0 → 100%).
+    """
+    from apps.scans.models.scans import Scan, ScanStatusChoices
+
+    try:
+        scan = Scan.objects.get(id=scan_id)
+    except Scan.DoesNotExist:
+        logger.error(f"Scan {scan_id} not found.")
+        return
+
+    scan.status = ScanStatusChoices.RUNNING
+    scan.started_at = timezone.now()
+    scan.save(update_fields=["status", "started_at"])
+
+    try:
+        all_findings = []
+        target = scan.target_url
+        parsed = urlparse(target)
+        hostname = parsed.hostname
+
+        # ── Stage 1: Header Analysis (10%) ──
+        scan.progress = 5
+        scan.save(update_fields=["progress"])
+        try:
+            from apps.scans.services.custom_scanners.header_analyzer import HeaderAnalyzer
+            header_scanner = HeaderAnalyzer()
+            findings = header_scanner.scan(target)
+            all_findings.extend(findings)
+            logger.info(f"Scan {scan_id}: Header analysis found {len(findings)} issues.")
+        except Exception as e:
+            logger.warning(f"Scan {scan_id}: Header analysis failed: {e}")
+        scan.progress = 10
+        scan.save(update_fields=["progress"])
+
+        # ── Stage 2: SSL Check (20%) ──
+        if hostname:
+            try:
+                from apps.scans.services.custom_scanners.ssl_checker import SSLChecker
+                ssl_checker = SSLChecker()
+                findings = ssl_checker.scan(hostname)
+                all_findings.extend(findings)
+                logger.info(f"Scan {scan_id}: SSL check found {len(findings)} issues.")
+            except Exception as e:
+                logger.warning(f"Scan {scan_id}: SSL check failed: {e}")
+        scan.progress = 20
+        scan.save(update_fields=["progress"])
+
+        # ── Stage 3: Port Scan (30%) — FULL va OWASP uchun ──
+        if scan.scan_type in ("FULL", "OWASP") and hostname:
+            try:
+                from apps.scans.services.custom_scanners.port_scanner import PortScanner
+                port_scanner = PortScanner()
+                findings = port_scanner.scan(hostname)
+                all_findings.extend(findings)
+                logger.info(f"Scan {scan_id}: Port scan found {len(findings)} open ports.")
+            except Exception as e:
+                logger.warning(f"Scan {scan_id}: Port scan failed: {e}")
+        scan.progress = 30
+        scan.save(update_fields=["progress"])
+
+        # ── Stage 4: XSS + SQLi Scan (50%) ──
+        if scan.scan_type in ("FULL", "QUICK", "OWASP"):
+            try:
+                from apps.scans.services.custom_scanners.xss_scanner import XSSScanner
+                xss_scanner = XSSScanner()
+                findings = xss_scanner.scan(target)
+                all_findings.extend(findings)
+                logger.info(f"Scan {scan_id}: XSS scan found {len(findings)} issues.")
+            except Exception as e:
+                logger.warning(f"Scan {scan_id}: XSS scan failed: {e}")
+
+            scan.progress = 40
+            scan.save(update_fields=["progress"])
+
+            try:
+                from apps.scans.services.custom_scanners.sqli_scanner import SQLiScanner
+                sqli_scanner = SQLiScanner()
+                findings = sqli_scanner.scan(target)
+                all_findings.extend(findings)
+                logger.info(f"Scan {scan_id}: SQLi scan found {len(findings)} issues.")
+            except Exception as e:
+                logger.warning(f"Scan {scan_id}: SQLi scan failed: {e}")
+        scan.progress = 50
+        scan.save(update_fields=["progress"])
+
+        # ── Stage 5: Nuclei Scan (70%) ──
+        if scan.scan_type in ("FULL", "OWASP", "CUSTOM"):
+            try:
+                from apps.scans.services.nuclei_scanner import NucleiScanner
+                nuclei = NucleiScanner()
+                results = nuclei.run_scan(target)
+                for r in results:
+                    all_findings.append(nuclei.parse_result(r))
+                logger.info(f"Scan {scan_id}: Nuclei found {len(results)} issues.")
+            except Exception as e:
+                logger.warning(f"Scan {scan_id}: Nuclei scan failed: {e}")
+        scan.progress = 70
+        scan.save(update_fields=["progress"])
+
+        # ── Stage 6: ZAP Scan (90%) — faqat FULL skan uchun ──
+        if scan.scan_type == "FULL":
+            try:
+                from apps.scans.services.zap_scanner import ZAPScanner
+                zap = ZAPScanner()
+
+                # Spider scan
+                spider_id = zap.spider_scan(target)
+                zap.wait_for_spider(spider_id)
+                scan.progress = 80
+                scan.save(update_fields=["progress"])
+
+                # Active scan
+                active_id = zap.active_scan(target)
+                zap.wait_for_active_scan(active_id)
+
+                # Get alerts
+                alerts = zap.get_alerts(target)
+                for alert in alerts:
+                    all_findings.append(zap.map_alert_to_vulnerability(alert))
+                logger.info(f"Scan {scan_id}: ZAP found {len(alerts)} alerts.")
+            except Exception as e:
+                logger.warning(f"Scan {scan_id}: ZAP scan failed: {e}")
+        scan.progress = 90
+        scan.save(update_fields=["progress"])
+
+        # ── Stage 7: Natijalarni DB ga yozish (100%) ──
+        from apps.vulnerabilities.models.vulnerabilities import Vulnerability
+        for finding in all_findings:
+            try:
+                Vulnerability.objects.create(
+                    scan=scan,
+                    title=finding.get("title", "Unknown")[:500],
+                    description=finding.get("description", ""),
+                    severity=finding.get("severity", "INFO"),
+                    category=finding.get("category", "MISC")[:100],
+                    affected_url=finding.get("affected_url", target)[:1000],
+                    evidence=finding.get("evidence", ""),
+                    remediation=finding.get("remediation", ""),
+                    cvss_score=finding.get("cvss_score"),
+                    cve_id=finding.get("cve_id", "")[:100],
+                    status="OPEN",
+                )
+            except Exception as e:
+                logger.error(f"Scan {scan_id}: Failed to save finding: {e}")
+
+        scan.status = ScanStatusChoices.COMPLETED
+        scan.progress = 100
+        scan.completed_at = timezone.now()
+        scan.results_summary = {
+            "total": len(all_findings),
+            "critical": sum(1 for f in all_findings if f.get("severity") == "CRITICAL"),
+            "high": sum(1 for f in all_findings if f.get("severity") == "HIGH"),
+            "medium": sum(1 for f in all_findings if f.get("severity") == "MEDIUM"),
+            "low": sum(1 for f in all_findings if f.get("severity") == "LOW"),
+            "info": sum(1 for f in all_findings if f.get("severity") == "INFO"),
+        }
+        scan.save()
+        logger.info(f"Scan {scan_id} completed. Total findings: {len(all_findings)}")
+
+    except Exception as e:
+        logger.error(f"Scan {scan_id} failed: {e}")
+        scan.status = ScanStatusChoices.FAILED
+        scan.results_summary = {"error": str(e)}
+        scan.completed_at = timezone.now()
+        scan.save(update_fields=["status", "results_summary", "completed_at"])
+        raise self.retry(exc=e, countdown=60)
+
+
+@shared_task
+def process_scheduled_scans():
+    """Rejalashtirilgan skanlarni tekshirish va ishga tushirish."""
+    from apps.scans.models.scans import ScanSchedule, Scan, ScanStatusChoices
+
+    now = timezone.now()
+    due_schedules = ScanSchedule.objects.filter(
+        is_active=True,
+        next_run__lte=now,
+    )
+
+    for schedule in due_schedules:
+        # Create new scan
+        scan = Scan.objects.create(
+            user=schedule.user,
+            target_url=schedule.target_url,
+            scan_type=schedule.scan_type,
+            status=ScanStatusChoices.PENDING,
+        )
+        # Trigger async scan
+        run_scan.delay(scan.id)
+
+        # Update next_run
+        from dateutil.relativedelta import relativedelta
+        if schedule.frequency == "DAILY":
+            schedule.next_run = now + timezone.timedelta(days=1)
+        elif schedule.frequency == "WEEKLY":
+            schedule.next_run = now + timezone.timedelta(weeks=1)
+        elif schedule.frequency == "MONTHLY":
+            schedule.next_run = now + timezone.timedelta(days=30)
+        schedule.save(update_fields=["next_run"])
+
+        logger.info(f"Scheduled scan {scan.id} created for {schedule.target_url}")

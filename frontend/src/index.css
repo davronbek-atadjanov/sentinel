@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   SENTINEL CORE — Design System CSS Variables
+   Creative North Star: "The Digital Obsidian"
+   ========================================================= */
+
+@layer base {
+  :root {
+    /* ── Core Surfaces (The Obsidian Palette) ── */
+    --background: 222 57% 9%;           /* #0B1326 — surface */
+    --foreground: 225 85% 92%;          /* #DAE2FD — on-surface */
+
+    --card: 222 40% 14%;               /* #171F33 — surface-container */
+    --card-foreground: 225 60% 90%;    /* on-surface */
+
+    --popover: 222 38% 15%;            /* surface-container */
+    --popover-foreground: 225 60% 90%;
+
+    /* ── Brand Primary (Sky Blue) ── */
+    --primary: 200 100% 74%;           /* #7BD0FF */
+    --primary-foreground: 200 100% 8%; /* #001E2C — on-primary-fixed */
+
+    /* ── Secondary (Slate Blue) ── */
+    --secondary: 216 30% 30%;          /* #3A4A5F — secondary-container */
+    --secondary-foreground: 216 35% 80%; /* #B7C8E1 */
+
+    /* ── Muted (Deep Slate) ── */
+    --muted: 222 35% 14%;              /* surface-container-low area */
+    --muted-foreground: 240 3% 76%;    /* #C6C6CD — on-surface-variant */
+
+    /* ── Accent (Cyan Action) ── */
+    --accent: 195 100% 37%;            /* #008ABB — on-primary-container */
+    --accent-foreground: 200 100% 93%; /* #C4E7FF — primary-fixed */
+
+    /* ── Destructive (Red) ── */
+    --destructive: 0 84% 60%;          /* #FFB4AB error */
+    --destructive-foreground: 0 100% 99%;
+
+    /* ── Border & Input ── */
+    --border: 230 5% 29%;              /* #45464D — outline-variant */
+    --input: 222 30% 16%;              /* surface-container-low */
+    --ring: 200 100% 74%;              /* primary */
+
+    --radius: 0.5rem;                   /* lg from design system */
+
+    /* ── Sidebar ── */
+    --sidebar-background: 222 60% 5%;  /* Near-black deep navy */
+    --sidebar-foreground: 225 60% 90%;
+    --sidebar-primary: 200 100% 74%;
+    --sidebar-primary-foreground: 222 57% 9%;
+    --sidebar-accent: 200 100% 20%;
+    --sidebar-accent-foreground: 200 100% 80%;
+    --sidebar-border: 222 20% 15%;
+    --sidebar-ring: 200 100% 74%;
+
+    /* ── Extended Sentinel Tokens ── */
+    --glow: 200 100% 74%;
+    --glow-muted: 200 70% 40%;
+    --surface: 222 57% 9%;             /* #0B1326 */
+    --surface-hover: 222 35% 16%;      /* #222A3D */
+
+    /* Surface tiers (tonal depth system) */
+    --surface-lowest: 222 65% 7%;      /* #060E20 */
+    --surface-low: 222 42% 13%;        /* #131B2E */
+    --surface-container: 222 37% 15%;  /* #171F33 */
+    --surface-high: 222 30% 19%;       /* #222A3D */
+    --surface-highest: 222 25% 23%;    /* #2D3449 */
+    --surface-bright: 222 20% 25%;     /* #31394D */
+
+    /* Status colors */
+    --sentinel-primary: 200 100% 74%;      /* #7BD0FF */
+    --sentinel-tertiary: 0 100% 85%;       /* #FFB3B0 */
+    --sentinel-error: 0 100% 84%;          /* #FFB4AB */
+    --sentinel-error-container: 0 100% 29%; /* #93000A */
+    --sentinel-tertiary-container: 0 100% 11%; /* #390005 */
+    --sentinel-success: 200 100% 37%;      /* #008ABB */
+
+    /* Gradients & Effects */
+    --gradient-primary: linear-gradient(135deg, hsl(200 100% 74%), hsl(195 100% 37%));
+    --gradient-threat: radial-gradient(circle, hsl(0 100% 85%) 0%, transparent 70%);
+    --hero-glow: 0 0 80px hsl(200 100% 74% / 0.14);
+    --card-glow: 0 0 30px hsl(200 100% 74% / 0.07);
+    --ambient-shadow: 0 0 40px -10px hsl(200 100% 74% / 0.08);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  code, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Typography Scale — The Authoritative Voice */
+  .text-display-lg {
+    font-family: 'Manrope', 'Inter', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.025em;
+  }
+
+  .text-headline-md {
+    font-family: 'Manrope', 'Inter', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .text-title-md {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .text-body-md {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .text-label-sm {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+}
+
+@layer utilities {
+  /* ── Gradient Utilities ── */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, hsl(200 100% 74%), hsl(195 100% 37%));
+  }
+
+  .bg-gradient-threat {
+    background: radial-gradient(circle, hsl(0 100% 85%) 0%, transparent 70%);
+  }
+
+  /* ── Glass Effect ── */
+  .glass-panel {
+    background: hsl(222 20% 25% / 0.6);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  /* ── Glow Effects ── */
+  .text-glow {
+    text-shadow: 0 0 20px hsl(200 100% 74% / 0.5), 0 0 40px hsl(200 100% 74% / 0.2);
+  }
+
+  .border-glow {
+    box-shadow: 0 0 15px hsl(200 100% 74% / 0.1), inset 0 0 15px hsl(200 100% 74% / 0.05);
+  }
+
+  .shadow-glow-primary {
+    box-shadow: 0 0 20px -5px hsl(200 100% 74% / 0.3);
+  }
+
+  .shadow-ambient {
+    box-shadow: 0 0 40px -10px hsl(200 100% 74% / 0.08);
+  }
+
+  /* ── Grid Background ── */
+  .bg-grid {
+    background-image:
+      linear-gradient(hsl(222 20% 15% / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(222 20% 15% / 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* ── Ghost Border (The "No-Line" Rule Fallback) ── */
+  .border-ghost {
+    border: 1px solid hsl(230 5% 29% / 0.15);
+  }
+
+  /* ── Animations ── */
+  .animate-pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-scan-line {
+    animation: scanLine 3s linear infinite;
+  }
+
+  .animate-threat-pulse {
+    animation: threatPulse 2s ease-in-out infinite;
+  }
+}
+
+/* ── Keyframes ── */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes scanLine {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes threatPulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.6; }
+}
+
+/* ── Custom Scrollbar (Obsidian Theme) ── */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: hsl(222 30% 19%);
+  border-radius: 10px;
+}
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: hsl(230 5% 29%);
+}
+
+/* Global scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(222 57% 9%);
+}
+::-webkit-scrollbar-thumb {
+  background-color: hsl(222 25% 23%);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(230 5% 40%);
+}
