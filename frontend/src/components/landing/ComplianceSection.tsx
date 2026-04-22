@@ -2,10 +2,10 @@ import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 
 const badges = [
-  { title: "SOC2", subtitle: "TYPE II" },
-  { title: "GDPR", subtitle: "COMPLIANT" },
-  { title: "PCI", subtitle: "DSS 4.0" },
-  { title: "HIPAA", subtitle: "READY" },
+  { title: "SOC 2", subtitle: "TYPE II" },
+  { title: "GDPR", subtitle: "MUVOFIQ" },
+  { title: "PCI DSS", subtitle: "v4.0" },
+  { title: "HIPAA", subtitle: "TAYYOR" },
 ] as const;
 
 const ComplianceSection = () => {
@@ -17,10 +17,10 @@ const ComplianceSection = () => {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
         <div className="max-w-md">
           <h2 className="text-2xl sm:text-3xl font-extrabold font-headline tracking-tight text-foreground mb-3">
-            Enterprise-Grade Trust
+            Korporativ darajadagi ishonch
           </h2>
           <p className="text-muted-foreground">
-            Sentinel meets stringent security and compliance standards — without compromising privacy.
+            Sentinel maxfiylikni buzmasdan, qat'iy xavfsizlik va muvofiqlik talablariga javob beradi.
           </p>
         </div>
 

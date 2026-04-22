@@ -6,7 +6,7 @@ const ExecutiveBriefPage = () => {
     <div>
       <PageHeader
         title="Boshqaruv Xulosasi"
-        description="2023-yil 4-choragi uchun xavfsizlik holati bo'yicha rahbariyat hisoboti. Sentinel AI tomonidan avtomatik yaratilgan."
+        description="2023-yil 4-choragi uchun xavfsizlik holati bo'yicha rahbariyat uchun hisobot. Sentinel AI tomonidan avtomatik shakllantirilgan."
         actions={
           <button className="flex items-center gap-2 bg-gradient-primary px-5 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all">
             <Download className="w-4 h-4" />
@@ -27,16 +27,16 @@ const ExecutiveBriefPage = () => {
           </div>
           <div className="text-right">
             <p className="text-5xl font-bold font-headline text-primary">A-</p>
-            <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">Umumiy Baho</p>
+            <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">Umumiy baho</p>
           </div>
         </div>
 
         {/* KPIs */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: "Xavfsizlik Bahosi", value: "94/100", icon: Shield, change: "+3 ball", changeColor: "text-primary" },
-            { label: "Ochiq Zaifliklar", value: "42", icon: AlertTriangle, change: "-18%", changeColor: "text-primary" },
-            { label: "O'rtacha Tuzatish Davri", value: "3.4 kun", icon: TrendingUp, change: "-12%", changeColor: "text-primary" },
+            { label: "Xavfsizlik bahosi", value: "94/100", icon: Shield, change: "+3 ball", changeColor: "text-primary" },
+            { label: "Ochiq zaifliklar", value: "42", icon: AlertTriangle, change: "-18%", changeColor: "text-primary" },
+            { label: "O'rtacha tuzatish muddati", value: "3.4 kun", icon: TrendingUp, change: "-12%", changeColor: "text-primary" },
             { label: "Muvofiqlik", value: "92%", icon: CheckCircle, change: "+5%", changeColor: "text-primary" },
           ].map((kpi) => (
             <div key={kpi.label} className="bg-surface-container rounded-lg p-4">
@@ -61,26 +61,26 @@ const ExecutiveBriefPage = () => {
               bu esa infratuzilma xavfsizligi bahosini 94/100 gacha olib chiqdi.
             </p>
             <p>
-              <span className="text-sentinel-error font-bold">Kritik topilmalar</span>: Autentifikatsiya xizmatida (api.v-scan.prod) ikkita SQL in'ektsiyasi 
-              zaifligi aniqlandi. Ikkalasi ham foydalanish mumkinligi tasdiqlangan va 
-              zudlik bilan tuzatishni talab qiladi. Bittasi AI Tuzatish Yordamchisi tomonidan avtomatik ravishda yamalgan.
+              <span className="text-sentinel-error font-bold">Kritik topilmalar</span>: Autentifikatsiya xizmatida (api.v-scan.prod) ikkita SQL Injection (SQLi) 
+              zaifligi aniqlandi. Ikkalasi ham ekspluatatsiya qilinishi mumkinligi tasdiqlangan va 
+              zudlik bilan bartaraf etishni talab qiladi. Bittasi AI tuzatish yordamchisi tomonidan avtomatik ravishda yamalangan.
             </p>
             <p>
-              <span className="text-primary font-bold">Ijobiy tendentsiyalar</span>: O'rtacha tuzatish vaqti 
+              <span className="text-primary font-bold">Ijobiy tendensiyalar</span>: O'rtacha tuzatish vaqti 
               3.9 kundan 3.4 kunga qisqardi (-12%). AI yordamida ishlovchi skanerlash dvigateli tahdidlarni oldingi 
-              chorakka qaraganda 40% tezroq aniqladi. SOC2 muvofiqligi darajasi 98.4% ga ko'tarildi.
+              chorakka qaraganda 40% tezroq aniqladi. SOC 2 muvofiqligi darajasi 98.4% ga ko'tarildi.
             </p>
             <p>
-              <span className="text-sentinel-tertiary font-bold">Tashvishlanarli sohalar</span>: PCI-DSS muvofiqligi diqqatni talab qiladigan 12 ta 
-              konfiguratsiya o'zgarishini ko'rsatmoqda. Autentifikatsiya xizmati barcha kritik topilmalarning 
-              62% jama bo'lgan asosiy hujum sathi bo'lib qolmoqda.
+              <span className="text-sentinel-tertiary font-bold">Tashvishlanarli sohalar</span>: PCI DSS muvofiqligi diqqatni talab qiladigan 12 ta 
+              konfiguratsiya og'ishini ko'rsatmoqda. Autentifikatsiya xizmati barcha kritik topilmalarning 
+              62% jamlangan asosiy hujum yuzasi bo'lib qolmoqda.
             </p>
           </div>
         </div>
 
         {/* Risk Distribution */}
         <div className="col-span-12 lg:col-span-4 bg-surface-low rounded-xl p-6 border-ghost">
-          <h3 className="font-bold text-white mb-6">Xavflar Taqsimoti</h3>
+          <h3 className="font-bold text-white mb-6">Xavflar taqsimoti</h3>
           <div className="space-y-4">
             {[
               { label: "Kritik", count: 2, pct: "5%", color: "bg-sentinel-error", bar: "w-[5%]" },
@@ -103,10 +103,10 @@ const ExecutiveBriefPage = () => {
           <div className="mt-8 pt-6 border-t border-[hsl(222,20%,12%,0.2)]">
             <h4 className="text-sm font-bold text-white mb-3">Asosiy Tavsiyalar</h4>
             <ol className="space-y-2 text-xs text-[hsl(215,15%,55%)]">
-              <li className="flex gap-2"><span className="text-primary font-bold">1.</span> Autentifikatsiya endpointidagi SQLi ni zudlik bilan yamash</li>
-              <li className="flex gap-2"><span className="text-primary font-bold">2.</span> PCI-DSS konfiguratsiya o'zgarishlarini hal qilish</li>
-              <li className="flex gap-2"><span className="text-primary font-bold">3.</span> Barcha xizmatlarda CSP sarlavhalarini yoqish</li>
-              <li className="flex gap-2"><span className="text-primary font-bold">4.</span> IoT gateway xavfsizlik boshqaruvlarini ko'rib chiqish</li>
+              <li className="flex gap-2"><span className="text-primary font-bold">1.</span> Autentifikatsiya endpointidagi SQLi ni zudlik bilan bartaraf etish</li>
+              <li className="flex gap-2"><span className="text-primary font-bold">2.</span> PCI DSS konfiguratsiya og'ishlarini bartaraf etish</li>
+              <li className="flex gap-2"><span className="text-primary font-bold">3.</span> Barcha xizmatlarda Content-Security-Policy (CSP) sarlavhalarini yoqish</li>
+              <li className="flex gap-2"><span className="text-primary font-bold">4.</span> IoT gateway xavfsizlik nazoratlarini qayta ko'rib chiqish</li>
             </ol>
           </div>
         </div>
@@ -114,11 +114,11 @@ const ExecutiveBriefPage = () => {
 
       {/* Compliance Matrix */}
       <div className="bg-surface-low rounded-xl p-6 border-ghost">
-        <h3 className="font-bold text-white mb-4">Muvofiqlik holati matrisasi</h3>
+        <h3 className="font-bold text-white mb-4">Muvofiqlik holati matritsasi</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
-            { framework: "SOC2 Type II", status: "98.4%", statusLabel: "Muvofiq", color: "text-primary", bg: "bg-primary/10" },
-            { framework: "PCI-DSS v4.0", siljish: "84%", statusLabel: "12 ta siljish", color: "text-sentinel-tertiary", bg: "bg-sentinel-tertiary/10" },
+            { framework: "SOC 2 Type II", status: "98.4%", statusLabel: "Muvofiq", color: "text-primary", bg: "bg-primary/10" },
+            { framework: "PCI DSS v4.0", siljish: "84%", statusLabel: "12 ta og'ish", color: "text-sentinel-tertiary", bg: "bg-sentinel-tertiary/10" },
             { framework: "HIPAA", status: "Kutilmoqda", statusLabel: "Audit rejalashtirilgan", color: "text-[hsl(215,15%,55%)]", bg: "bg-surface-high" },
           ].map((c) => (
             <div key={c.framework} className="bg-surface-container rounded-lg p-5 flex justify-between items-center">

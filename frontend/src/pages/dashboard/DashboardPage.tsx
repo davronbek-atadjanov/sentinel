@@ -23,7 +23,7 @@ const recentScans = [
     icon: Globe,
     status: "completed" as const,
     found: "08",
-    time: "2 mins ago",
+    time: "2 daqiqa oldin",
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const recentScans = [
     icon: Cloud,
     status: "running" as const,
     found: "--",
-    time: "Just now",
+    time: "Hozirgina",
   },
   {
     id: 3,
@@ -39,26 +39,26 @@ const recentScans = [
     icon: Database,
     status: "failed" as const,
     found: "--",
-    time: "1 hour ago",
+    time: "1 soat oldin",
   },
 ];
 
 const criticalAlerts = [
   {
     id: 1,
-    title: "SQL Injection - Endpoint /auth",
+    title: "SQL Injection - /auth endpointi",
     cve: "CVE-2024-8832",
-    description: "Critical bypass found in production authentication handler.",
-    primaryAction: "Remediate Now",
-    secondaryAction: "Ignore",
+    description: "Production autentifikatsiya handlerida kritik bypass aniqlandi.",
+    primaryAction: "Hozir bartaraf etish",
+    secondaryAction: "E'tiborsiz qoldirish",
   },
   {
     id: 2,
     title: "Remote Code Execution (RCE)",
     cve: "CVE-2023-4512",
-    description: "Possible payload injection through file upload module.",
-    primaryAction: "Patch Instance",
-    secondaryAction: "View Logs",
+    description: "Fayl yuklash modulida payload injektsiyasi ehtimoli bor.",
+    primaryAction: "Instansni yamash",
+    secondaryAction: "Loglarni ko'rish",
   },
 ];
 
@@ -111,8 +111,8 @@ const DashboardPage = () => {
   return (
     <div>
       <PageHeader
-        title="Xavfsizlik Xulosasi"
-        description="Global xavflar holati va real vaqt skanerlash tahlili."
+        title="Xavfsizlik xulosasi"
+        description="Global xavf holati va real vaqt skanerlash tahlili."
         actions={
           <>
             <button className="bg-surface-container px-6 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
@@ -136,7 +136,7 @@ const DashboardPage = () => {
           <div className="bg-surface-low rounded-xl p-8 border-ghost relative overflow-hidden group">
             <div className="absolute -right-12 -top-12 w-48 h-48 bg-primary/5 rounded-full blur-3xl transition-all group-hover:bg-primary/10" />
             <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4 font-label">
-              Umumiy Xavfsizlik
+              Umumiy xavfsizlik
             </p>
             <div className="flex items-baseline gap-4 mb-2">
               <span className="text-6xl font-bold font-headline text-white tracking-tighter">
@@ -157,7 +157,7 @@ const DashboardPage = () => {
             </div>
             <div className="flex justify-between items-center text-xs">
               <span className="text-[hsl(215,15%,55%)]">
-                Joriy Holat: <span className="text-primary font-bold">A'LO</span>
+                Joriy holat: <span className="text-primary font-bold">A'LO</span>
               </span>
               <span className="text-[hsl(215,15%,40%)]">o'tgan haftaga nisbatan +1.2%</span>
             </div>
@@ -165,9 +165,9 @@ const DashboardPage = () => {
 
           {/* Metrics Grid */}
           <div className="grid grid-cols-2 gap-6">
-            <MetricCard label="Jami Skanerlashlar" value={(stats?.total_scans ?? "1,284").toString()} icon={Settings2} />
+            <MetricCard label="Jami skanerlashlar" value={(stats?.total_scans ?? "1,284").toString()} icon={Settings2} />
             <MetricCard
-              label="Ochiq Zaifliklar"
+              label="Ochiq zaifliklar"
               value={(stats?.open_vulnerabilities ?? "42").toString()}
               icon={Bug}
               iconColor="text-sentinel-error"
@@ -179,9 +179,9 @@ const DashboardPage = () => {
         <div className="col-span-12 lg:col-span-8 bg-surface-low rounded-xl p-8 border-ghost flex flex-col">
           <div className="flex justify-between items-center mb-8">
             <div>
-              <h3 className="text-lg font-bold font-headline text-white">Xavflar Traektoriyasi</h3>
+              <h3 className="text-lg font-bold font-headline text-white">Xavflar traektoriyasi</h3>
               <p className="text-xs text-[hsl(215,15%,40%)]">
-                Zaifliklarni aniqlash tendensiyalari (Oxirgi 30 kun)
+                Zaifliklarni aniqlash tendensiyalari (so'nggi 30 kun)
               </p>
             </div>
             <div className="flex gap-1 bg-[hsl(222,30%,6%,0.5)] p-1 rounded-lg">
@@ -221,7 +221,7 @@ const DashboardPage = () => {
               })
             ) : (
               <div className="w-full flex items-center justify-center text-[hsl(215,15%,45%)] text-sm h-full">
-                Hozircha zaifliklar topilmadi. Xavflar trayektoriyasini shakllantirish uchun skanerlashni boshlang.
+                Hozircha zaifliklar topilmadi. Xavflar traektoriyasini shakllantirish uchun skanerlashni boshlang.
               </div>
             )}
           </div>
@@ -234,7 +234,7 @@ const DashboardPage = () => {
         {/* ── Recent Scans Table ── */}
         <div className="col-span-12 lg:col-span-7 bg-surface-low rounded-xl border-ghost overflow-hidden">
           <div className="p-6 border-b border-[hsl(222,20%,12%,0.3)] flex justify-between items-center bg-surface-high/30">
-            <h3 className="font-bold font-headline text-white">Oxirgi Faoliyat</h3>
+            <h3 className="font-bold font-headline text-white">So'nggi faoliyat</h3>
             <Link
               to="/app/scans"
               className="text-xs text-primary font-semibold hover:underline"
@@ -277,7 +277,7 @@ const DashboardPage = () => {
                 ) : (
                   <tr>
                     <td colSpan={4} className="py-8 text-center text-muted-foreground">
-                      Oxirgi skanerlashlar yo'q. Faoliyatni ko'rish uchun yangisiga start bering.
+                      So'nggi skanerlashlar yo'q. Faoliyatni ko'rish uchun yangisini boshlang.
                     </td>
                   </tr>
                 )}
@@ -293,7 +293,7 @@ const DashboardPage = () => {
             <div className="flex justify-between items-start mb-6">
               <h3 className="font-bold font-headline text-white flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-sentinel-error" />
-                Muhim Xavflar
+                Muhim xavflar
               </h3>
               <span className="bg-error-container text-on-error-container text-[10px] font-black px-2 py-1 rounded uppercase tracking-tighter">
                 Harakat talab etiladi
@@ -342,13 +342,13 @@ const DashboardPage = () => {
                 <ShieldCheck className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <p className="text-xs font-bold text-white leading-tight">Tizim Muvofiqligi</p>
-                <p className="text-[10px] text-[hsl(215,15%,40%)]">SOC2 Type II Standarti</p>
+                <p className="text-xs font-bold text-white leading-tight">Tizim muvofiqligi</p>
+                <p className="text-[10px] text-[hsl(215,15%,40%)]">SOC 2 Type II standarti</p>
               </div>
             </div>
             <div className="text-right">
               <p className="text-sm font-bold text-primary">{stats?.compliance_score ?? 92}%</p>
-              <p className="text-[10px] text-[hsl(215,15%,30%)] font-semibold">QONUNIYLIK</p>
+              <p className="text-[10px] text-[hsl(215,15%,30%)] font-semibold">MUVOFIQLIK</p>
             </div>
           </div>
         </div>
@@ -357,9 +357,9 @@ const DashboardPage = () => {
       {/* ── Bottom Cards ── */}
       <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
-          { title: "Oxirgi Qamrov", value: "Tarmoq Perimetrida:", highlight: "85%", suffix: " Skanerlash Zichligi" },
-          { title: "Xavf Manbasi", value: "Asosan:", highlight: "Cloud Aktivlari (62%)", suffix: "", isError: true },
-          { title: "Qayta ishlash Yuku", value: "Alpha Klasteri:", highlight: "Normal", suffix: "" },
+          { title: "So'nggi qamrov", value: "Tarmoq perimetrida:", highlight: "85%", suffix: " skanerlash zichligi" },
+          { title: "Xavf manbai", value: "Asosan:", highlight: "Cloud aktivlari (62%)", suffix: "", isError: true },
+          { title: "Qayta ishlash yuki", value: "Alpha klasteri:", highlight: "Normal", suffix: "" },
         ].map((card, i) => (
           <div
             key={i}

@@ -5,23 +5,23 @@ import { useRef } from "react"
 const features = [
   {
     icon: Radar,
-    title: "Avtomatlashtirilgan Skanerlash",
-    desc: "Kodingiz bilan birga rivojlanadigan doimiy, xalaqit bermaydigan skanerlashlarni o'rnating. Bizning AI dvigateli real vaqtda hujum yuzalarini xaritalaydi va ular ishlab chiqarishga yetib borguncha zaifliklarni aniqlaydi.",
+    title: "To'liq Avtomatlashtirilgan Skanerlash",
+    desc: "Kodingizni URL yoki Domen orqali tizimga kiritib, avtomat qidiruvni boshlang. Bizning dvigatel saytdagi uzilishlarsiz SQLi, XSS kabi kiberhujumlarga sharoitlar bor-yo'qligini xaritalaydi.",
   },
   {
     icon: Bell,
-    title: "Haqiqiy vaqtdagi Ogohlantirishlar",
-    desc: "Tezkor chora ko'rish uchun kontekstli tahdid haqida ma'lumot va og'irlik darajasini baholash bilan tanqidiy zaifliklar bo'yicha darhol xabarnomalar.",
+    title: "Vaqtida Va Aniq Ogohlantirish",
+    desc: "Loyihangizda zaiflik topilganda, darhol uning og'irlik darajasi (Critical, High, Medium) hamda uni Qanday bartaraf etish (Remediation) bo'yicha ko'rsatma oling.",
   },
   {
     icon: FileCheck,
-    title: "Muvofiqlik Hisobotlari",
-    desc: "SOC2, HIPAA va GDPR ga muvofiqlik, bir marta bosish bilan audit uchun tayyor eksportlar bilan. Qo'shimcha xarajatlarsiz muvofiq qoling.",
+    title: "Eksport va Xavfsizlik Hisobotlari",
+    desc: "OWASP Top10 hamda boshqa xalqaro xavfsizlik standartlariga asoslangan audit hisobotlarini tezda PDF yoki ko'rgazmali grafiklar orqali yuklab olish.",
   },
   {
     icon: FlaskConical,
-    title: "Foydali yuk Laboratoriyasi",
-    desc: "Eksploit vektorlarini o'z infratuzilmangizga qarshi xavfsiz sinab ko'rish uchun qumdon (sandbox) muhiti. Qizil jamoa aniqligi uchun ilg'or mutatsiya vositalari.",
+    title: "Darhol Qo'llab-quvvatlash",
+    desc: "Ko'plab turdagi maxsus Payloadlar (Zararli so'rovlar). Bu orqali siz ilovangizning yevolyutsiyasini doimiy monitoringi nazoratini ushlab turasiz.",
   },
 ] as const;
 
@@ -34,12 +34,11 @@ const CoreFeaturesSection = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-14">
           <h2 className="text-3xl sm:text-5xl font-extrabold font-headline tracking-tight text-foreground mb-4">
-            Jarrohlik Aniqligi.{" "}
-            <span className="text-primary">Kengayuvchi Quvvat.</span>
+            Yuqori Aniqlik.{" "}
+            <span className="text-primary">Chuqur Tahlil.</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-            Intellektual xavfsizlikning to'rtta ustuni — avtomatlashtirilgan skanerlashdan 
-            tortib ilg'or foydali yuk sinovlarigacha.
+            Zamonaviy Veb-sayt xavfsizligining to'rtta asosiy ustuni — Avtomatik skanerlashdan tortib xavflarni zudlik bilan aniqlashgacha.
           </p>
         </div>
 

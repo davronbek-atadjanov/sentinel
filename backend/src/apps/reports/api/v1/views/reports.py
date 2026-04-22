@@ -28,12 +28,27 @@ class ReportViewSet(ModelViewSet):
             return ReportCreateSerializer
         return ReportSerializer
 
-    def perform_create(self, serializer):
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
         report = serializer.save()
-        # Trigger async report generation
-        from apps.reports.tasks import generate_report
 
-        generate_report.delay(report.id)
+        from apps.reports.tasks import generate_report_sync
+
+        try:
+            generate_report_sync(report)
+        except Exception:
+            return Response(
+                {"success": False, "message": "Report generation failed."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+        return FileResponse(
+            report.file.open("rb"),
+            as_attachment=True,
+            filename=f"{report.title}.pdf",
+            status=status.HTTP_201_CREATED,
+        )
 
     @action(detail=True, methods=["get"], url_path="download")
     def download(self, request, pk=None):

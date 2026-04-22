@@ -5,7 +5,7 @@ const liveFeeds = [
   { id: 1, type: "scan", message: "api.sentinel.com uchun to'liq skanerlash boshlandi", time: "Hozirgina", severity: "info" },
   { id: 2, type: "alert", message: "Kritik: /upload endpointida RCE xavfi aniqlandi", time: "12 soniya oldin", severity: "critical" },
   { id: 3, type: "scan", message: "Port tekshiruvi yakunlandi — 3 ta ochiq port topildi", time: "45 soniya oldin", severity: "warning" },
-  { id: 4, type: "alert", message: "/api/auth qismida SQL injection hujumi bloklandi", time: "1 daqiqa oldin", severity: "critical" },
+  { id: 4, type: "alert", message: "/api/auth qismida SQL Injection hujumi bloklandi", time: "1 daqiqa oldin", severity: "critical" },
   { id: 5, type: "scan", message: "SSL sertifikati tekshiruvdan o'tdi", time: "2 daqiqa oldin", severity: "info" },
   { id: 6, type: "alert", message: "45.33.32.156 IP manzilidan noodatiy trafik uzilishi kuzatildi", time: "3 daqiqa oldin", severity: "warning" },
 ];
@@ -22,7 +22,7 @@ const RealTimeDashboardPage = () => {
     <div>
       <PageHeader
         title="Real vaqtdagi xavfsizlik paneli"
-        description="Barcha xavfsizlik operatsiyalari va xavflarni jonli monitoring qilish."
+        description="Barcha xavfsizlik operatsiyalari va xavflarni real vaqt monitoringi."
         actions={
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-lg">
@@ -59,10 +59,10 @@ const RealTimeDashboardPage = () => {
           <div className="p-6 border-b border-[hsl(222,20%,12%,0.3)] flex justify-between items-center bg-surface-high/30">
             <h3 className="font-bold font-headline text-white flex items-center gap-2">
               <Zap className="w-5 h-5 text-primary" />
-              Jonli xavflar lentasi
+              Jonli xavf lentasi
             </h3>
             <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-1 rounded">
-              Avto-yangilash: 5s
+              Avto-yangilash: 5 s
             </span>
           </div>
           <div className="divide-y divide-[hsl(222,20%,10%,0.3)]">
@@ -92,7 +92,7 @@ const RealTimeDashboardPage = () => {
         {/* Active Nodes */}
         <div className="col-span-12 lg:col-span-4 bg-surface-low rounded-xl border-ghost overflow-hidden">
           <div className="p-6 border-b border-[hsl(222,20%,12%,0.3)] bg-surface-high/30">
-            <h3 className="font-bold font-headline text-white">Faol Skanerlash Tugunlari</h3>
+            <h3 className="font-bold font-headline text-white">Faol skanerlash tugunlari</h3>
           </div>
           <div className="p-4 space-y-3">
             {activeNodes.map((node, i) => (
@@ -116,7 +116,7 @@ const RealTimeDashboardPage = () => {
                   </div>
                   <span className="text-[10px] text-[hsl(215,15%,45%)] font-mono">{node.load}%</span>
                 </div>
-                <p className="text-[10px] text-[hsl(215,15%,40%)] mt-2">{node.scans} ta qidiruv</p>
+                <p className="text-[10px] text-[hsl(215,15%,40%)] mt-2">{node.scans} ta skan</p>
               </div>
             ))}
           </div>

@@ -1,9 +1,9 @@
-# 🚀 Sentinel — Proyekti Haqida To'liq Ma'lumot
+# 🚀 Sentinel — Loyihasi Haqida To'liq Ma'lumot
 
-## 📌 Proyektning Maqsadi va Nomi
+## 📌 Loyihaning Maqsadi va Nomi
 **Loyiha nomi:** Sentinel  
-**Vazifasi:** AI-powered Web Application Security Scanner (Web ilovalarning xavfsizligi uchun skanerlanuvchi asbob)  
-**Maqsad:** Veb-saytlarda zaifliklar topish, hisobotlar yaratish, va xavfsizlik statistikasini ko'rsatish
+**Vazifasi:** AI-powered Web Application Security Scanner (veb-ilovalar xavfsizligini skanerlash vositasi)  
+**Maqsad:** Veb-ilovalarda zaifliklarni aniqlash, hisobotlar yaratish va xavfsizlik statistikalarini taqdim etish
 
 ---
 
@@ -59,10 +59,10 @@ PATCH  /api/v1/auth/change-password/   — Parolni o'zgartirish
 ```
 
 ### 2. **Assets** (Aktivlar)
-- Scan qiladigan veb-saytlar va endpoint'larni boshqarish
+- Skan qilinadigan veb-ilovalar va endpointlarni boshqarish
 - Asset tipini belgilash (website, API, etc.)
 - Riskni baholash
-- Attack surface analizi
+- Attack surface tahlili
 
 **API Endpoints:**
 ```
@@ -76,10 +76,10 @@ GET    /api/v1/assets/history/         — Asset tarix
 ```
 
 ### 3. **Scans** (Skanlar)
-- Veb-saytni xavfsizlik uchun skanirash
+- Veb-ilovani xavfsizlik uchun skanerlash
 - 5 turi: FULL, QUICK, API, OWASP, CUSTOM
 - Status kuzatish (PENDING, RUNNING, COMPLETED, FAILED)
-- Skanlarni jadval asosida rejalash
+- Skanlarni jadval asosida rejalashtirish
 
 **API Endpoints:**
 ```
@@ -88,7 +88,7 @@ POST   /api/v1/scans/                  — Yangi skan boshlash
 GET    /api/v1/scans/{id}/             — Skan tafsilotlari
 PATCH  /api/v1/scans/{id}/cancel/      — Skanni bekor qilish
 DELETE /api/v1/scans/{id}/             — Skanlarni o'chirish
-GET    /api/v1/scans/{id}/results/     — Scan natijalari
+GET    /api/v1/scans/{id}/results/     — Skan natijalari
 GET    /api/v1/scans/stats/            — Statistika
 ```
 
@@ -110,9 +110,9 @@ GET    /api/v1/vulnerabilities/by-severity/
 ```
 
 ### 5. **Reports** (Hisobotlar)
-- PDF/Excel hisobotlar generatsiya qilish
+- PDF/Excel hisobotlarni generatsiya qilish
 - Compliance standarti bo'yicha hisobotlar
-- Report yuklab olish
+- Hisobotni yuklab olish
 - Tarix saqlash
 
 **API Endpoints:**
@@ -126,8 +126,8 @@ GET    /api/v1/reports/compliance/     — Compliance statistikasi
 ```
 
 ### 6. **Notifications** (Bildirishnomalar)
-- System bildirishnomalarini boshqarish
-- Oqu/o'qilmagan status
+- Tizim bildirishnomalarini boshqarish
+- O'qilgan/o'qilmagan status
 - Push/Email bildirishnomalar
 
 **API Endpoints:**
@@ -293,16 +293,16 @@ Webhook
 
 ## 🎯 Asosiy Xususiyatlar
 
-1. **Xavfsizlik Skanirash** - Web-saytlarda zaifliklar topish
-2. **Jadval Orqali Skanirash** - Avtomatik rejalashtirish
-3. **Zaifliklar Boshqarish** - Status, severity, remediation
-4. **Hisobotlar Generatsiya** - PDF/Excel formatida
-5. **Compliance Analizi** - Xavfsizlik standarti
-6. **Bildirishnomalar** - Real-time alerts
+1. **Xavfsizlik skanerlash** - veb-ilovalarda zaifliklarni aniqlash
+2. **Jadval orqali skanerlash** - avtomatik rejalashtirish
+3. **Zaifliklarni boshqarish** - status, severity, remediation
+4. **Hisobotlarni generatsiya** - PDF/Excel formatida
+5. **Muvofiqlik tahlili** - xavfsizlik standarti
+6. **Bildirishnomalar** - real-time ogohlantirishlar
 7. **Integratsiyalar** - Webhook, Slack, CI/CD
-8. **Dashboard Analytics** - KPI va statistics
-9. **Foydalanuvchi Profili** - Avatar, rol, settings
-10. **Admin Panel** - Unfold admin interface
+8. **Dashboard analytics** - KPI va statistika
+9. **Foydalanuvchi profili** - avatar, rol, settings
+10. **Admin panel** - Unfold admin interface
 
 ---
 
@@ -322,16 +322,16 @@ Webhook
 ### Faza 2: Scans ✅ (To'liq)
 - Scan yaratish va boshqarish
 - Status kuzatish
-- Jadval orqali skanirash
+- Jadval orqali skanerlash
 
 ### Faza 3: Vulnerabilities ✅ (To'liq)
 - Zaifliklar ko'rsatish
-- Filteratsia va kategoriya
-- Statistics
+- Filtrlash va kategoriya
+- Statistika
 
 ### Faza 4: Assets ✅ (To'liq)
 - Asset boshqarish
-- Attack surface analizi
+- Attack surface tahlili
 
 ### Faza 5: Reports ✅ (To'liq)
 - Report generatsiya
@@ -347,21 +347,21 @@ Webhook
 - Tashqi ilova'lar
 
 ### Faza 8: Dashboard ✅ (To'liq)
-- Overview va statistics
+- Overview va statistika
 - KPI ko'rsatkichlari
 
 ---
 
 ## 🚀 Keyingi Bosqichlar
 
-1. **Database Migratsiyalari** - `python manage.py migrate`
-2. **Testing** - Unit tests, API tests
-3. **API Testing** - Swagger UI'da manual test
-4. **Frontend Testing** - Vitest
-5. **Docker Testing** - Production environment
-6. **Load Testing** - Performance optimization
-7. **Security Audit** - Penetration testing
-8. **Deployment** - Production serve'rga joylashtirish
+1. **Database migratsiyalari** - `python manage.py migrate`
+2. **Testlash** - unit testlar, API testlar
+3. **API testlash** - Swagger UI'da manual test
+4. **Frontend testlash** - Vitest
+5. **Docker testlash** - production environment
+6. **Load testing** - performance optimization
+7. **Security audit** - penetration testing
+8. **Deployment** - production serverga joylashtirish
 
 ---
 
@@ -398,10 +398,10 @@ Webhook
 
 ## 💡 Asosiy Fikrlar
 
-- **Monolit** degil, modular architecture
-- **Microservices** xohlamaslik, lekin scalable
+- **Monolit** emas, modular architecture
+- **Microservices**ga ehtiyoj yo'q, lekin scalable
 - **Frontend/Backend** mustaqil o'zaro bog'lanishda
-- **Docker Compose** bilan osongina ishga tushadigan
+- **Docker Compose** bilan osongina ishga tushiriladigan
 - **JWT Authentication** - stateless va secure
 - **Celery** - async tasks (Report generation, notifications)
 - **PostgreSQL** - reliable database

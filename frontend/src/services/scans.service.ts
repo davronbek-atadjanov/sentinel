@@ -1,5 +1,5 @@
-import { api } from "@/lib/api";
-import { PaginatedResponse, ApiResponse } from "@/types/backend.types";
+import { api } from "@/lib/api"
+import { ApiResponse, PaginatedResponse } from "@/types/backend.types"
 
 export interface Scan {
   id: number;
@@ -12,6 +12,23 @@ export interface Scan {
   started_at: string | null;
   completed_at: string | null;
   created_at: string;
+}
+
+export interface ScanResultVulnerability {
+  id: number;
+  title: string;
+  severity: string;
+  status: string;
+  category: string;
+  affected_url: string;
+}
+
+export interface ScanResultsData {
+  scan_id: number;
+  status: string;
+  progress: number;
+  summary: Record<string, any>;
+  vulnerabilities: ScanResultVulnerability[];
 }
 
 export const ScansService = {
@@ -41,6 +58,11 @@ export const ScansService = {
 
   async getStats(): Promise<ApiResponse<any>> {
     const response = await api.get("/scans/stats/");
+    return response.data;
+  },
+
+  async getResults(id: number): Promise<ApiResponse<ScanResultsData>> {
+    const response = await api.get(`/scans/${id}/results/`);
     return response.data;
   },
 };

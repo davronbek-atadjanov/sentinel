@@ -1,36 +1,36 @@
-import { Bug, Search, FileText, Globe, ShieldAlert, Database, type LucideIcon } from "lucide-react";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useInView } from "framer-motion"
+import { Bug, Database, FileText, Globe, Search, ShieldAlert, type LucideIcon } from "lucide-react"
+import { useRef } from "react"
 
 const features: { icon: LucideIcon; title: string; description: string; accent: string }[] = [
   {
     icon: ShieldAlert,
     title: "OWASP Top 10",
-    description: "Eng keng tarqalgan 10 ta veb-zaiflikni avtomatik aniqlash va tahlil qilish.",
+    description: "OWASP Top 10 doirasidagi eng ko'p uchraydigan 10 ta veb-zaiflikni avtomatik aniqlash va tahlil qilish.",
     accent: "from-primary/20 to-accent/10",
   },
   {
     icon: Database,
     title: "SQL Injection",
-    description: "Ma'lumotlar bazasiga ruxsatsiz kirish zaifliklarini topish va xabar berish.",
+    description: "SQL Injection orqali ma'lumotlar bazasiga ruxsatsiz kirish zaifliklarini aniqlash va xabar berish.",
     accent: "from-destructive/15 to-primary/10",
   },
   {
     icon: Bug,
     title: "XSS Detection",
-    description: "Cross-Site Scripting hujumlariga qarshi himoya va aniqlash moduli.",
+    description: "Cross-Site Scripting (XSS) zaifliklarini aniqlash va mitigatsiya bo'yicha tavsiyalar.",
     accent: "from-accent/20 to-primary/10",
   },
   {
     icon: Globe,
     title: "Web Crawling",
-    description: "Sayt sahifalarini avtomatik aniqlash va barcha endpointlarni skanerlash.",
+    description: "Sayt sahifalarini avtomatik aniqlash va endpointlarni qamrab skanerlash.",
     accent: "from-primary/15 to-accent/15",
   },
   {
     icon: Search,
     title: "HTTP Tahlili",
-    description: "HTTP so'rovlar va javoblarni chuqur tahlil qilish orqali zaifliklarni topish.",
+    description: "HTTP so'rov va javoblarni chuqur tahlil qilish orqali zaifliklarni aniqlash.",
     accent: "from-accent/15 to-primary/20",
   },
   {
@@ -95,7 +95,7 @@ const FeaturesSection = () => {
           className="text-center mb-20"
         >
           <span className="inline-block text-xs font-mono text-primary/70 tracking-[0.3em] uppercase mb-4">
-            Features
+            Imkoniyatlar
           </span>
           <h2 className="text-4xl md:text-5xl font-extrabold mb-5 text-foreground">
             Asosiy <span className="text-primary text-glow">imkoniyatlar</span>

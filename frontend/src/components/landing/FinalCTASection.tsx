@@ -9,12 +9,12 @@ const FinalCTASection = () => {
 
       <div className="relative max-w-4xl mx-auto text-center">
         <h2 className="text-3xl sm:text-5xl font-extrabold font-headline tracking-tight text-foreground mb-6">
-          Kelajagingizni Xavfsiz Qiling,{" "}
-          <span className="text-primary">Har Bir Skanerlash Orqali.</span>
+          Har Bir Skanerlash Orqali{" "}
+          <span className="text-primary">Ilovangiz Xavfsizligini Oshiring.</span>
         </h2>
         <p className="text-lg sm:text-xl text-muted-foreground mb-10">
-          Raqamli perimetrini himoya qilishda Sentinel'ga ishonadigan 500 dan ortiq 
-          korxonalarga qo'shiling. Xavfsizligingizni to'liq ishonch bilan boshqaring.
+          Veb loyihalaringizni turli xakerlik hujumlaridan muntazam himoyalashni 
+          uyg'unlashtiring. Tizimingizni himoyalashni o'z nazoratingizga oling!
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link

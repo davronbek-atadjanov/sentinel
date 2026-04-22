@@ -11,38 +11,38 @@ class HeaderAnalyzer:
     SECURITY_HEADERS = {
         "Strict-Transport-Security": {
             "severity": "HIGH",
-            "description": "HSTS header prevents protocol downgrade attacks and cookie hijacking.",
-            "remediation": "Add 'Strict-Transport-Security: max-age=31536000; includeSubDomains' header.",
+            "description": "HSTS sarlavhasi protokolni pasaytirish (downgrade) va cookie hijacking hujumlarini oldini oladi.",
+            "remediation": "Strict-Transport-Security: max-age=31536000; includeSubDomains sarlavhasini qo'shing.",
         },
         "Content-Security-Policy": {
             "severity": "MEDIUM",
-            "description": "CSP header prevents XSS, clickjacking, and code injection attacks.",
-            "remediation": "Implement a Content-Security-Policy header with appropriate directives.",
+            "description": "CSP sarlavhasi XSS, clickjacking va kod injektsiyasi hujumlarini cheklaydi.",
+            "remediation": "Tegishli direktivalar bilan Content-Security-Policy sarlavhasini joriy qiling.",
         },
         "X-Frame-Options": {
             "severity": "MEDIUM",
-            "description": "X-Frame-Options prevents clickjacking by disabling iframe embedding.",
-            "remediation": "Add 'X-Frame-Options: DENY' or 'SAMEORIGIN' header.",
+            "description": "X-Frame-Options iframe ichiga joylashtirishni cheklab, clickjackingni oldini oladi.",
+            "remediation": "X-Frame-Options: DENY yoki SAMEORIGIN sarlavhasini qo'shing.",
         },
         "X-Content-Type-Options": {
             "severity": "LOW",
-            "description": "Prevents MIME type sniffing which can lead to XSS attacks.",
-            "remediation": "Add 'X-Content-Type-Options: nosniff' header.",
+            "description": "MIME turini sniffing qilishni oldini oladi, bu XSS hujumlariga olib kelishi mumkin.",
+            "remediation": "X-Content-Type-Options: nosniff sarlavhasini qo'shing.",
         },
         "X-XSS-Protection": {
             "severity": "LOW",
-            "description": "Enables browser's built-in XSS filter (legacy browsers).",
-            "remediation": "Add 'X-XSS-Protection: 1; mode=block' header.",
+            "description": "Brauzerlarning ichki XSS filtri (legacy brauzerlar)ni yoqadi.",
+            "remediation": "X-XSS-Protection: 1; mode=block sarlavhasini qo'shing.",
         },
         "Referrer-Policy": {
             "severity": "LOW",
-            "description": "Controls how much referrer information is sent with requests.",
-            "remediation": "Add 'Referrer-Policy: strict-origin-when-cross-origin' header.",
+            "description": "So'rovlar bilan yuboriladigan referrer ma'lumotining hajmini boshqaradi.",
+            "remediation": "Referrer-Policy: strict-origin-when-cross-origin sarlavhasini qo'shing.",
         },
         "Permissions-Policy": {
             "severity": "LOW",
-            "description": "Controls which browser features the site can use.",
-            "remediation": "Add Permissions-Policy header to restrict unnecessary browser features.",
+            "description": "Brauzer funksiyalaridan qaysilarini sayt ishlatishini cheklaydi.",
+            "remediation": "Keraksiz brauzer funksiyalarini cheklash uchun Permissions-Policy sarlavhasini qo'shing.",
         },
     }
 
@@ -75,12 +75,12 @@ class HeaderAnalyzer:
             if server and any(v in server.lower() for v in ["apache/", "nginx/", "iis/"]):
                 findings.append({
                     "title": "Server Version Disclosure",
-                    "description": "The server header exposes version information.",
+                    "description": "Server sarlavhasi versiya ma'lumotini oshkor qiladi.",
                     "severity": "LOW",
                     "category": "HEADERS",
                     "affected_url": url,
                     "evidence": f"Server: {server}",
-                    "remediation": "Remove or obfuscate the Server header version.",
+                    "remediation": "Server sarlavhasidagi versiya ma'lumotini olib tashlang yoki yashiring.",
                 })
 
         except requests.RequestException as e:

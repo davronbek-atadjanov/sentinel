@@ -2,17 +2,17 @@ import PageHeader from "@/components/shared/PageHeader"
 import { Cloud, Globe, Server, Shield, Wifi } from "lucide-react"
 
 const surfaceNodes = [
-  { id: 1, name: "api.sentinel-prod.io", type: "API Shlyuzi", icon: Server, risk: 82, status: "Ochiq Qolgan", vulns: 4, ports: "443, 8080", location: "US-East-1" },
-  { id: 2, name: "auth-v3.legacy-app.com", type: "Autentifikatsiya Xizmati", icon: Shield, risk: 94, status: "Kritik", vulns: 8, ports: "443", location: "EU-West-1" },
+  { id: 1, name: "api.sentinel-prod.io", type: "API shlyuzi", icon: Server, risk: 82, status: "Ochiq qolgan", vulns: 4, ports: "443, 8080", location: "US-East-1" },
+  { id: 2, name: "auth-v3.legacy-app.com", type: "Autentifikatsiya xizmati", icon: Shield, risk: 94, status: "Kritik", vulns: 8, ports: "443", location: "EU-West-1" },
   { id: 3, name: "cdn.sentinel-prod.io", type: "CDN", icon: Globe, risk: 12, status: "Himoyalangan", vulns: 0, ports: "443", location: "Global" },
-  { id: 4, name: "storage-node-04.aws.com", type: "S3 Ombor", icon: Cloud, risk: 45, status: "Ogohlantirish", vulns: 2, ports: "443", location: "US-West-2" },
-  { id: 5, name: "10.0.42.1", type: "Ichki MB", icon: Server, risk: 68, status: "Ochiq Qolgan", vulns: 3, ports: "5432, 6379", location: "Mahalliy tarmoq" },
-  { id: 6, name: "mqtt.iot-fleet.sentinel.io", type: "IoT Shlyuzi", icon: Wifi, risk: 56, status: "Ogohlantirish", vulns: 1, ports: "1883, 8883", location: "US-East-1" },
+  { id: 4, name: "storage-node-04.aws.com", type: "S3 ombori", icon: Cloud, risk: 45, status: "Ogohlantirish", vulns: 2, ports: "443", location: "US-West-2" },
+  { id: 5, name: "10.0.42.1", type: "Ichki MB", icon: Server, risk: 68, status: "Ochiq qolgan", vulns: 3, ports: "5432, 6379", location: "Mahalliy tarmoq" },
+  { id: 6, name: "mqtt.iot-fleet.sentinel.io", type: "IoT shlyuzi", icon: Wifi, risk: 56, status: "Ogohlantirish", vulns: 1, ports: "1883, 8883", location: "US-East-1" },
 ];
 
 const statusConfig: Record<string, { color: string; bg: string }> = {
   Kritik: { color: "text-sentinel-error", bg: "bg-error-container" },
-  "Ochiq Qolgan": { color: "text-sentinel-tertiary", bg: "bg-tertiary-container" },
+  "Ochiq qolgan": { color: "text-sentinel-tertiary", bg: "bg-tertiary-container" },
   Ogohlantirish: { color: "text-[hsl(35,90%,65%)]", bg: "bg-[hsl(35,80%,15%)]" },
   Himoyalangan: { color: "text-primary", bg: "bg-primary-container" },
 };
@@ -21,12 +21,12 @@ const AttackSurfacePage = () => {
   return (
     <div>
       <PageHeader
-        title="Hujum Yuzasi Xaritasi"
+        title="Hujum yuzasi xaritasi"
         description="Tashqi va ichki hujum yuzasini keng qamrovli vizuallashtirish. Ochiq qolgan aktivlar, ochiq portlar va noto'g'ri sozlamalarni aniqlang."
         badge={
           <span className="flex items-center gap-1.5 ml-3 mt-2">
             <Globe className="w-4 h-4 text-sentinel-tertiary" />
-            <span className="text-[10px] text-sentinel-tertiary font-bold uppercase">Jonli Aniqlash</span>
+            <span className="text-[10px] text-sentinel-tertiary font-bold uppercase">Jonli aniqlash</span>
           </span>
         }
       />
@@ -34,10 +34,10 @@ const AttackSurfacePage = () => {
       {/* Stats Row */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         {[
-          { label: "Umumiy Yuza Maydoni", value: "1,482", sub: "aktivlar" },
-          { label: "Ochiq Qolgan Yakuniy Nuqtalar", value: "247", sub: "ommaga ochiq", color: "text-sentinel-tertiary" },
-          { label: "Ochiq Portlar", value: "842", sub: "barcha tarmoqlarda" },
-          { label: "Xavf Darajasi", value: "68/100", sub: "e'tibor talab qiladi", color: "text-sentinel-tertiary" },
+          { label: "Umumiy yuza maydoni", value: "1,482", sub: "aktivlar" },
+          { label: "Ochiq qolgan endpointlar", value: "247", sub: "ommaga ochiq", color: "text-sentinel-tertiary" },
+          { label: "Ochiq portlar", value: "842", sub: "barcha tarmoqlarda" },
+          { label: "Xavf darajasi", value: "68/100", sub: "e'tibor talab qiladi", color: "text-sentinel-tertiary" },
         ].map((s) => (
           <div key={s.label} className="bg-surface-low rounded-xl p-5 border-ghost">
             <p className={`text-3xl font-bold font-headline ${s.color || "text-white"}`}>{s.value}</p>
@@ -50,11 +50,11 @@ const AttackSurfacePage = () => {
       {/* Visual Map (Simplified network node visualization) */}
       <div className="bg-surface-low rounded-xl p-8 border-ghost mb-8">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="font-bold font-headline text-white">Tarmoq Topologiyasi</h3>
+          <h3 className="font-bold font-headline text-white">Tarmoq topologiyasi</h3>
           <div className="flex gap-4 text-xs">
             {[
               { color: "bg-sentinel-error", label: "Kritik" },
-              { color: "bg-sentinel-tertiary", label: "Ochiq Qolgan" },
+              { color: "bg-sentinel-tertiary", label: "Ochiq qolgan" },
               { color: "bg-[hsl(35,90%,55%)]", label: "Ogohlantirish" },
               { color: "bg-primary", label: "Himoyalangan" },
             ].map((l) => (
@@ -98,7 +98,7 @@ const AttackSurfacePage = () => {
       {/* Asset Details Table */}
       <div className="bg-surface-low rounded-xl border-ghost overflow-hidden">
         <div className="p-5 border-b border-[hsl(222,20%,12%,0.2)]">
-          <h3 className="font-bold text-white">Yuzasi Tafsilotlari</h3>
+          <h3 className="font-bold text-white">Yuza tafsilotlari</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left">

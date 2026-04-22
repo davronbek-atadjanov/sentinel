@@ -26,7 +26,7 @@ const HeroSection = () => {
           >
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             <span className="text-[11px] font-semibold tracking-widest uppercase text-primary/90">
-              Global Liderlar Uchun Infratuzilmani Himoyalash
+              Zamonaviy veb-ilovalar xavfsizligi dvigateli
             </span>
           </motion.div>
 
@@ -36,7 +36,7 @@ const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.05 }}
             className="text-5xl sm:text-6xl lg:text-7xl font-extrabold font-headline leading-[1.08] tracking-tight mb-8"
           >
-            Raqamli <span className="text-primary text-glow">Obsidian.</span>
+            Veb xavfsizlik <span className="text-primary text-glow">skaneri.</span>
           </motion.h1>
 
           <motion.p
@@ -45,8 +45,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="text-lg sm:text-xl text-muted-foreground max-w-xl mb-10 leading-relaxed"
           >
-            Veb-ilovalar xavfsizligiga jarrohlik yondashuvi. Sentinel zamonaviy 
-            korporativ ekotizimlar uchun buzib bo'lmas buyruq va boshqaruv qatlamini taqdim etadi.
+            Veb-ilovalardagi zaifliklarni aniqlash va bartaraf etish tizimi. Sentinel yordamida veb-ilovangizdagi XSS, SQL Injection (SQLi) va boshqa zaifliklarni avtomatik aniqlang hamda xavfsizligini ta'minlang.
           </motion.p>
 
           <motion.div
@@ -59,7 +58,7 @@ const HeroSection = () => {
               to="/app/dashboard"
               className="inline-flex items-center justify-center gap-2 bg-gradient-primary text-on-primary-fixed font-bold text-base px-8 py-4 rounded-lg hover:brightness-110 transition-all shadow-glow-primary"
             >
-              Boshqaruv Markazini Oching
+              Boshqaruv Paneliga O'tish
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
@@ -85,7 +84,7 @@ const HeroSection = () => {
               ))}
             </div>
             <p className="text-sm text-muted-foreground font-medium">
-              Xavfsizlikni birinchi o'ringa qo'yadigan 500+ tashkilot ishonchi
+              Xavfsizlikni ustuvor deb biladigan dasturchilar jamoalari
             </p>
           </motion.div>
         </div>
@@ -115,7 +114,7 @@ const HeroSection = () => {
                   99.9%
                 </div>
                 <div className="text-xs text-muted-foreground tracking-[0.3em] uppercase mt-2">
-                  Xavfni Aniqlash
+                  Xavfni aniqlash
                 </div>
               </div>
             </div>
@@ -127,8 +126,8 @@ const HeroSection = () => {
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             >
               <Eye className="w-5 h-5 text-primary mb-1" />
-              <div className="text-[10px] text-muted-foreground font-semibold">Haqiqiy vaqt</div>
-              <div className="text-xs text-primary font-bold">Kuzatuv</div>
+              <div className="text-[10px] text-muted-foreground font-semibold">Real vaqt</div>
+              <div className="text-xs text-primary font-bold">Monitoring</div>
             </motion.div>
 
             <motion.div
@@ -137,7 +136,7 @@ const HeroSection = () => {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
               <Lock className="w-5 h-5 text-sentinel-success mb-1" />
-              <div className="text-[10px] text-muted-foreground font-semibold">Nolinchi Kun</div>
+              <div className="text-[10px] text-muted-foreground font-semibold">Zero-Day</div>
               <div className="text-xs text-sentinel-success font-bold">Himoyalangan</div>
             </motion.div>
 
@@ -148,7 +147,7 @@ const HeroSection = () => {
             >
               <Zap className="w-5 h-5 text-sentinel-tertiary mb-1" />
               <div className="text-[10px] text-muted-foreground font-semibold">Tezkor</div>
-              <div className="text-xs text-sentinel-tertiary font-bold">Harbiy Javob</div>
+              <div className="text-xs text-sentinel-tertiary font-bold">Tezkor javob</div>
             </motion.div>
           </div>
         </div>

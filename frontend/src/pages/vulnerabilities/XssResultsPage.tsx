@@ -3,27 +3,27 @@ import SeverityBadge from "@/components/shared/SeverityBadge"
 import { Code } from "lucide-react"
 
 const xssFindings = [
-  { id: 1, severity: "high" as const, type: "Qaytarilgan XSS", url: "/search?q=<script>alert(1)</script>", param: "q", context: "HTML Tanasida", payload: '<script>alert("XSS")</script>', status: "Tasdiqlangan" },
-  { id: 2, severity: "high" as const, type: "Saqlangan XSS", url: "/api/comments", param: "body", context: "Ma'lumotlar Bazasidan → HTML", payload: '<img src=x onerror=alert(1)>', status: "Tasdiqlangan" },
-  { id: 3, severity: "medium" as const, type: "DOM-ga asoslangan XSS", url: "/dashboard#section=", param: "hash qismi", context: "JavaScript", payload: "javascript:alert(document.cookie)", status: "Ehtimoliy" },
-  { id: 4, severity: "low" as const, type: "Self-XSS", url: "/profile/edit", param: "bio", context: "Foydalanuvchi Profili", payload: '<svg onload=alert(1)>', status: "Past xavf" },
+  { id: 1, severity: "high" as const, type: "Reflected XSS", url: "/search?q=<script>alert(1)</script>", param: "q", context: "HTML tanasida", payload: '<script>alert("XSS")</script>', status: "Tasdiqlangan" },
+  { id: 2, severity: "high" as const, type: "Stored XSS", url: "/api/comments", param: "body", context: "Ma'lumotlar bazasidan → HTML", payload: '<img src=x onerror=alert(1)>', status: "Tasdiqlangan" },
+  { id: 3, severity: "medium" as const, type: "DOM-based XSS", url: "/dashboard#section=", param: "hash qismi", context: "JavaScript", payload: "javascript:alert(document.cookie)", status: "Ehtimoliy" },
+  { id: 4, severity: "low" as const, type: "Self-XSS", url: "/profile/edit", param: "bio", context: "Foydalanuvchi profili", payload: '<svg onload=alert(1)>', status: "Past xavf" },
 ];
 
 const XssResultsPage = () => {
   return (
     <div>
       <PageHeader
-        title="XSS Skaner Natijalari"
-        description="847 ta nuqta bo'ylab Saytlararo Skripting (XSS) zaiflik tahlili. Skanerlash 8daq 14soniyada yakunlandi."
+        title="XSS skanerlash natijalari"
+        description="847 ta nuqta bo'ylab Cross-Site Scripting (XSS) zaiflik tahlili. Skanerlash 8 daqiqa 14 soniyada yakunlandi."
         badge={<Code className="w-5 h-5 text-primary mt-2 ml-2" />}
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
         {[
-          { label: "Jami Topilgan XSS", value: "4", color: "text-sentinel-tertiary" },
-          { label: "Qaytarilgan XSS", value: "1" },
-          { label: "Saqlangan XSS", value: "1" },
-          { label: "DOM-ga asoslangan", value: "2" },
+          { label: "Jami topilgan XSS", value: "4", color: "text-sentinel-tertiary" },
+          { label: "Reflected XSS", value: "1" },
+          { label: "Stored XSS", value: "1" },
+          { label: "DOM-based XSS", value: "2" },
         ].map((s) => (
           <div key={s.label} className="bg-surface-low rounded-xl p-5 border-ghost text-center">
             <p className={`text-3xl font-bold font-headline ${s.color || "text-white"}`}>{s.value}</p>
@@ -40,7 +40,7 @@ const XssResultsPage = () => {
                 <th className="px-5 py-3">Jiddiylik</th>
                 <th className="px-5 py-3">Turi</th>
                 <th className="px-5 py-3">URL / Parametr</th>
-                <th className="px-5 py-3">Yuk (Payload)</th>
+                <th className="px-5 py-3">Yuk (payload)</th>
                 <th className="px-5 py-3">Holati</th>
               </tr>
             </thead>
@@ -51,7 +51,7 @@ const XssResultsPage = () => {
                   <td className="px-5 py-4 font-semibold text-on-surface">{f.type}</td>
                   <td className="px-5 py-4">
                     <span className="text-primary font-mono text-xs block">{f.url}</span>
-                    <span className="text-[10px] text-[hsl(215,15%,45%)]">Param: {f.param} • Kontekst: {f.context}</span>
+                    <span className="text-[10px] text-[hsl(215,15%,45%)]">Parametr: {f.param} • Kontekst: {f.context}</span>
                   </td>
                   <td className="px-5 py-4">
                     <code className="text-xs text-sentinel-tertiary bg-surface-container px-2 py-1 rounded font-mono">{f.payload}</code>

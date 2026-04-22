@@ -87,8 +87,8 @@ const ScansListPage = () => {
   return (
     <div>
       <PageHeader
-        title="Skanerlashlar."
-        description="Infratuzilmangiz bo'ylab avtomatlashtirilgan penetratsion testlarni boshqaring. Zamonaviy aktivlar uchun yuqori aniqlik."
+        title="Skanerlashlar"
+        description="Infratuzilmangiz bo'ylab avtomatlashtirilgan penetratsion testlarni boshqaring. Zamonaviy aktivlar uchun yuqori aniqlikdagi tahlil."
         actions={
           <>
             <button className="flex items-center gap-2 bg-surface-container px-6 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
@@ -125,18 +125,18 @@ const ScansListPage = () => {
         ))}
         <div className="bg-surface-low rounded-xl p-6 border-ghost">
           <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-semibold mb-3">
-            Faol Filtrlar
+            Faol filtrlar
           </p>
           <div className="flex flex-wrap gap-2">
             <span className="px-3 py-1 bg-surface-container rounded text-xs text-on-surface font-medium">
-              Barcha Holatlar
+              Barcha holatlar
             </span>
             <span className="px-3 py-1 bg-surface-container rounded text-xs text-on-surface font-medium">
-              So'nggi 24 Soat
+              So'nggi 24 soat
             </span>
           </div>
           <button className="text-primary text-[10px] font-bold uppercase mt-3 hover:underline">
-            Qayta O'rnatish
+            Qayta o'rnatish
           </button>
         </div>
       </div>
@@ -147,10 +147,10 @@ const ScansListPage = () => {
           <table className="w-full text-left">
             <thead>
               <tr className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold border-b border-[hsl(222,20%,12%,0.3)]">
-                <th className="px-6 py-4">Nishon Yakuniy Nuqtasi</th>
-                <th className="px-6 py-4">Skanerlash Turi</th>
-                <th className="px-6 py-4">Jarayon / Holati</th>
-                <th className="px-6 py-4">Xavf Darajasi</th>
+                <th className="px-6 py-4">Nishon endpointi</th>
+                <th className="px-6 py-4">Skanerlash turi</th>
+                <th className="px-6 py-4">Jarayon / holat</th>
+                <th className="px-6 py-4">Xavf darajasi</th>
                 <th className="px-6 py-4">Harakatlar</th>
               </tr>
             </thead>
@@ -219,7 +219,7 @@ const ScansListPage = () => {
                           <button 
                             onClick={() => cancelMutation.mutate(scan.id)}
                             className="text-[hsl(215,15%,55%)] hover:text-[hsl(35,90%,65%)] transition-colors"
-                            title="Skanerlashni Bekor Qilish"
+                            title="Skanerlashni bekor qilish"
                           >
                             <XCircle className="w-4 h-4" />
                           </button>
@@ -231,7 +231,7 @@ const ScansListPage = () => {
                             }
                           }}
                           className="text-[hsl(215,15%,55%)] hover:text-sentinel-error transition-colors"
-                          title="Skanerlashni O'chirish"
+                          title="Skanerlashni o'chirish"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -250,7 +250,7 @@ const ScansListPage = () => {
                         to="/app/scans/new"
                         className="bg-[hsl(222,30%,12%)] hover:bg-[hsl(222,30%,15%)] text-white text-xs font-bold px-4 py-2 rounded transition-colors"
                       >
-                        Birinchi Skanerlashni Yarating
+                        Birinchi skanerlashni yarating
                       </Link>
                     </div>
                   </td>
@@ -287,15 +287,15 @@ const ScansListPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-surface-low rounded-xl p-6 border-ghost flex items-start gap-6">
           <div className="flex-1">
-            <h4 className="font-bold font-headline text-white mb-2">Avtomatlashtirilgan Keshfiyot</h4>
+            <h4 className="font-bold font-headline text-white mb-2">Avtomatlashtirilgan kashfiyot</h4>
             <p className="text-body-md text-[hsl(215,15%,50%)] mb-4">
-              Sentinel arxitekturangizda 14 ta yangi yakuniy nuqtani aniqladi. Ularni skanerlaymizmi?
+              Sentinel arxitekturangizda 14 ta yangi endpointni aniqladi. Ularni skanerlaymizmi?
             </p>
             <Link
               to="/app/assets"
               className="text-primary text-label-sm uppercase font-bold hover:underline flex items-center gap-1"
             >
-              Yakuniy Nuqtalarni Ko'rib Chiqish →
+              Endpointlarni ko'rib chiqish →
             </Link>
           </div>
           <Network className="w-16 h-16 text-primary/20" />
@@ -304,10 +304,10 @@ const ScansListPage = () => {
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
               <Zap className="w-5 h-5 text-sentinel-tertiary" />
-              <h4 className="font-bold font-headline text-white">Skanerlash Samaradorligi</h4>
+              <h4 className="font-bold font-headline text-white">Skanerlash samaradorligi</h4>
             </div>
             <p className="text-body-md text-[hsl(215,15%,50%)] mb-4">
-              Dvigatel optimallashtirilgani sababli bu hafta o'rtacha skanerlash vaqti 14% ga kamaydi.
+              Dvigatel optimallashtirilgani sababli bu hafta o'rtacha skanerlash vaqti 14% ga qisqardi.
             </p>
             <div className="flex items-center gap-3">
               <div className="flex-1 h-1.5 bg-surface-high rounded-full overflow-hidden">

@@ -1,13 +1,12 @@
-import { ArrowDown, Globe, Search, ShieldCheck, FileText } from "lucide-react";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { type LucideIcon } from "lucide-react";
+import { motion, useInView } from "framer-motion"
+import { ArrowDown, FileText, Globe, Search, ShieldCheck, type LucideIcon } from "lucide-react"
+import { useRef } from "react"
 
 const steps: { step: string; title: string; desc: string; icon: LucideIcon }[] = [
-  { step: "01", title: "URL kiriting", desc: "Skanerlash uchun veb-ilova manzilini va skanerlash parametrlarini belgilang", icon: Globe },
-  { step: "02", title: "Crawling", desc: "Tizim avtomatik ravishda barcha sahifalar, formalar va API endpointlarini topadi", icon: Search },
-  { step: "03", title: "Skanerlash", desc: "SQLi, XSS, CSRF va boshqa OWASP Top 10 zaifliklar tekshiriladi", icon: ShieldCheck },
-  { step: "04", title: "Hisobot", desc: "Natijalar batafsil hisobot va tavsiyalar shaklida taqdim etiladi", icon: FileText },
+  { step: "01", title: "URL kiriting", desc: "Skanerlash uchun veb-ilova manzilini va parametrlarini belgilang", icon: Globe },
+  { step: "02", title: "Web crawling", desc: "Tizim avtomatik ravishda barcha sahifalar, formalar va API endpointlarini topadi", icon: Search },
+  { step: "03", title: "Skanerlash", desc: "SQL Injection (SQLi), XSS, CSRF va OWASP Top 10 dagi boshqa zaifliklar tekshiriladi", icon: ShieldCheck },
+  { step: "04", title: "Hisobot", desc: "Natijalar batafsil hisobot va tavsiyalar ko'rinishida taqdim etiladi", icon: FileText },
 ];
 
 const StepCard = ({ item, index }: { item: typeof steps[0]; index: number }) => {
@@ -61,13 +60,13 @@ const HowItWorksSection = () => {
           className="text-center mb-20"
         >
           <span className="inline-block text-xs font-mono text-primary/70 tracking-[0.3em] uppercase mb-4">
-            Process
+            Jarayon
           </span>
           <h2 className="text-4xl md:text-5xl font-extrabold mb-5 text-foreground">
             Qanday <span className="text-primary text-glow">ishlaydi?</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-lg mx-auto">
-            4 ta oddiy qadamda veb-ilovangiz xavfsizligini to'liq tekshiring
+            4 ta bosqichda veb-ilovangiz xavfsizligini to'liq baholang
           </p>
         </motion.div>
 

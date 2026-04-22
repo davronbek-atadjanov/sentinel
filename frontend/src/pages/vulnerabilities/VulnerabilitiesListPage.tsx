@@ -35,8 +35,8 @@ const VulnerabilitiesListPage = () => {
   return (
     <div>
       <PageHeader
-        title="Zaifliklar Inventarizatsiyasi"
-        description={`Hozirda ${totalCount.toLocaleString()} ta aniqlangan zaifliklar kuzatilmoqda.`}
+        title="Zaifliklar inventarizatsiyasi"
+        description={`Hozirda ${totalCount.toLocaleString()} ta zaiflik aniqlangan va kuzatilmoqda.`}
         badge={
           totalCount > 0 && <span className="w-2 h-2 rounded-full bg-sentinel-tertiary animate-pulse mt-2" />
         }
@@ -48,7 +48,7 @@ const VulnerabilitiesListPage = () => {
             </button>
             <button className="flex items-center gap-2 bg-surface-container px-5 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
               <FileText className="w-4 h-4" />
-              PDF Hisobot
+              PDF hisobot
             </button>
           </>
         }
@@ -75,7 +75,7 @@ const VulnerabilitiesListPage = () => {
           <span className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold">
             Holati:
           </span>
-          <span className="text-sm text-on-surface">Barcha Holatlar</span>
+          <span className="text-sm text-on-surface">Barcha holatlar</span>
         </div>
         <div className="ml-auto text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-semibold">
           {totalCount} ta dan {displayVulns.length} tasi ko'rsatilmoqda
@@ -89,10 +89,10 @@ const VulnerabilitiesListPage = () => {
             <thead>
               <tr className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold border-b border-[hsl(222,20%,12%,0.3)]">
                 <th className="px-6 py-4">Jiddiylik</th>
-                <th className="px-6 py-4">Zaiflik Nomi</th>
-                <th className="px-6 py-4">Maqsadli URL</th>
+                <th className="px-6 py-4">Zaiflik nomi</th>
+                <th className="px-6 py-4">Maqsad URL</th>
                 <th className="px-6 py-4">Holati</th>
-                <th className="px-6 py-4">Topilgan Sana</th>
+                <th className="px-6 py-4">Topilgan sana</th>
                 <th className="px-6 py-4">Harakat</th>
               </tr>
             </thead>
@@ -186,7 +186,7 @@ const VulnerabilitiesListPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-surface-low rounded-xl p-6 border-ghost">
           <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold mb-2">
-            Kritik Tuzatish Ko'rsatkichi
+            Kritik tuzatish ko'rsatkichi
           </p>
           <div className="flex items-baseline gap-2">
             <span className="text-3xl font-bold font-headline text-white">{fixRate}%</span>
@@ -198,7 +198,7 @@ const VulnerabilitiesListPage = () => {
         </div>
         <div className="bg-surface-low rounded-xl p-6 border-ghost">
           <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold mb-2">
-            Hal Qilingan Zaifliklar
+            Hal qilingan zaifliklar
           </p>
           <div className="flex items-baseline gap-2">
             <span className="text-3xl font-bold font-headline text-white">{stats.resolved}</span>
@@ -211,7 +211,7 @@ const VulnerabilitiesListPage = () => {
         <div className="bg-surface-low rounded-xl p-6 border-ghost flex items-center justify-between">
           <div>
             <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold mb-2">
-              Faol Skanerlash Klasteri
+              Faol skanerlash klasteri
             </p>
             <div className="flex items-baseline gap-2">
               <span className="text-3xl font-bold font-headline text-white">{stats.total > 0 ? "Faol" : "Neytral"}</span>

@@ -1,13 +1,13 @@
 # 🚀 Sentinel Backend-Frontend Integration Status
 
 **Last Updated:** April 21, 2026  
-**Status:** ✅ **INTEGRATION COMPLETE** (Ready for Testing)
+**Status:** ✅ **INTEGRATION COMPLETE** (Sinov uchun tayyor)
 
 ---
 
 ## 📊 Summary
 
-Loyihaning **Backend API** va **Frontend Application** to'liq integratsiya qilingan. Barcha qism-qismlar o'zaro to'g'ri ishlashga tayyorlangan, faqat Database migrations va Testing kerak.
+Loyihaning **Backend API** va **Frontend ilova** to'liq integratsiya qilingan. Barcha qismlar o'zaro to'g'ri ishlashga tayyorlangan, faqat ma'lumotlar bazasi migratsiyalari va sinovlar kerak.
 
 ---
 
@@ -17,7 +17,7 @@ Loyihaning **Backend API** va **Frontend Application** to'liq integratsiya qilin
 | Service | Endpoints | Status | Integration |
 |---------|-----------|--------|-------------|
 | **AuthService** | register, login, logout, getProfile, updateProfile | ✅ | OAuth + JWT Refresh |
-| **ScansService** | getScans, createScan, cancelScan, deleteS scan, getStats | ✅ | React Query |
+| **ScansService** | getScans, createScan, cancelScan, deleteScan, getStats | ✅ | React Query |
 | **VulnerabilitiesService** | getVulnerabilities, updateStatus, getStats, getByCategory | ✅ | React Query |
 | **AssetsService** | getAssets, createAsset, updateAsset, getAttackSurface | ✅ | React Query |
 | **ReportsService** | getReports, generateReport, downloadReport, getComplianceStats | ✅ | React Query |
@@ -219,7 +219,7 @@ Frontend (ReportsPage)
 - [ ] Download report → file saved locally
 - [ ] Notifications load → can mark as read
 
-### Integration Tests (Manual)
+### Integratsion sinovlar (Manual)
 1. **Start Backend**
    ```bash
    cd backend/src
@@ -232,7 +232,7 @@ Frontend (ReportsPage)
    npm run dev
    ```
 
-3. **Test Flow**
+3. **Sinov oqimi**
    - Navigate to http://localhost:5173
    - Register new user (e.g., `test@example.com`)
    - View Dashboard (should show 0 scans, 0 vulns)
@@ -240,7 +240,7 @@ Frontend (ReportsPage)
    - Create Scan (select asset, scan type)
    - Check scan progress in real-time
    - View Vulnerabilities (from completed scan)
-   - Generate & download Report
+  - Hisobotni generatsiya qilish va yuklab olish
 
 ### Swagger/API Documentation
 - Open: `http://localhost:8000/api/schema/swagger-ui/`
@@ -330,4 +330,4 @@ apps/notifications/api/v1/views/notifications.py    — Added IsAuthenticated
 
 ---
 
-**Status:** ✅ READY FOR INTEGRATION TESTING
+**Status:** ✅ INTEGRATION SINOVI UCHUN TAYYOR

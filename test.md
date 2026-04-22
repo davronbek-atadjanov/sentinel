@@ -60,8 +60,8 @@ backend/src/
 | 1 | `users` | ✅ Mavjud — Auth API qo'shish kerak |
 | 2 | `scans` | Skan yaratish, boshqarish, natijalar |
 | 3 | `vulnerabilities` | Topilgan zaifliklar, tafsilotlar |
-| 4 | `assets` | Target veb-saytlar va endpointlar |
-| 5 | `reports` | Hisobotlar generatsiya, export |
+| 4 | `assets` | Maqsad veb-ilovalar va endpointlar |
+| 5 | `reports` | Hisobotlar generatsiya, eksport |
 
 ---
 
@@ -278,7 +278,7 @@ GET    /api/v1/assets/{id}/           — Tafsilotlar
 PATCH  /api/v1/assets/{id}/           — Tahrirlash
 DELETE /api/v1/assets/{id}/           — O'chirish
 GET    /api/v1/assets/{id}/history/   — Skan tarixi
-GET    /api/v1/assets/attack-surface/ — Attack surface
+GET    /api/v1/assets/attack-surface/ — Attack surface tahlili
 ```
 
 ---
@@ -340,7 +340,7 @@ GET /api/v1/dashboard/overview/
 
 ---
 
-## Faza 7: Haqiqiy Skan Engine Integratsiya
+## Faza 7: Haqiqiy skan engine integratsiyasi
 
 > [!CAUTION]
 > Bu faza loyihaning eng muhim va murakkab qismi — haqiqiy zaiflik skanerlash mexanizmi.

@@ -58,7 +58,7 @@ const NotificationsPage = () => {
         title="Bildirishnomalar markazi"
         badge={
           <span className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold ml-2 mt-2">
-            Buyruqlar markazi / Signallar
+            Buyruqlar markazi / signallar
           </span>
         }
         actions={
@@ -117,7 +117,7 @@ const NotificationsPage = () => {
               <div className="h-full w-[82%] bg-primary rounded-full" />
             </div>
             <p className="text-xs text-[hsl(215,15%,45%)]">
-              Tizim hozirda 12,403 ta endpointni aylanib chiqmoqda. Taxminiy tugash: <span className="text-on-surface font-bold">12d</span>
+              Tizim hozirda 12,403 ta endpointni aylanib chiqmoqda. Taxminiy tugash: <span className="text-on-surface font-bold">12 kun</span>
             </p>
           </div>
         </div>

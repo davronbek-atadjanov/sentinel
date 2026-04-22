@@ -31,22 +31,22 @@ const AssetsPage = () => {
   return (
     <div>
       <div className="flex items-center gap-2 text-[10px] text-primary uppercase tracking-widest font-bold mb-2">
-        Nishon Muhiti
+        Nishon muhiti
       </div>
       <PageHeader
-        title="Aktivlarni Boshqarish"
+        title="Aktivlarni boshqarish"
         actions={
           <>
             <button className="flex items-center gap-2 bg-surface-container px-5 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
               <Download className="w-4 h-4" />
-              CSV Formatida Yuklash
+              CSV formatida yuklash
             </button>
             <Link
               to="/app/assets/new"
               className="flex items-center gap-2 bg-gradient-primary px-5 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all"
             >
               <Plus className="w-4 h-4" />
-              Yangi Aktiv Qo'shish
+              Yangi aktiv qo'shish
             </Link>
           </>
         }
@@ -55,9 +55,9 @@ const AssetsPage = () => {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {[
-          { label: "Jami Aktivlar", value: stats.total_assets.toString(), trend: "", trendColor: "text-primary" },
-          { label: "Faol Nishonlar", value: stats.active_assets.toString(), badge: "Faol", badgeColor: "text-sentinel-tertiary" },
-          { label: "Yuqori Xavfli Aktivlar", value: stats.high_risk_assets.toString(), trend: "" },
+          { label: "Jami aktivlar", value: stats.total_assets.toString(), trend: "", trendColor: "text-primary" },
+          { label: "Faol nishonlar", value: stats.active_assets.toString(), badge: "Faol", badgeColor: "text-sentinel-tertiary" },
+          { label: "Yuqori xavfli aktivlar", value: stats.high_risk_assets.toString(), trend: "" },
         ].map((s) => (
           <div key={s.label} className="bg-surface-low rounded-xl p-6 border-ghost">
             <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-semibold mb-2">
@@ -100,11 +100,11 @@ const AssetsPage = () => {
         <div className="flex items-center gap-3">
           <button className="flex items-center gap-2 px-3 py-2 text-xs text-[hsl(215,15%,55%)] hover:text-white transition-colors">
             <Filter className="w-4 h-4" />
-            Murakkab Filtrlar
+            Murakkab filtrlar
           </button>
-          <span className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">Ommaviy Harakatlar:</span>
+          <span className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">Ommaviy harakatlar:</span>
           <button className="px-3 py-1.5 bg-surface-container rounded text-xs font-semibold text-on-surface hover:bg-surface-high">
-            Tanlanganlarni Skanerlash
+            Tanlanganlarni skanerlash
           </button>
           <button className="px-3 py-1.5 bg-sentinel-error-container rounded text-xs font-semibold text-on-error-container hover:brightness-110">
             O'chirish
@@ -121,11 +121,11 @@ const AssetsPage = () => {
                 <th className="px-6 py-4 w-10">
                   <input type="checkbox" className="w-4 h-4 rounded bg-surface-container border-outline-variant" />
                 </th>
-                <th className="px-6 py-4">Nishon URL / Identifikator</th>
+                <th className="px-6 py-4">Nishon URL / identifikator</th>
                 <th className="px-6 py-4">Turi</th>
-                <th className="px-6 py-4">Xavfsizlik Holati</th>
-                <th className="px-6 py-4">So'nggi Skanerlash</th>
-                <th className="px-6 py-4">Xavf Darajasi</th>
+                <th className="px-6 py-4">Xavfsizlik holati</th>
+                <th className="px-6 py-4">So'nggi skanerlash</th>
+                <th className="px-6 py-4">Xavf darajasi</th>
                 <th className="px-6 py-4">Harakatlar</th>
               </tr>
             </thead>
@@ -189,7 +189,7 @@ const AssetsPage = () => {
                         to="/app/assets/new"
                         className="bg-[hsl(222,30%,12%)] hover:bg-[hsl(222,30%,15%)] text-white text-xs font-bold px-4 py-2 rounded transition-colors"
                       >
-                        Aktiv Qo'shish
+                        Aktiv qo'shish
                       </Link>
                     </div>
                   </td>

@@ -101,7 +101,7 @@
 
 ---
 
-## Faza 7: Haqiqiy Skan Engine
+## Faza 7: Haqiqiy skan engine
 - [x] 7.1. Docker Compose'ga OWASP ZAP container qo'shish
 - [x] 7.2. `ZAPScanner` service class yaratish (spider_scan, active_scan, get_alerts)
 - [ ] 7.3. ZAP integratsiyani test qilish (oddiy saytga skan)
@@ -116,7 +116,7 @@
   - [x] 7.7.5. `PortScanner` — Common ports scanning
 - [x] 7.8. `run_scan` Celery master task yaratish (orchestrator)
 - [x] 7.9. Progress tracking mexanizmi (Scan.progress real-time yangilash)
-- [x] 7.10. `settings.py` ga skan engine sozlamalar qo'shish (ZAP_API_URL, NUCLEI_PATH)
+- [x] 7.10. `settings.py` ga skan engine sozlamalari qo'shish (ZAP_API_URL, NUCLEI_PATH)
 - [ ] 7.11. End-to-end test — POST /scans/ → Celery → skanerlash → natijalar DB'da
 
 ---

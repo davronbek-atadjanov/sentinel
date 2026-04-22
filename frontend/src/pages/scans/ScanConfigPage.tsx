@@ -7,15 +7,15 @@ import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 
 const scanTypes = [
-  { id: "quick", label: "Tezkor Skanerlash", desc: "Top 10 OWASP xavflarining yuza tahlili.", active: true },
-  { id: "full", label: "To'liq Audit", desc: "Keng qamrovli tarkibiy va mantiqiy test." },
-  { id: "custom", label: "Maxsus Profil", desc: "Foydalanuvchi tomonidan belgilangan siyosat va qoidalar." },
+  { id: "quick", label: "Tezkor skanerlash", desc: "OWASP Top 10 xavflarining yuzaki tahlili.", active: true },
+  { id: "full", label: "To'liq audit", desc: "Keng qamrovli tarkibiy va mantiqiy testlar." },
+  { id: "custom", label: "Maxsus profil", desc: "Foydalanuvchi tomonidan belgilangan siyosat va qoidalar." },
 ];
 
 const schedules = [
-  { label: "Kunlik Texnik Xizmat", active: true },
-  { label: "Haftalik Salomatlik Tekshiruvi" },
-  { label: "Oylik Muvofiqlik Auditi" },
+  { label: "Kunlik texnik xizmat", active: true },
+  { label: "Haftalik salomatlik tekshiruvi" },
+  { label: "Oylik muvofiqlik auditi" },
 ];
 
 const ScanConfigPage = () => {
@@ -52,22 +52,22 @@ const ScanConfigPage = () => {
   return (
     <div>
       <PageHeader
-        title="Skanerlash Sozlamasi"
-        description="Yangi maqsadli skanerlashni boshlang yoki rejalashtirilgan takroriy baholashlarni o'zgartiring."
+        title="Skanerlash sozlamalari"
+        description="Yangi maqsadli skanerlashni boshlang yoki rejalashtirilgan takroriy baholashlarni yangilang."
         actions={
           <>
             <button 
               onClick={() => navigate("/app/scans")}
               className="bg-surface-container px-6 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors"
             >
-              O'zgarishlarni Bekor Qilish
+              O'zgarishlarni bekor qilish
             </button>
             <button 
               onClick={handleExecuteScan}
               disabled={startScanMutation.isPending}
               className="bg-gradient-primary px-6 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all disabled:opacity-50"
             >
-              {startScanMutation.isPending ? "Boshlanmoqda..." : "Skanerlashni Bajarish"}
+              {startScanMutation.isPending ? "Boshlanmoqda..." : "Skanerlashni boshlash"}
             </button>
           </>
         }
@@ -82,13 +82,13 @@ const ScanConfigPage = () => {
               <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                 <span className="w-3 h-3 border-2 border-primary rounded-full" />
               </span>
-              Asosiy Maqsad
+              Asosiy maqsad
             </h3>
 
             <div className="space-y-4">
               <div>
                 <label className="text-[10px] text-primary uppercase tracking-widest font-bold block mb-2">
-                  Nishon URL / Xost nomi
+                  Nishon URL / host nomi
                 </label>
                 <input
                   type="text"
@@ -131,10 +131,10 @@ const ScanConfigPage = () => {
             <div className="flex justify-between items-center mb-6">
               <h3 className="font-bold font-headline text-white text-lg flex items-center gap-2">
                 <Lock className="w-5 h-5 text-primary" />
-                Autentifikatsiyalangan Skanerlash
+                Autentifikatsiyalangan skanerlash
               </h3>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">Holati:</span>
+                <span className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">Holat:</span>
                 <span className="text-[10px] text-[hsl(215,15%,50%)] uppercase font-bold">O'chirilgan</span>
               </div>
             </div>
@@ -142,7 +142,7 @@ const ScanConfigPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold block mb-2">
-                  Foydalanuvchi nomi / API Kaliti
+                  Foydalanuvchi nomi / API kaliti
                 </label>
                 <input
                   type="text"
@@ -151,7 +151,7 @@ const ScanConfigPage = () => {
               </div>
               <div>
                 <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold block mb-2">
-                  Parol / Maxfiy so'z
+                  Parol / maxfiy so'z
                 </label>
                 <input
                   type="password"
@@ -162,7 +162,7 @@ const ScanConfigPage = () => {
 
             <div className="mt-4">
               <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold block mb-2">
-                Tizimga Kirish Formasi URL (Ixtiyoriy)
+                Tizimga kirish formasi URL (ixtiyoriy)
               </label>
               <input
                 type="text"
@@ -176,16 +176,16 @@ const ScanConfigPage = () => {
           <div className="bg-surface-low rounded-xl p-6 border-ghost">
             <h3 className="font-bold font-headline text-white text-lg flex items-center gap-2 mb-6">
               <Sliders className="w-5 h-5 text-primary" />
-              Murakkab Parametrlar
+              Murakkab parametrlar
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <div className="flex justify-between mb-2">
                   <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold">
-                    Maksimal Qidiruv Chuqurligi
+                    Maksimal qidiruv chuqurligi
                   </label>
-                  <span className="text-sm text-primary font-mono font-bold">10 Daraja</span>
+                  <span className="text-sm text-primary font-mono font-bold">10 daraja</span>
                 </div>
                 <input
                   type="range"
@@ -201,7 +201,7 @@ const ScanConfigPage = () => {
               <div>
                 <div className="flex justify-between mb-2">
                   <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold">
-                    So'rovlar Parallelizmi
+                    So'rovlar parallelizmi
                   </label>
                   <span className="text-sm text-primary font-mono font-bold">25 so'rov/s</span>
                 </div>
@@ -222,14 +222,14 @@ const ScanConfigPage = () => {
               <label className="flex items-start gap-3 p-4 bg-surface-container rounded-lg cursor-pointer hover:bg-surface-high transition-colors">
                 <input type="checkbox" className="w-4 h-4 mt-0.5 rounded bg-surface-container border-outline-variant text-primary focus:ring-primary/30" />
                 <div>
-                  <span className="text-sm font-semibold text-on-surface block">HTTPS dan Majburiy Foydalanish</span>
+                  <span className="text-sm font-semibold text-on-surface block">HTTPS dan majburiy foydalanish</span>
                   <span className="text-xs text-[hsl(215,15%,45%)]">Barcha xavfsiz bo'lmagan ulanishlarni avtomatik ravishda yangilaydi.</span>
                 </div>
               </label>
               <label className="flex items-start gap-3 p-4 bg-surface-container rounded-lg cursor-pointer hover:bg-surface-high transition-colors">
                 <input type="checkbox" defaultChecked className="w-4 h-4 mt-0.5 rounded bg-surface-container border-outline-variant text-primary focus:ring-primary/30" />
                 <div>
-                  <span className="text-sm font-semibold text-on-surface block">Qayta Yo'naltirishlarni Kuzatish</span>
+                  <span className="text-sm font-semibold text-on-surface block">Qayta yo'naltirishlarni kuzatish</span>
                   <span className="text-xs text-[hsl(215,15%,45%)]">Kashfiyot davomida 301/302 status kodlarini kuzatish.</span>
                 </div>
               </label>
@@ -244,7 +244,7 @@ const ScanConfigPage = () => {
             <div className="flex justify-between items-center mb-6">
               <h3 className="font-bold font-headline text-white flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-primary" />
-                Vaqtinchalik Reja
+                Vaqtinchalik reja
               </h3>
               <div className="w-10 h-5 bg-surface-high rounded-full relative cursor-pointer">
                 <div className="absolute right-0.5 top-0.5 w-4 h-4 bg-on-surface-variant rounded-full" />
@@ -253,7 +253,7 @@ const ScanConfigPage = () => {
 
             <div className="space-y-1 mb-6">
               <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold mb-3">
-                Takrorlanish Qonuniyati
+                Takrorlanish qonuniyati
               </p>
               {schedules.map((s) => (
                 <div
@@ -274,7 +274,7 @@ const ScanConfigPage = () => {
 
             <div>
               <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold mb-3">
-                Bajarish Oynasi (UTC)
+                Bajarish oynasi (UTC)
               </p>
               <div className="flex items-center gap-3">
                 <input

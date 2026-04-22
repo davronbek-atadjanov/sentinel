@@ -1,16 +1,18 @@
 {% load static %}
 
 {% block body %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Django - The Web Framework for Perfectionists</title>
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-        <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel - Web Application Security Scanner</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+</head>
+
+<body>
     <div class="background">
         <div class="grid-overlay"></div>
         <div class="orb orb-1"></div>
@@ -21,7 +23,7 @@
 
     <nav>
         <div class="nav-container">
-            <div class="logo">DJANGO</div>
+            <div class="logo">SENTINEL</div>
             <ul class="nav-links">
                 <li><a href="{% url 'admin:index' %}">Admin</a></li>
                 <li><a href="{% url 'swagger-ui' %}">Swagger</a></li>
@@ -35,19 +37,19 @@
             <br>
             <br>
             <br>
-            <div class="hero-badge">THE WEB FRAMEWORK FOR PERFECTIONISTS</div>
+            <div class="hero-badge">AI-POWERED WEB APPLICATION SECURITY SCANNER</div>
             <h1>
-                Build <span class="gradient-text">Powerful</span><br>
-                Web Applications
+                Secure <span class="gradient-text">Web Applications</span><br>
+                with Sentinel
             </h1>
             <p class="hero-description">
-                Django makes it easier to build better web apps more quickly and with less code.
-                A high-level Python framework that encourages rapid development and clean, pragmatic design.
+                Sentinel yordamida veb-ilovalarda XSS, SQL Injection va konfiguratsion xatolarni
+                aniqlang, tahlil qiling va bartaraf etish bo'yicha tavsiyalar oling.
             </p>
             <div class="cta-buttons">
-                <a href="{% url 'admin:index' %}" class="btn btn-primary">Get Started</a>
-                <a href="https://github.com/JahongirHakimjonov/DjangoDefault" class="btn btn-secondary">View
-                    Documentation</a>
+                <a href="{% url 'admin:index' %}" class="btn btn-primary">Boshlash</a>
+                <a href="https://github.com/JahongirHakimjonov/DjangoDefault" class="btn btn-secondary">Hujjatlarni
+                    ko'rish</a>
             </div>
 
             <div class="glass-card">
@@ -58,18 +60,18 @@
                 <div class="feature-grid">
                     <div class="feature-item">
                         <div class="feature-icon">⚡</div>
-                        <div class="feature-title">Blazing Fast</div>
-                        <div class="feature-desc">Optimized for performance and scalability</div>
+                        <div class="feature-title">Tezkor tahlil</div>
+                        <div class="feature-desc">Performance va masshtablash uchun optimallashtirilgan</div>
                     </div>
                     <div class="feature-item">
                         <div class="feature-icon">🔒</div>
-                        <div class="feature-title">Secure by Default</div>
-                        <div class="feature-desc">Built-in protection against common vulnerabilities</div>
+                        <div class="feature-title">Default bo'yicha xavfsiz</div>
+                        <div class="feature-desc">Keng tarqalgan zaifliklarga qarshi ichki himoya</div>
                     </div>
                     <div class="feature-item">
                         <div class="feature-icon">🎯</div>
-                        <div class="feature-title">Fully Featured</div>
-                        <div class="feature-desc">Everything you need out of the box</div>
+                        <div class="feature-title">To'liq imkoniyatlar</div>
+                        <div class="feature-desc">Asosiy ehtiyojlar uchun tayyor funksiyalar</div>
                     </div>
                 </div>
             </div>
@@ -96,6 +98,7 @@
         <p>Made with ❤️ by Jahongir Hakimjonov</p>
     </footer>
     <script src="{% static 'js/main.js' %}"></script>
-    </body>
-    </html>
+</body>
+
+</html>
 {% endblock %}

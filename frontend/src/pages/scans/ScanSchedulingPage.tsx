@@ -2,22 +2,22 @@ import PageHeader from "@/components/shared/PageHeader"
 import { Calendar, Clock, Pause, Play, Plus, Trash2 } from "lucide-react"
 
 const schedules = [
-  { id: 1, name: "Kunlik Ishlab Chiqarish Perimetri", target: "api.sentinel-prod.io", frequency: "Har kuni 02:00 UTC da", type: "TO'LIQ OWASP", status: "faol", nextRun: "8 soat ichida", lastRun: "14 soat oldin" },
-  { id: 2, name: "Haftalik Muvofiqlik Auditi", target: "*.sentinel-prod.io", frequency: "Har dushanba 04:00 UTC da", type: "MUVOFIQLIK", status: "faol", nextRun: "3 kun ichida", lastRun: "4 kun oldin" },
-  { id: 3, name: "Staging Chuqur Skanerlash", target: "staging.sentinel.dev", frequency: "Har 6 soatda", type: "CHUQUR QIDIRUV", status: "to'xtatilgan", nextRun: "To'xtatilgan", lastRun: "2 kun oldin" },
-  { id: 4, name: "Oylik PCI Baholash", target: "payment.sentinel-prod.io", frequency: "Har oyning 1-sanasida", type: "PCI-DSS", status: "faol", nextRun: "17 kun ichida", lastRun: "13 kun oldin" },
+  { id: 1, name: "Kunlik ishlab chiqarish perimetri", target: "api.sentinel-prod.io", frequency: "Har kuni 02:00 UTC da", type: "TO'LIQ (OWASP)", status: "faol", nextRun: "8 soat ichida", lastRun: "14 soat oldin" },
+  { id: 2, name: "Haftalik muvofiqlik auditi", target: "*.sentinel-prod.io", frequency: "Har dushanba 04:00 UTC da", type: "MUVOFIQLIK", status: "faol", nextRun: "3 kun ichida", lastRun: "4 kun oldin" },
+  { id: 3, name: "Staging chuqur skanerlash", target: "staging.sentinel.dev", frequency: "Har 6 soatda", type: "CHUQUR SKAN", status: "to'xtatilgan", nextRun: "To'xtatilgan", lastRun: "2 kun oldin" },
+  { id: 4, name: "Oylik PCI DSS baholashi", target: "payment.sentinel-prod.io", frequency: "Har oyning 1-sanasida", type: "PCI DSS", status: "faol", nextRun: "17 kun ichida", lastRun: "13 kun oldin" },
 ];
 
 const ScanSchedulingPage = () => {
   return (
     <div>
       <PageHeader
-        title="Skanerlashni Rejalashtirish"
+        title="Skanerlashni rejalashtirish"
         description="Takroriy xavfsizlik baholashlarini avtomatlashtiring. Infratuzilmangiz bo'ylab aqlli skanerlash orkestratsiyasini sozlang."
         actions={
           <button className="flex items-center gap-2 bg-gradient-primary px-5 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all">
             <Plus className="w-4 h-4" />
-            Yangi Reja
+            Yangi reja
           </button>
         }
       />
@@ -27,17 +27,17 @@ const ScanSchedulingPage = () => {
         <div className="bg-surface-low rounded-xl p-6 border-ghost">
           <Calendar className="w-5 h-5 text-primary mb-3" />
           <p className="text-3xl font-bold font-headline text-white">4</p>
-          <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-semibold mt-1">Faol Rejalar</p>
+          <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-semibold mt-1">Faol rejalar</p>
         </div>
         <div className="bg-surface-low rounded-xl p-6 border-ghost">
           <Clock className="w-5 h-5 text-primary mb-3" />
           <p className="text-3xl font-bold font-headline text-white">128</p>
-          <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-semibold mt-1">Shu Oydagi Skanerlashlar</p>
+          <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-semibold mt-1">Shu oydagi skanerlashlar</p>
         </div>
         <div className="bg-surface-low rounded-xl p-6 border-ghost">
           <Play className="w-5 h-5 text-primary mb-3" />
-          <p className="text-3xl font-bold font-headline text-white">8soat</p>
-          <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-semibold mt-1">Keyingi Skanerlashgacha</p>
+          <p className="text-3xl font-bold font-headline text-white">8 soat</p>
+          <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-semibold mt-1">Keyingi skanerlashgacha</p>
         </div>
       </div>
 
