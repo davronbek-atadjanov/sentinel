@@ -1,17 +1,17 @@
-import { Link } from "react-router-dom";
-import { Download, Plus, MoreVertical, Filter } from "lucide-react";
-import PageHeader from "@/components/shared/PageHeader";
+import PageHeader from "@/components/shared/PageHeader"
+import { Download, Filter, MoreVertical, Plus } from "lucide-react"
+import { Link } from "react-router-dom"
 
-import { useQuery } from "@tanstack/react-query";
-import { AssetsService } from "@/services/assets.service";
-import { ServerCrash } from "lucide-react";
+import { AssetsService } from "@/services/assets.service"
+import { useQuery } from "@tanstack/react-query"
+import { ServerCrash } from "lucide-react"
 const statusStyles: Record<string, { label: string; cls: string }> = {
-  protected: { label: "PROTECTED", cls: "bg-primary-container text-primary" },
-  scanning: { label: "SCANNING", cls: "bg-[hsl(35,80%,15%)] text-[hsl(35,90%,65%)]" },
-  vulnerable: { label: "VULNERABLE", cls: "bg-error-container text-on-error-container" },
+  protected: { label: "HIMOYA QILINGAN", cls: "bg-primary-container text-primary" },
+  scanning: { label: "SKANERLANMOQDA", cls: "bg-[hsl(35,80%,15%)] text-[hsl(35,90%,65%)]" },
+  vulnerable: { label: "XAVF OSTIDA", cls: "bg-error-container text-on-error-container" },
 };
 
-const tabs = ["All Assets", "Domains", "IP Addresses", "Endpoints"];
+const tabs = ["Barcha Aktivlar", "Domenlar", "IP Manzillar", "Yakuniy Nuqtalar"];
 
 const AssetsPage = () => {
   const { data: assetsData, isLoading } = useQuery({
@@ -31,22 +31,22 @@ const AssetsPage = () => {
   return (
     <div>
       <div className="flex items-center gap-2 text-[10px] text-primary uppercase tracking-widest font-bold mb-2">
-        Target Environment
+        Nishon Muhiti
       </div>
       <PageHeader
-        title="Asset Management"
+        title="Aktivlarni Boshqarish"
         actions={
           <>
             <button className="flex items-center gap-2 bg-surface-container px-5 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
               <Download className="w-4 h-4" />
-              Export CSV
+              CSV Formatida Yuklash
             </button>
             <Link
               to="/app/assets/new"
               className="flex items-center gap-2 bg-gradient-primary px-5 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all"
             >
               <Plus className="w-4 h-4" />
-              Add New Asset
+              Yangi Aktiv Qo'shish
             </Link>
           </>
         }
@@ -55,9 +55,9 @@ const AssetsPage = () => {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {[
-          { label: "Total Assets", value: stats.total_assets.toString(), trend: "", trendColor: "text-primary" },
-          { label: "Active Targets", value: stats.active_assets.toString(), badge: "Active", badgeColor: "text-sentinel-tertiary" },
-          { label: "High Risk Assets", value: stats.high_risk_assets.toString(), trend: "" },
+          { label: "Jami Aktivlar", value: stats.total_assets.toString(), trend: "", trendColor: "text-primary" },
+          { label: "Faol Nishonlar", value: stats.active_assets.toString(), badge: "Faol", badgeColor: "text-sentinel-tertiary" },
+          { label: "Yuqori Xavfli Aktivlar", value: stats.high_risk_assets.toString(), trend: "" },
         ].map((s) => (
           <div key={s.label} className="bg-surface-low rounded-xl p-6 border-ghost">
             <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-semibold mb-2">
@@ -100,14 +100,14 @@ const AssetsPage = () => {
         <div className="flex items-center gap-3">
           <button className="flex items-center gap-2 px-3 py-2 text-xs text-[hsl(215,15%,55%)] hover:text-white transition-colors">
             <Filter className="w-4 h-4" />
-            Advanced Filters
+            Murakkab Filtrlar
           </button>
-          <span className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">Bulk Actions:</span>
+          <span className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">Ommaviy Harakatlar:</span>
           <button className="px-3 py-1.5 bg-surface-container rounded text-xs font-semibold text-on-surface hover:bg-surface-high">
-            Scan Selected
+            Tanlanganlarni Skanerlash
           </button>
           <button className="px-3 py-1.5 bg-sentinel-error-container rounded text-xs font-semibold text-on-error-container hover:brightness-110">
-            Delete
+            O'chirish
           </button>
         </div>
       </div>
@@ -121,19 +121,19 @@ const AssetsPage = () => {
                 <th className="px-6 py-4 w-10">
                   <input type="checkbox" className="w-4 h-4 rounded bg-surface-container border-outline-variant" />
                 </th>
-                <th className="px-6 py-4">Target URL / Identifier</th>
-                <th className="px-6 py-4">Type</th>
-                <th className="px-6 py-4">Security Status</th>
-                <th className="px-6 py-4">Last Scan</th>
-                <th className="px-6 py-4">Risk Score</th>
-                <th className="px-6 py-4">Actions</th>
+                <th className="px-6 py-4">Nishon URL / Identifikator</th>
+                <th className="px-6 py-4">Turi</th>
+                <th className="px-6 py-4">Xavfsizlik Holati</th>
+                <th className="px-6 py-4">So'nggi Skanerlash</th>
+                <th className="px-6 py-4">Xavf Darajasi</th>
+                <th className="px-6 py-4">Harakatlar</th>
               </tr>
             </thead>
             <tbody className="text-sm">
               {isLoading ? (
                 <tr>
                   <td colSpan={7} className="py-8 text-center text-muted-foreground">
-                    Loading assets...
+                    Aktivlar yuklanmoqda...
                   </td>
                 </tr>
               ) : displayAssets.length > 0 ? (
@@ -155,10 +155,10 @@ const AssetsPage = () => {
                         <div className="font-semibold text-on-surface">{a.name}</div>
                         <div className="text-xs text-[hsl(215,15%,45%)] mt-0.5">{a.url}</div>
                       </td>
-                      <td className="px-6 py-5 text-[hsl(215,15%,55%)]">{a.asset_type || "Generic"}</td>
+                      <td className="px-6 py-5 text-[hsl(215,15%,55%)]">{a.asset_type || "Umumiy"}</td>
                       <td className="px-6 py-5">
                         <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${statusStyles[mappedStatus]?.cls || 'bg-surface-container'}`}>
-                          {statusStyles[mappedStatus]?.label || 'UNKNOWN'}
+                          {statusStyles[mappedStatus]?.label || "NOMA'LUM"}
                         </span>
                       </td>
                       <td className="px-6 py-5 text-[hsl(215,15%,50%)] text-body-md">
@@ -183,13 +183,13 @@ const AssetsPage = () => {
                   <td colSpan={7} className="py-12 text-center">
                     <div className="flex flex-col items-center justify-center">
                       <ServerCrash className="w-10 h-10 text-[hsl(215,15%,35%)] mb-3" />
-                      <p className="text-[hsl(215,15%,65%)] font-semibold">No assets found.</p>
-                      <p className="text-[hsl(215,15%,40%)] text-sm mb-4">Add your first domain or IP address to begin monitoring.</p>
+                      <p className="text-[hsl(215,15%,65%)] font-semibold">Hech qanday aktiv topilmadi.</p>
+                      <p className="text-[hsl(215,15%,40%)] text-sm mb-4">Kuzatishni boshlash uchun birinchi domen yoki IP manzilingizni qo'shing.</p>
                       <Link 
                         to="/app/assets/new"
                         className="bg-[hsl(222,30%,12%)] hover:bg-[hsl(222,30%,15%)] text-white text-xs font-bold px-4 py-2 rounded transition-colors"
                       >
-                        Add Output Asset
+                        Aktiv Qo'shish
                       </Link>
                     </div>
                   </td>
@@ -199,7 +199,7 @@ const AssetsPage = () => {
           </table>
         </div>
         <div className="px-6 py-4 flex justify-between items-center border-t border-[hsl(222,20%,12%,0.15)]">
-          <span className="text-xs text-[hsl(215,15%,45%)]">Showing {displayAssets.length} of {totalCount} assets</span>
+          <span className="text-xs text-[hsl(215,15%,45%)]">{totalCount} ta aktivdan {displayAssets.length} tasi ko'rsatilmoqda</span>
           <div className="flex items-center gap-2">
             <button className="w-8 h-8 rounded text-[hsl(215,15%,55%)] hover:bg-surface-high text-xs font-bold flex items-center justify-center">
               {Math.max(1, Math.ceil(totalCount / 10))}

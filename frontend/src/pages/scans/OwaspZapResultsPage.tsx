@@ -1,37 +1,37 @@
-import PageHeader from "@/components/shared/PageHeader";
-import SeverityBadge from "@/components/shared/SeverityBadge";
-import { Shield, AlertTriangle, CheckCircle, ExternalLink, Info } from "lucide-react";
+import PageHeader from "@/components/shared/PageHeader"
+import SeverityBadge from "@/components/shared/SeverityBadge"
+import { ExternalLink } from "lucide-react"
 
 const findings = [
-  { id: 1, severity: "critical" as const, name: "SQL Injection", location: "/api/v2/auth", evidence: "Parameter: session_token", cwe: "CWE-89", confidence: "High" },
-  { id: 2, severity: "high" as const, name: "Cross-Site Scripting (Reflected)", location: "/search?q=", evidence: "Reflected input in response body", cwe: "CWE-79", confidence: "High" },
-  { id: 3, severity: "medium" as const, name: "Missing Security Headers", location: "/*", evidence: "X-Frame-Options, CSP not set", cwe: "CWE-693", confidence: "Confirmed" },
-  { id: 4, severity: "medium" as const, name: "Cookie Without Secure Flag", location: "/api/session", evidence: "Set-Cookie: sid=...; HttpOnly", cwe: "CWE-614", confidence: "Confirmed" },
-  { id: 5, severity: "low" as const, name: "Information Disclosure", location: "/api/health", evidence: "Server version exposed in headers", cwe: "CWE-200", confidence: "Medium" },
+  { id: 1, severity: "critical" as const, name: "SQL Inyeksiyasi", location: "/api/v2/auth", evidence: "Parametr: session_token", cwe: "CWE-89", confidence: "Yuqori" },
+  { id: 2, severity: "high" as const, name: "Saytlararo Skripting (Qaytarilgan)", location: "/search?q=", evidence: "Javob tanasida qaytarilgan kiritish", cwe: "CWE-79", confidence: "Yuqori" },
+  { id: 3, severity: "medium" as const, name: "Xavfsizlik Sarlavhalari Yo'q", location: "/*", evidence: "X-Frame-Options, CSP o'rnatilmagan", cwe: "CWE-693", confidence: "Tasdiqlangan" },
+  { id: 4, severity: "medium" as const, name: "Secure Bayroqsiz Cookie", location: "/api/session", evidence: "Set-Cookie: sid=...; HttpOnly", cwe: "CWE-614", confidence: "Tasdiqlangan" },
+  { id: 5, severity: "low" as const, name: "Axborot Oshkor Qilinishi", location: "/api/health", evidence: "Server versiyasi sarlavhalarda ko'rsatilgan", cwe: "CWE-200", confidence: "O'rtacha" },
 ];
 
 const scanSummary = [
-  { label: "Total Requests", value: "12,483" },
-  { label: "Scan Duration", value: "14m 32s" },
-  { label: "URLs Crawled", value: "847" },
-  { label: "Parameters Tested", value: "3,291" },
+  { label: "Jami So'rovlar", value: "12,483" },
+  { label: "Skanerlash Davomiyligi", value: "14daq 32soniya" },
+  { label: "O'qib chiqilgan URLlar", value: "847" },
+  { label: "Sinab Ko'rilgan Parametrlar", value: "3,291" },
 ];
 
 const OwaspZapResultsPage = () => {
   return (
     <div>
       <PageHeader
-        title="OWASP ZAP Results"
-        description="Automated scan results from OWASP ZAP proxy analysis. Target: https://api.v-scan.prod"
+        title="OWASP ZAP Natijalari"
+        description="OWASP ZAP proksi tahlilidan avtomatlashtirilgan skanerlash natijalari. Nishon: https://api.v-scan.prod"
         badge={
           <span className="px-2 py-1 bg-primary-container text-primary text-[10px] font-bold uppercase rounded ml-3 mt-2">
-            Scan #778
+            Skanerlash #778
           </span>
         }
         actions={
           <button className="flex items-center gap-2 bg-surface-container px-5 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
             <ExternalLink className="w-4 h-4" />
-            Export Full Report
+            To'liq Hisobotni Yuklab Olish
           </button>
         }
       />
@@ -48,14 +48,14 @@ const OwaspZapResultsPage = () => {
 
       {/* Severity Overview */}
       <div className="bg-surface-low rounded-xl p-6 border-ghost mb-8">
-        <h3 className="font-bold text-white mb-4">Severity Distribution</h3>
+        <h3 className="font-bold text-white mb-4">Jiddiylik Taqsimoti</h3>
         <div className="flex items-end gap-8">
           {[
-            { label: "Critical", count: 1, color: "bg-sentinel-error", height: "h-16" },
-            { label: "High", count: 1, color: "bg-sentinel-tertiary", height: "h-20" },
-            { label: "Medium", count: 2, color: "bg-[hsl(35,90%,55%)]", height: "h-32" },
-            { label: "Low", count: 1, color: "bg-primary", height: "h-12" },
-            { label: "Info", count: 0, color: "bg-on-surface-variant", height: "h-4" },
+            { label: "Kritik", count: 1, color: "bg-sentinel-error", height: "h-16" },
+            { label: "Yuqori", count: 1, color: "bg-sentinel-tertiary", height: "h-20" },
+            { label: "O'rtacha", count: 2, color: "bg-[hsl(35,90%,55%)]", height: "h-32" },
+            { label: "Past", count: 1, color: "bg-primary", height: "h-12" },
+            { label: "Ma'lumot", count: 0, color: "bg-on-surface-variant", height: "h-4" },
           ].map((item) => (
             <div key={item.label} className="flex flex-col items-center gap-2 flex-1">
               <span className="text-lg font-bold text-white">{item.count}</span>
@@ -69,17 +69,17 @@ const OwaspZapResultsPage = () => {
       {/* Findings Table */}
       <div className="bg-surface-low rounded-xl border-ghost overflow-hidden">
         <div className="p-5 border-b border-[hsl(222,20%,12%,0.2)]">
-          <h3 className="font-bold text-white">Findings ({findings.length})</h3>
+          <h3 className="font-bold text-white">Topilmalar ({findings.length})</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
               <tr className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold border-b border-[hsl(222,20%,12%,0.15)]">
-                <th className="px-5 py-3">Severity</th>
-                <th className="px-5 py-3">Finding</th>
-                <th className="px-5 py-3">Location</th>
+                <th className="px-5 py-3">Jiddiylik</th>
+                <th className="px-5 py-3">Topilma</th>
+                <th className="px-5 py-3">Joylashuv</th>
                 <th className="px-5 py-3">CWE</th>
-                <th className="px-5 py-3">Confidence</th>
+                <th className="px-5 py-3">Ishonchlilik</th>
               </tr>
             </thead>
             <tbody className="text-sm">

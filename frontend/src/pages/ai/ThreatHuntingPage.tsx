@@ -1,28 +1,28 @@
-import PageHeader from "@/components/shared/PageHeader";
-import { Crosshair, Brain, Shield, Zap, TrendingUp } from "lucide-react";
+import PageHeader from "@/components/shared/PageHeader"
+import { Brain, Crosshair, Shield, TrendingUp } from "lucide-react"
 
 const threats = [
-  { id: 1, name: "Advanced Persistent Threat (APT-29)", confidence: 94, severity: "Critical", vector: "Spear phishing → Lateral Movement", firstSeen: "2 hours ago", status: "Active Hunt" },
-  { id: 2, name: "Supply Chain Compromise", confidence: 78, severity: "High", vector: "Dependency injection via npm package", firstSeen: "6 hours ago", status: "Investigating" },
-  { id: 3, name: "Credential Stuffing Campaign", confidence: 88, severity: "High", vector: "Automated login attempts (12,000+ IPs)", firstSeen: "1 day ago", status: "Mitigated" },
-  { id: 4, name: "Zero-Day Exploit Attempt", confidence: 62, severity: "Medium", vector: "Unknown payload targeting auth endpoints", firstSeen: "3 days ago", status: "Monitoring" },
+  { id: 1, name: "Ilg'or Doimiy Xavf (APT-29)", confidence: 94, severity: "Critical", vector: "Maqsadli fashing → Yonbosh Harakat", firstSeen: "2 soat oldin", status: "Faol Qidiruv" },
+  { id: 2, name: "Ta'minot Zanjirining Buzilishi", confidence: 78, severity: "High", vector: "npm to'plami orqali qaramlik inyeksiyasi", firstSeen: "6 soat oldin", status: "Tekshirilmoqda" },
+  { id: 3, name: "Ma'lumotlarni Kiritish Kampaniyasi", confidence: 88, severity: "High", vector: "Avtomatlashtirilgan kirish urinishlari (12,000+ IP lar)", firstSeen: "1 kun oldin", status: "Yengillashtirilgan" },
+  { id: 4, name: "Nolinchi Kun Eksploit Urinishi", confidence: 62, severity: "Medium", vector: "Autentifikatsiya manzillariga qaratilgan noma'lum foydali yuk", firstSeen: "3 kun oldin", status: "Kuzatilmoqda" },
 ];
 
 const ThreatHuntingPage = () => {
   return (
     <div>
       <PageHeader
-        title="Proactive Threat Hunting"
-        description="AI-driven threat detection engine continuously scanning for emerging attack patterns, zero-days, and APT indicators."
-        badge={<span className="flex items-center gap-1.5 ml-3 mt-2"><Crosshair className="w-4 h-4 text-sentinel-tertiary" /><span className="text-[10px] text-sentinel-tertiary font-bold uppercase">Hunting Active</span></span>}
+        title="Faol Xavflarni Qidirish"
+        description="Yangi hujum naqshlari, nolinchi kunlik zaifliklar va APT ko'rsatkichlarini doimiy ravishda kuzatib boruvchi AI ga asoslangan tahdidlarni aniqlash mexanizmi."
+        badge={<span className="flex items-center gap-1.5 ml-3 mt-2"><Crosshair className="w-4 h-4 text-sentinel-tertiary" /><span className="text-[10px] text-sentinel-tertiary font-bold uppercase">Qidiruv Faol</span></span>}
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
         {[
-          { label: "Active Hunts", value: "4", icon: Crosshair },
-          { label: "Threats Found", value: "42", icon: Shield },
-          { label: "AI Confidence", value: "94%", icon: Brain },
-          { label: "IOCs Tracked", value: "1.2K", icon: TrendingUp },
+          { label: "Faol Qidiruvlar", value: "4", icon: Crosshair },
+          { label: "Topilgan Xavflar", value: "42", icon: Shield },
+          { label: "AI Ishonchi", value: "94%", icon: Brain },
+          { label: "Kuzatilgan IOC lar", value: "1.2K", icon: TrendingUp },
         ].map((s) => (
           <div key={s.label} className="bg-surface-low rounded-xl p-5 border-ghost">
             <s.icon className="w-5 h-5 text-primary mb-3" />
@@ -45,21 +45,21 @@ const ThreatHuntingPage = () => {
                     "bg-[hsl(35,80%,15%)] text-[hsl(35,90%,65%)]"
                   }`}>{t.severity}</span>
                   <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                    t.status === "Active Hunt" ? "text-sentinel-tertiary bg-sentinel-tertiary/10" :
-                    t.status === "Mitigated" ? "text-primary bg-primary/10" :
+                    t.status === "Faol Qidiruv" ? "text-sentinel-tertiary bg-sentinel-tertiary/10" :
+                    t.status === "Yengillashtirilgan" ? "text-primary bg-primary/10" :
                     "text-[hsl(215,15%,50%)] bg-surface-high"
                   }`}>{t.status}</span>
                 </div>
-                <p className="text-xs text-[hsl(215,15%,50%)] mb-1">Vector: {t.vector}</p>
-                <p className="text-[10px] text-[hsl(215,15%,40%)]">First seen: {t.firstSeen}</p>
+                <p className="text-xs text-[hsl(215,15%,50%)] mb-1">Vektor: {t.vector}</p>
+                <p className="text-[10px] text-[hsl(215,15%,40%)]">Birinchi ko'rilgan: {t.firstSeen}</p>
               </div>
               <div className="flex items-center gap-4">
                 <div className="text-right">
-                  <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">AI Confidence</p>
+                  <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">AI Ishonchi</p>
                   <p className={`text-lg font-bold font-headline ${t.confidence > 80 ? "text-sentinel-tertiary" : "text-[hsl(35,90%,55%)]"}`}>{t.confidence}%</p>
                 </div>
                 <button className="px-4 py-2 bg-surface-container rounded-lg text-xs font-bold text-on-surface hover:bg-surface-high transition-colors">
-                  Investigate
+                  Tekshirish
                 </button>
               </div>
             </div>

@@ -1,33 +1,33 @@
-import { Activity, AlertTriangle, Radio, Shield, Wifi, Zap } from "lucide-react";
-import PageHeader from "@/components/shared/PageHeader";
+import PageHeader from "@/components/shared/PageHeader"
+import { Activity, AlertTriangle, Radio, Shield, Wifi, Zap } from "lucide-react"
 
 const liveFeeds = [
-  { id: 1, type: "scan", message: "Full scan initiated on api.sentinel.com", time: "Just now", severity: "info" },
-  { id: 2, type: "alert", message: "Critical: RCE attempt detected on /upload endpoint", time: "12s ago", severity: "critical" },
-  { id: 3, type: "scan", message: "Port scan completed — 3 open ports detected", time: "45s ago", severity: "warning" },
-  { id: 4, type: "alert", message: "SQL injection payload blocked on /api/auth", time: "1m ago", severity: "critical" },
-  { id: 5, type: "scan", message: "SSL certificate validation passed", time: "2m ago", severity: "info" },
-  { id: 6, type: "alert", message: "Unusual traffic spike from IP 45.33.32.156", time: "3m ago", severity: "warning" },
+  { id: 1, type: "scan", message: "api.sentinel.com uchun to'liq skanerlash boshlandi", time: "Hozirgina", severity: "info" },
+  { id: 2, type: "alert", message: "Kritik: /upload endpointida RCE xavfi aniqlandi", time: "12 soniya oldin", severity: "critical" },
+  { id: 3, type: "scan", message: "Port tekshiruvi yakunlandi — 3 ta ochiq port topildi", time: "45 soniya oldin", severity: "warning" },
+  { id: 4, type: "alert", message: "/api/auth qismida SQL injection hujumi bloklandi", time: "1 daqiqa oldin", severity: "critical" },
+  { id: 5, type: "scan", message: "SSL sertifikati tekshiruvdan o'tdi", time: "2 daqiqa oldin", severity: "info" },
+  { id: 6, type: "alert", message: "45.33.32.156 IP manzilidan noodatiy trafik uzilishi kuzatildi", time: "3 daqiqa oldin", severity: "warning" },
 ];
 
 const activeNodes = [
-  { name: "Scanner Alpha", status: "active", load: 72, scans: 12 },
-  { name: "Scanner Beta", status: "active", load: 45, scans: 8 },
-  { name: "Scanner Gamma", status: "idle", load: 5, scans: 0 },
-  { name: "Scanner Delta", status: "active", load: 88, scans: 15 },
+  { name: "Skaner Alpha", status: "faol", load: 72, scans: 12 },
+  { name: "Skaner Beta", status: "faol", load: 45, scans: 8 },
+  { name: "Skaner Gamma", status: "kutilmoqda", load: 5, scans: 0 },
+  { name: "Skaner Delta", status: "faol", load: 88, scans: 15 },
 ];
 
 const RealTimeDashboardPage = () => {
   return (
     <div>
       <PageHeader
-        title="Real-time Security Dashboard"
-        description="Live monitoring of all security operations and threat detection."
+        title="Real vaqtdagi xavfsizlik paneli"
+        description="Barcha xavfsizlik operatsiyalari va xavflarni jonli monitoring qilish."
         actions={
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-lg">
               <Radio className="w-4 h-4 text-primary animate-pulse" />
-              <span className="text-xs font-bold text-primary">LIVE</span>
+              <span className="text-xs font-bold text-primary">JONLI</span>
             </span>
           </div>
         }
@@ -37,10 +37,10 @@ const RealTimeDashboardPage = () => {
         {/* Stats Row */}
         <div className="col-span-12 grid grid-cols-4 gap-6">
           {[
-            { label: "Active Threats", value: "7", icon: AlertTriangle, color: "text-sentinel-error" },
-            { label: "Active Scans", value: "4", icon: Activity, color: "text-primary" },
-            { label: "Blocked Attacks", value: "1,247", icon: Shield, color: "text-sentinel-success" },
-            { label: "Network Status", value: "Healthy", icon: Wifi, color: "text-primary" },
+            { label: "Faol xavflar", value: "7", icon: AlertTriangle, color: "text-sentinel-error" },
+            { label: "Faol skanerlashlar", value: "4", icon: Activity, color: "text-primary" },
+            { label: "To'xtatilgan hujumlar", value: "1,247", icon: Shield, color: "text-sentinel-success" },
+            { label: "Tarmoq holati", value: "Sog'lom", icon: Wifi, color: "text-primary" },
           ].map((stat, i) => (
             <div key={i} className="bg-surface-low rounded-xl p-6 border-ghost">
               <div className="flex items-center justify-between mb-4">
@@ -59,10 +59,10 @@ const RealTimeDashboardPage = () => {
           <div className="p-6 border-b border-[hsl(222,20%,12%,0.3)] flex justify-between items-center bg-surface-high/30">
             <h3 className="font-bold font-headline text-white flex items-center gap-2">
               <Zap className="w-5 h-5 text-primary" />
-              Live Threat Feed
+              Jonli xavflar lentasi
             </h3>
             <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-1 rounded">
-              Auto-refresh: 5s
+              Avto-yangilash: 5s
             </span>
           </div>
           <div className="divide-y divide-[hsl(222,20%,10%,0.3)]">
@@ -92,7 +92,7 @@ const RealTimeDashboardPage = () => {
         {/* Active Nodes */}
         <div className="col-span-12 lg:col-span-4 bg-surface-low rounded-xl border-ghost overflow-hidden">
           <div className="p-6 border-b border-[hsl(222,20%,12%,0.3)] bg-surface-high/30">
-            <h3 className="font-bold font-headline text-white">Active Scan Nodes</h3>
+            <h3 className="font-bold font-headline text-white">Faol Skanerlash Tugunlari</h3>
           </div>
           <div className="p-4 space-y-3">
             {activeNodes.map((node, i) => (
@@ -100,7 +100,7 @@ const RealTimeDashboardPage = () => {
                 <div className="flex justify-between items-center mb-3">
                   <span className="text-sm font-semibold text-[hsl(215,20%,85%)]">{node.name}</span>
                   <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${
-                    node.status === "active" ? "bg-primary/10 text-primary" : "bg-[hsl(222,25%,15%)] text-[hsl(215,15%,45%)]"
+                    node.status === "faol" ? "bg-primary/10 text-primary" : "bg-[hsl(222,25%,15%)] text-[hsl(215,15%,45%)]"
                   }`}>
                     {node.status}
                   </span>
@@ -116,7 +116,7 @@ const RealTimeDashboardPage = () => {
                   </div>
                   <span className="text-[10px] text-[hsl(215,15%,45%)] font-mono">{node.load}%</span>
                 </div>
-                <p className="text-[10px] text-[hsl(215,15%,40%)] mt-2">{node.scans} active scans</p>
+                <p className="text-[10px] text-[hsl(215,15%,40%)] mt-2">{node.scans} ta qidiruv</p>
               </div>
             ))}
           </div>

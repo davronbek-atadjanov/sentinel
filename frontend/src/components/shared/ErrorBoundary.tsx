@@ -1,5 +1,5 @@
-import { Component, ErrorInfo, ReactNode } from "react";
-import { AlertTriangle, Home, RefreshCw } from "lucide-react";
+import { AlertTriangle, Home, RefreshCw } from "lucide-react"
+import { Component, ErrorInfo, ReactNode } from "react"
 
 interface Props {
   children?: ReactNode;
@@ -43,12 +43,12 @@ export class ErrorBoundary extends Component<Props, State> {
           </div>
           
           <h1 className="text-3xl font-bold font-headline text-white mb-4">
-            Something went wrong
+            Nimadir xato ketdi
           </h1>
           
           <p className="text-[hsl(215,15%,55%)] max-w-md mb-8">
-            An unexpected error occurred while rendering this page. Our systems have 
-            logged the issue for investigation.
+            Ushbu sahifani ko'rsatishda kutilmagan xatolik yuz berdi. Tizimlarimiz bu muammoni
+            tekshirish uchun qayd etib oldi.
           </p>
 
           <div className="bg-surface-low p-4 rounded-lg border border-ghost text-left w-full max-w-2xl mb-8 overflow-x-auto">
@@ -66,14 +66,14 @@ export class ErrorBoundary extends Component<Props, State> {
               className="flex items-center gap-2 bg-gradient-primary px-6 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all"
             >
               <RefreshCw className="w-4 h-4" />
-              Try Again
+              Qayta urinish
             </button>
             <a 
               href="/app/dashboard"
               className="flex items-center gap-2 bg-surface-container px-6 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors"
             >
               <Home className="w-4 h-4" />
-              Return Home
+              Bosh sahifaga qaytish
             </a>
           </div>
         </div>

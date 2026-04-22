@@ -1,38 +1,38 @@
-import PageHeader from "@/components/shared/PageHeader";
-import { Wrench, GitPullRequest, CheckCircle, Clock, Code } from "lucide-react";
+import PageHeader from "@/components/shared/PageHeader"
+import { CheckCircle, Clock, Code, GitPullRequest, Wrench } from "lucide-react"
 
 const remediations = [
   {
     id: 1,
-    vuln: "SQL Injection — /api/v2/user/auth",
+    vuln: "SQL Inyektsiyasi — /api/v2/user/auth",
     severity: "Critical",
-    fix: "Parameterized query using prepared statements",
-    status: "Fix Ready",
+    fix: "Tayyorlangan bayonotlar yordamida parametrlangan so'rov",
+    status: "Tuzatish Tayyor",
     statusColor: "text-primary bg-primary/10",
     language: "Python",
-    code: `# Before (vulnerable)\ncursor.execute(f"SELECT * FROM users WHERE token='{token}'")\n\n# After (fixed)\ncursor.execute("SELECT * FROM users WHERE token=%s", (token,))`,
+    code: `# Oldin (zaif)\ncursor.execute(f"SELECT * FROM users WHERE token='{token}'")\n\n# Keyin (tuzatilgan)\ncursor.execute("SELECT * FROM users WHERE token=%s", (token,))`,
     confidence: 96,
   },
   {
     id: 2,
-    vuln: "XSS Reflected — /search",
+    vuln: "Qaytarilgan XSS — /search",
     severity: "High",
-    fix: "HTML entity encoding on output",
-    status: "PR Created",
+    fix: "Chiqishda HTML obyektini kodlash",
+    status: "PR Yaratildi",
     statusColor: "text-[hsl(35,90%,55%)] bg-[hsl(35,90%,55%,0.1)]",
     language: "TypeScript",
-    code: `// Before\nreturn <div>{userInput}</div>\n\n// After\nimport DOMPurify from 'dompurify';\nreturn <div>{DOMPurify.sanitize(userInput)}</div>`,
+    code: `// Oldin\nreturn <div>{userInput}</div>\n\n// Keyin\nimport DOMPurify from 'dompurify';\nreturn <div>{DOMPurify.sanitize(userInput)}</div>`,
     confidence: 92,
   },
   {
     id: 3,
-    vuln: "Missing CSP Header",
+    vuln: "CSP Sarlavhasi Yo'q",
     severity: "Medium",
-    fix: "Add Content-Security-Policy header",
-    status: "Merged",
+    fix: "Content-Security-Policy sarlavhasini qo'shish",
+    status: "Birlashtirildi",
     statusColor: "text-primary bg-primary/10",
     language: "nginx",
-    code: `# Add to nginx config\nadd_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';" always;`,
+    code: `# nginx konfiguratsiyasiga qo'shish\nadd_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';" always;`,
     confidence: 99,
   },
 ];
@@ -41,16 +41,16 @@ const RemediationCopilotPage = () => {
   return (
     <div>
       <PageHeader
-        title="AI Remediation Copilot"
-        description="AI-generated fix recommendations with ready-to-deploy code patches. One-click PR generation for your CI/CD pipeline."
-        badge={<span className="flex items-center gap-1.5 ml-3 mt-2"><Wrench className="w-4 h-4 text-primary" /><span className="text-[10px] text-primary font-bold uppercase">Copilot Active</span></span>}
+        title="AI Tuzatish Yordamchisi"
+        description="O'rnatishga tayyor kod yamoqlari bilan AI tomonidan yaratilgan tuzatish tavsiyalari. CI/CD tizimingiz uchun bir marta bosish orqali PR yaratish."
+        badge={<span className="flex items-center gap-1.5 ml-3 mt-2"><Wrench className="w-4 h-4 text-primary" /><span className="text-[10px] text-primary font-bold uppercase">Yordamchi Faol</span></span>}
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         {[
-          { label: "Fixes Generated", value: "78", icon: CheckCircle },
-          { label: "PRs Created", value: "23", icon: GitPullRequest },
-          { label: "Avg Fix Time", value: "4.2s", icon: Clock },
+          { label: "Yaratilgan Tuzatishlar", value: "78", icon: CheckCircle },
+          { label: "Yaratilgan PR lar", value: "23", icon: GitPullRequest },
+          { label: "O'rtacha Tuzatish Vaqti", value: "4.2s", icon: Clock },
         ].map((s) => (
           <div key={s.label} className="bg-surface-low rounded-xl p-5 border-ghost flex items-center gap-4">
             <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
@@ -74,17 +74,17 @@ const RemediationCopilotPage = () => {
                   <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${r.statusColor}`}>{r.status}</span>
                 </div>
                 <p className="text-xs text-[hsl(215,15%,50%)]">
-                  Fix: {r.fix} • Confidence: <span className="text-primary font-bold">{r.confidence}%</span>
+                  Tuzatish: {r.fix} • Ishonch: <span className="text-primary font-bold">{r.confidence}%</span>
                 </p>
               </div>
               <div className="flex gap-2">
                 <button className="px-4 py-2 bg-surface-container rounded-lg text-xs font-bold text-on-surface hover:bg-surface-high transition-colors flex items-center gap-1.5">
                   <Code className="w-3.5 h-3.5" />
-                  View Diff
+                  Farqni Ko'rish
                 </button>
                 <button className="px-4 py-2 bg-gradient-primary rounded-lg text-xs font-bold text-on-primary-fixed hover:opacity-90 transition-all flex items-center gap-1.5">
                   <GitPullRequest className="w-3.5 h-3.5" />
-                  Create PR
+                  PR Yaratish
                 </button>
               </div>
             </div>

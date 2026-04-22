@@ -1,5 +1,5 @@
-import { Search, Bell, HelpCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Bell, HelpCircle, Search } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const TopBar = () => {
   return (
@@ -10,7 +10,7 @@ const TopBar = () => {
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[hsl(215,15%,35%)]" />
           <input
             type="text"
-            placeholder="Search vulnerabilities, targets or logs..."
+            placeholder="Zaifliklar, nishonlar yoki loglarni izlash..."
             className="w-full bg-[hsl(222,40%,5%,0.6)] border border-[hsl(222,15%,12%)] rounded-lg pl-10 pr-4 py-2 text-on-surface text-xs focus:ring-1 focus:ring-primary/40 placeholder:text-[hsl(215,15%,30%)] transition-all focus:outline-none"
           />
         </div>
@@ -35,10 +35,10 @@ const TopBar = () => {
 
         {/* Status */}
         <div className="flex items-center gap-2">
-          <span className="text-[10px] text-[hsl(215,15%,40%)] uppercase font-semibold">Status:</span>
+          <span className="text-[10px] text-[hsl(215,15%,40%)] uppercase font-semibold">Holati:</span>
           <span className="flex items-center gap-1.5">
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-[10px] text-primary font-bold uppercase tracking-wide">Operational</span>
+            <span className="text-[10px] text-primary font-bold uppercase tracking-wide">Ishlayabdi</span>
           </span>
         </div>
       </div>

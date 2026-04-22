@@ -1,27 +1,27 @@
-import { motion, useInView } from "framer-motion";
-import { Radar, Bell, FileCheck, FlaskConical } from "lucide-react";
-import { useRef } from "react";
+import { motion, useInView } from "framer-motion"
+import { Bell, FileCheck, FlaskConical, Radar } from "lucide-react"
+import { useRef } from "react"
 
 const features = [
   {
     icon: Radar,
-    title: "Automated Scanning",
-    desc: "Deploy persistent, non-intrusive scans that evolve with your codebase. Our AI-driven engine maps attack surfaces in real-time, identifying vulnerabilities before they reach production.",
+    title: "Avtomatlashtirilgan Skanerlash",
+    desc: "Kodingiz bilan birga rivojlanadigan doimiy, xalaqit bermaydigan skanerlashlarni o'rnating. Bizning AI dvigateli real vaqtda hujum yuzalarini xaritalaydi va ular ishlab chiqarishga yetib borguncha zaifliklarni aniqlaydi.",
   },
   {
     icon: Bell,
-    title: "Real-time Alerts",
-    desc: "Instant notifications on critical vulnerabilities with contextual threat intelligence and severity scoring for rapid triage.",
+    title: "Haqiqiy vaqtdagi Ogohlantirishlar",
+    desc: "Tezkor chora ko'rish uchun kontekstli tahdid haqida ma'lumot va og'irlik darajasini baholash bilan tanqidiy zaifliklar bo'yicha darhol xabarnomalar.",
   },
   {
     icon: FileCheck,
-    title: "Compliance Reporting",
-    desc: "SOC2, HIPAA, and GDPR readiness with one-click audit-ready exports. Stay compliant without the overhead.",
+    title: "Muvofiqlik Hisobotlari",
+    desc: "SOC2, HIPAA va GDPR ga muvofiqlik, bir marta bosish bilan audit uchun tayyor eksportlar bilan. Qo'shimcha xarajatlarsiz muvofiq qoling.",
   },
   {
     icon: FlaskConical,
-    title: "Payload Lab",
-    desc: "A sandboxed environment to safely test exploit vectors against your own infrastructure. Advanced mutation tools for red-team precision.",
+    title: "Foydali yuk Laboratoriyasi",
+    desc: "Eksploit vektorlarini o'z infratuzilmangizga qarshi xavfsiz sinab ko'rish uchun qumdon (sandbox) muhiti. Qizil jamoa aniqligi uchun ilg'or mutatsiya vositalari.",
   },
 ] as const;
 
@@ -34,12 +34,12 @@ const CoreFeaturesSection = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-14">
           <h2 className="text-3xl sm:text-5xl font-extrabold font-headline tracking-tight text-foreground mb-4">
-            Surgical Precision.{" "}
-            <span className="text-primary">Scalable Power.</span>
+            Jarrohlik Aniqligi.{" "}
+            <span className="text-primary">Kengayuvchi Quvvat.</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-            Four pillars of intelligent security — from automated scanning to
-            advanced payload testing.
+            Intellektual xavfsizlikning to'rtta ustuni — avtomatlashtirilgan skanerlashdan 
+            tortib ilg'or foydali yuk sinovlarigacha.
           </p>
         </div>
 

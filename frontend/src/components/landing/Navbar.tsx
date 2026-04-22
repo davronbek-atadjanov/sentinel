@@ -1,7 +1,7 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { Menu, Shield, X } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion"
+import { Menu, Shield, X } from "lucide-react"
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -14,11 +14,11 @@ const Navbar = () => {
   }, []);
 
   const links = [
-    { href: "/app/dashboard", label: "Dashboard" },
-    { href: "/app/scans", label: "Scans" },
-    { href: "/app/reports", label: "Compliance" },
-    { href: "/app/ai/payload-lab", label: "Payload Lab" },
-    { href: "/app/settings/integrations", label: "Settings" },
+    { href: "/app/dashboard", label: "Boshqaruv paneli" },
+    { href: "/app/scans", label: "Skanerlash" },
+    { href: "/app/reports", label: "Moslik" },
+    { href: "/app/ai/payload-lab", label: "Foydali yuk laboratoiyasi" },
+    { href: "/app/settings/integrations", label: "Sozlamalar" },
   ];
 
   return (
@@ -60,14 +60,14 @@ const Navbar = () => {
             to="/app/dashboard"
             className="inline-flex items-center gap-2 bg-gradient-primary text-on-primary-fixed font-bold text-sm px-5 py-2.5 rounded-lg hover:brightness-110 transition-all shadow-glow-primary"
           >
-            Scan Now
+            Skanerlash
           </Link>
         </div>
 
         <button
           className="md:hidden text-foreground"
           onClick={() => setMobileOpen((v) => !v)}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-label={mobileOpen ? "Menyuni yopish" : "Menyuni ochish"}
         >
           {mobileOpen ? (
             <X className="w-6 h-6" />
@@ -101,7 +101,7 @@ const Navbar = () => {
                   to="/app/dashboard"
                   className="block w-full text-center bg-gradient-primary text-on-primary-fixed font-bold text-sm px-5 py-2.5 rounded-lg hover:brightness-110 transition-all"
                 >
-                  Scan Now
+                  Skanerlash
                 </Link>
               </div>
             </div>

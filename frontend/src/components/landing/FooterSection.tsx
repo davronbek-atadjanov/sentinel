@@ -1,5 +1,5 @@
-import { Shield } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Shield } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const FooterSection = () => {
   return (
@@ -17,15 +17,15 @@ const FooterSection = () => {
               </span>
             </div>
             <p className="text-muted-foreground text-sm max-w-sm leading-relaxed">
-              The next generation of web application security — powered by AI
-              and verified by security experts.
+              Veb-ilovalar xavfsizligining navbatdagi avlodi — AI bilan 
+              ishlaydigan va xavfsizlik mutaxassislari tomonidan tasdiqlangan.
             </p>
           </div>
 
           <div className="flex flex-wrap gap-8 justify-start md:justify-end">
             <div>
               <h4 className="text-xs font-bold text-primary uppercase tracking-widest mb-4">
-                Platform
+                Platforma
               </h4>
               <ul className="space-y-2.5 text-sm">
                 <li>
@@ -33,7 +33,7 @@ const FooterSection = () => {
                     className="text-muted-foreground hover:text-foreground transition-colors"
                     to="/app/dashboard"
                   >
-                    Dashboard
+                    Boshqaruv paneli
                   </Link>
                 </li>
                 <li>
@@ -41,7 +41,7 @@ const FooterSection = () => {
                     className="text-muted-foreground hover:text-foreground transition-colors"
                     to="/app/scans"
                   >
-                    Scans
+                    Skanerlash
                   </Link>
                 </li>
                 <li>
@@ -49,14 +49,14 @@ const FooterSection = () => {
                     className="text-muted-foreground hover:text-foreground transition-colors"
                     to="/app/reports"
                   >
-                    Compliance
+                    Moslik
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
               <h4 className="text-xs font-bold text-primary uppercase tracking-widest mb-4">
-                Legal
+                Huquqiy
               </h4>
               <ul className="space-y-2.5 text-sm">
                 <li>
@@ -64,7 +64,7 @@ const FooterSection = () => {
                     className="text-muted-foreground hover:text-foreground transition-colors"
                     href="#"
                   >
-                    Privacy Policy
+                    Maxfiylik Siyosati
                   </a>
                 </li>
                 <li>
@@ -72,7 +72,7 @@ const FooterSection = () => {
                     className="text-muted-foreground hover:text-foreground transition-colors"
                     href="#"
                   >
-                    Terms of Service
+                    Xizmat Ko'rsatish Shartlari
                   </a>
                 </li>
                 <li>
@@ -80,7 +80,7 @@ const FooterSection = () => {
                     className="text-muted-foreground hover:text-foreground transition-colors"
                     href="#"
                   >
-                    Security Disclosure
+                    Xavfsizlik Boshqaruvi
                   </a>
                 </li>
                 <li>
@@ -88,7 +88,7 @@ const FooterSection = () => {
                     className="text-muted-foreground hover:text-foreground transition-colors"
                     href="#"
                   >
-                    Status
+                    Holat (Status)
                   </a>
                 </li>
               </ul>
@@ -98,7 +98,7 @@ const FooterSection = () => {
 
         <div className="pt-6 border-t border-border/20 text-center">
           <span className="text-muted-foreground text-sm">
-            © 2024 Sentinel Security. All rights reserved.
+            © 2024 Sentinel Security. Barcha huquqlar himoyalangan.
           </span>
         </div>
       </div>

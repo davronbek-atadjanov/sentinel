@@ -1,32 +1,32 @@
-import { Link, useLocation } from "react-router-dom";
 import {
-  LayoutDashboard,
-  Radar,
-  ShieldAlert,
-  FolderOpen,
-  BarChart3,
-  Settings,
-  Plus,
-  HelpCircle,
-  LogOut,
-  Brain,
-  Bell,
-  ScrollText,
-} from "lucide-react";
+    BarChart3,
+    Bell,
+    Brain,
+    FolderOpen,
+    HelpCircle,
+    LayoutDashboard,
+    LogOut,
+    Plus,
+    Radar,
+    ScrollText,
+    Settings,
+    ShieldAlert,
+} from "lucide-react"
+import { Link, useLocation } from "react-router-dom"
 
 const mainNav = [
-  { label: "Dashboard", icon: LayoutDashboard, path: "/app/dashboard" },
-  { label: "Scans", icon: Radar, path: "/app/scans" },
-  { label: "Vulnerabilities", icon: ShieldAlert, path: "/app/vulnerabilities" },
-  { label: "Assets", icon: FolderOpen, path: "/app/assets" },
-  { label: "Reports", icon: BarChart3, path: "/app/reports" },
+  { label: "Boshqaruv paneli", icon: LayoutDashboard, path: "/app/dashboard" },
+  { label: "Skanerlash", icon: Radar, path: "/app/scans" },
+  { label: "Zaifliklar", icon: ShieldAlert, path: "/app/vulnerabilities" },
+  { label: "Aktivlar", icon: FolderOpen, path: "/app/assets" },
+  { label: "Hisobotlar", icon: BarChart3, path: "/app/reports" },
 ];
 
 const secondaryNav = [
-  { label: "AI Center", icon: Brain, path: "/app/ai" },
-  { label: "Notifications", icon: Bell, path: "/app/notifications" },
-  { label: "Activity Logs", icon: ScrollText, path: "/app/activity-logs" },
-  { label: "Settings", icon: Settings, path: "/app/settings/integrations" },
+  { label: "AI Markaz", icon: Brain, path: "/app/ai" },
+  { label: "Bildirishnomalar", icon: Bell, path: "/app/notifications" },
+  { label: "Faoliyatlar tarixi", icon: ScrollText, path: "/app/activity-logs" },
+  { label: "Sozlamalar", icon: Settings, path: "/app/settings/integrations" },
 ];
 
 interface SidebarProps {
@@ -90,7 +90,7 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
           }`}
         >
           <Plus className="w-4 h-4" />
-          {!collapsed && <span>New Scan</span>}
+          {!collapsed && <span>Yangi Skanerlash</span>}
         </Link>
       </div>
 
@@ -117,11 +117,11 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
               className="flex items-center gap-3 px-4 py-2 text-[hsl(215,15%,42%)] hover:text-[hsl(215,20%,70%)] transition-colors text-sm"
             >
               <HelpCircle className="w-4 h-4" />
-              <span>Support</span>
+              <span>Yordam</span>
             </Link>
             <button className="flex items-center gap-3 px-4 py-2 text-[hsl(215,15%,42%)] hover:text-[hsl(215,20%,70%)] transition-colors text-sm w-full text-left">
               <LogOut className="w-4 h-4" />
-              <span>Sign Out</span>
+              <span>Chiqish</span>
             </button>
           </>
         )}
@@ -133,12 +133,12 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
           }`}
         >
           <div className="w-9 h-9 rounded-full bg-gradient-primary flex items-center justify-center text-on-primary-fixed font-bold text-xs flex-shrink-0">
-            SA
+            TA
           </div>
           {!collapsed && (
             <div className="min-w-0">
-              <p className="text-xs font-semibold text-white truncate">SYS_ADMIN_01</p>
-              <p className="text-[10px] text-primary/50 font-mono">Level 4 Clearance</p>
+              <p className="text-xs font-semibold text-white truncate">TIZIM_ADMIN_01</p>
+              <p className="text-[10px] text-primary/50 font-mono">4-darajali ruxsat</p>
             </div>
           )}
         </div>

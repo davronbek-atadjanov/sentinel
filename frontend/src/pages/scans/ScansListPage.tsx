@@ -1,18 +1,19 @@
-import { Link } from "react-router-dom";
+import PageHeader from "@/components/shared/PageHeader"
+import StatusBadge from "@/components/shared/StatusBadge"
+import { ScansService } from "@/services/scans.service"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import {
-  Settings2,
-  Plus,
-  ChevronLeft,
-  ChevronRight,
-  Zap,
-  Network,
-} from "lucide-react";
-import PageHeader from "@/components/shared/PageHeader";
-import StatusBadge from "@/components/shared/StatusBadge";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { ScansService } from "@/services/scans.service";
-import { toast } from "sonner";
-import { XCircle, Trash2 } from "lucide-react";
+    ChevronLeft,
+    ChevronRight,
+    Network,
+    Plus,
+    Settings2,
+    Trash2,
+    XCircle,
+    Zap,
+} from "lucide-react"
+import { Link } from "react-router-dom"
+import { toast } from "sonner"
 
 const threatColors: Record<string, string> = {
   critical: "bg-sentinel-error",
@@ -34,7 +35,7 @@ const ScansListPage = () => {
   const cancelMutation = useMutation({
     mutationFn: ScansService.cancelScan,
     onSuccess: () => {
-      toast.success("Scan cancelled");
+      toast.success("Skanerlash bekor qilindi");
       queryClient.invalidateQueries({ queryKey: ["scans"] });
     },
   });
@@ -42,7 +43,7 @@ const ScansListPage = () => {
   const deleteMutation = useMutation({
     mutationFn: ScansService.deleteScan,
     onSuccess: () => {
-      toast.success("Scan deleted");
+      toast.success("Skanerlash o'chirildi");
       queryClient.invalidateQueries({ queryKey: ["scans"] });
     },
   });
@@ -78,28 +79,28 @@ const ScansListPage = () => {
   const completedScans = stats.by_status?.COMPLETED || 0;
   // Note: we'd need actual total critical risks across vulnerabilities, but for scans summary we can just show total scans or similar
   const statsCards = [
-    { label: "Live Scans", value: stats.active_scans.toString().padStart(2, "0"), dot: stats.active_scans > 0 },
-    { label: "Completed Scans", value: completedScans.toString() },
-    { label: "Total Scans", value: stats.total_scans.toString() },
+    { label: "Jonli Skanerlashlar", value: stats.active_scans.toString().padStart(2, "0"), dot: stats.active_scans > 0 },
+    { label: "Tugallangan Skanerlashlar", value: completedScans.toString() },
+    { label: "Jami Skanerlashlar", value: stats.total_scans.toString() },
   ];
 
   return (
     <div>
       <PageHeader
-        title="Scans."
-        description="Orchestrate automated penetration testing across your infrastructure. Surgical precision for modern assets."
+        title="Skanerlashlar."
+        description="Infratuzilmangiz bo'ylab avtomatlashtirilgan penetratsion testlarni boshqaring. Zamonaviy aktivlar uchun yuqori aniqlik."
         actions={
           <>
             <button className="flex items-center gap-2 bg-surface-container px-6 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
               <Settings2 className="w-4 h-4" />
-              View Settings
+              Sozlamalarni Ko'rish
             </button>
             <Link
               to="/app/scans/new"
               className="flex items-center gap-2 bg-gradient-primary px-6 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all"
             >
               <Plus className="w-4 h-4" />
-              New Scan
+              Yangi Skanerlash
             </Link>
           </>
         }
@@ -124,18 +125,18 @@ const ScansListPage = () => {
         ))}
         <div className="bg-surface-low rounded-xl p-6 border-ghost">
           <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-semibold mb-3">
-            Active Filters
+            Faol Filtrlar
           </p>
           <div className="flex flex-wrap gap-2">
             <span className="px-3 py-1 bg-surface-container rounded text-xs text-on-surface font-medium">
-              All Statuses
+              Barcha Holatlar
             </span>
             <span className="px-3 py-1 bg-surface-container rounded text-xs text-on-surface font-medium">
-              Last 24 Hours
+              So'nggi 24 Soat
             </span>
           </div>
           <button className="text-primary text-[10px] font-bold uppercase mt-3 hover:underline">
-            Reset
+            Qayta O'rnatish
           </button>
         </div>
       </div>
@@ -146,18 +147,18 @@ const ScansListPage = () => {
           <table className="w-full text-left">
             <thead>
               <tr className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold border-b border-[hsl(222,20%,12%,0.3)]">
-                <th className="px-6 py-4">Target Endpoint</th>
-                <th className="px-6 py-4">Scan Type</th>
-                <th className="px-6 py-4">Progress / Status</th>
-                <th className="px-6 py-4">Threat Level</th>
-                <th className="px-6 py-4">Actions</th>
+                <th className="px-6 py-4">Nishon Yakuniy Nuqtasi</th>
+                <th className="px-6 py-4">Skanerlash Turi</th>
+                <th className="px-6 py-4">Jarayon / Holati</th>
+                <th className="px-6 py-4">Xavf Darajasi</th>
+                <th className="px-6 py-4">Harakatlar</th>
               </tr>
             </thead>
             <tbody className="text-sm">
               {isLoading ? (
                 <tr>
                   <td colSpan={5} className="py-8 text-center text-muted-foreground">
-                    Loading scans...
+                    Skanerlashlar yuklanmoqda...
                   </td>
                 </tr>
               ) : displayScans.length > 0 ? (
@@ -175,7 +176,7 @@ const ScansListPage = () => {
                           {scan.target}
                         </Link>
                         <p className="text-[10px] text-[hsl(215,15%,40%)] mt-0.5">
-                          Started {scan.started}
+                          Boshlandi: {scan.started}
                         </p>
                       </div>
                     </td>
@@ -218,19 +219,19 @@ const ScansListPage = () => {
                           <button 
                             onClick={() => cancelMutation.mutate(scan.id)}
                             className="text-[hsl(215,15%,55%)] hover:text-[hsl(35,90%,65%)] transition-colors"
-                            title="Cancel Scan"
+                            title="Skanerlashni Bekor Qilish"
                           >
                             <XCircle className="w-4 h-4" />
                           </button>
                         )}
                         <button 
                           onClick={() => {
-                            if(window.confirm("Are you sure you want to delete this scan?")) {
+                            if(window.confirm("Haqiqatan ham ushbu skanerlashni o'chirmoqchimisiz?")) {
                               deleteMutation.mutate(scan.id);
                             }
                           }}
                           className="text-[hsl(215,15%,55%)] hover:text-sentinel-error transition-colors"
-                          title="Delete Scan"
+                          title="Skanerlashni O'chirish"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -243,13 +244,13 @@ const ScansListPage = () => {
                   <td colSpan={5} className="py-12 text-center">
                     <div className="flex flex-col items-center justify-center">
                       <Zap className="w-10 h-10 text-[hsl(215,15%,35%)] mb-3" />
-                      <p className="text-[hsl(215,15%,65%)] font-semibold">No scans found.</p>
-                      <p className="text-[hsl(215,15%,40%)] text-sm mb-4">You haven't initiated any scans yet.</p>
+                      <p className="text-[hsl(215,15%,65%)] font-semibold">Skanerlashlar topilmadi.</p>
+                      <p className="text-[hsl(215,15%,40%)] text-sm mb-4">Siz hali hech qanday skanerlashni boshlamadingiz.</p>
                       <Link 
                         to="/app/scans/new"
                         className="bg-[hsl(222,30%,12%)] hover:bg-[hsl(222,30%,15%)] text-white text-xs font-bold px-4 py-2 rounded transition-colors"
                       >
-                        Create Your First Scan
+                        Birinchi Skanerlashni Yarating
                       </Link>
                     </div>
                   </td>
@@ -260,7 +261,7 @@ const ScansListPage = () => {
         </div>
         <div className="px-6 py-4 flex justify-between items-center border-t border-[hsl(222,20%,12%,0.15)]">
           <span className="text-[10px] text-[hsl(215,15%,40%)] uppercase tracking-widest font-semibold">
-            Showing {displayScans.length} of {scansData?.count || 0} Total Scans
+            Jami {scansData?.count || 0} ta skanerlashdan {displayScans.length} tasi ko'rsatilmoqda
           </span>
           <div className="flex items-center gap-2">
             <button className="w-8 h-8 rounded flex items-center justify-center text-[hsl(215,15%,45%)] hover:bg-surface-high">
@@ -286,15 +287,15 @@ const ScansListPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-surface-low rounded-xl p-6 border-ghost flex items-start gap-6">
           <div className="flex-1">
-            <h4 className="font-bold font-headline text-white mb-2">Automated Discovery</h4>
+            <h4 className="font-bold font-headline text-white mb-2">Avtomatlashtirilgan Keshfiyot</h4>
             <p className="text-body-md text-[hsl(215,15%,50%)] mb-4">
-              Sentinel detected 14 new endpoints in your architecture. Should we scan them?
+              Sentinel arxitekturangizda 14 ta yangi yakuniy nuqtani aniqladi. Ularni skanerlaymizmi?
             </p>
             <Link
               to="/app/assets"
               className="text-primary text-label-sm uppercase font-bold hover:underline flex items-center gap-1"
             >
-              Review Endpoints →
+              Yakuniy Nuqtalarni Ko'rib Chiqish →
             </Link>
           </div>
           <Network className="w-16 h-16 text-primary/20" />
@@ -303,17 +304,16 @@ const ScansListPage = () => {
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
               <Zap className="w-5 h-5 text-sentinel-tertiary" />
-              <h4 className="font-bold font-headline text-white">Scan Performance</h4>
+              <h4 className="font-bold font-headline text-white">Skanerlash Samaradorligi</h4>
             </div>
             <p className="text-body-md text-[hsl(215,15%,50%)] mb-4">
-              Average scan completion time has decreased by 14% this week due to engine
-              optimizations.
+              Dvigatel optimallashtirilgani sababli bu hafta o'rtacha skanerlash vaqti 14% ga kamaydi.
             </p>
             <div className="flex items-center gap-3">
               <div className="flex-1 h-1.5 bg-surface-high rounded-full overflow-hidden">
                 <div className="h-full w-[86%] bg-gradient-to-r from-sentinel-tertiary to-primary rounded-full" />
               </div>
-              <span className="text-[10px] text-primary font-bold uppercase">Optimized</span>
+              <span className="text-[10px] text-primary font-bold uppercase">Optimallashtirilgan</span>
             </div>
           </div>
         </div>

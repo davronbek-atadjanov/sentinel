@@ -15,9 +15,9 @@ import LoginPage from "./pages/auth/LoginPage"
 import RegisterPage from "./pages/auth/RegisterPage"
 
 /* ── Auth Providers & Guards ── */
-import { AuthProvider } from "./contexts/AuthContext"
 import { ProtectedRoute } from "./components/auth/ProtectedRoute"
 import { ErrorBoundary } from "./components/shared/ErrorBoundary"
+import { AuthProvider } from "./contexts/AuthContext"
 
 /* ── Standalone Pages ── */
 const OnboardingPage = lazy(() => import("./pages/OnboardingPage"));
@@ -74,7 +74,7 @@ const PageLoader = () => (
   <div className="flex items-center justify-center h-[60vh]">
     <div className="flex flex-col items-center gap-4">
       <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-      <p className="text-sm text-on-surface-variant">Initializing module...</p>
+      <p className="text-sm text-on-surface-variant">Modul ishga tushirilmoqda...</p>
     </div>
   </div>
 );

@@ -1,32 +1,32 @@
-import { useState } from "react";
-import { Shield, Radar, CheckCircle, ArrowRight, ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowLeft, ArrowRight, CheckCircle, Radar, Shield } from "lucide-react"
+import { useState } from "react"
+import { Link } from "react-router-dom"
 
 const steps = [
   {
     step: 1,
-    title: "Connect Your Assets",
-    description: "Add your web applications, APIs, and infrastructure endpoints to begin monitoring. Sentinel will automatically discover related subdomains and services.",
+    title: "Aktivlaringizni Ulang",
+    description: "Kuzatishni boshlash uchun veb-ilovalaringiz, API'lar va infratuzilma manzillarini qo'shing. Sentinel bog'liq subdomenlar va xizmatlarni avtomatik ravishda aniqlaydi.",
     icon: Shield,
     fields: [
-      { label: "Primary Domain", placeholder: "https://example.com", type: "url" },
-      { label: "Asset Type", placeholder: "Web Application", type: "select", options: ["Web Application", "API Endpoint", "Mobile Backend", "Microservice"] },
+      { label: "Asosiy Domen", placeholder: "https://example.com", type: "url" },
+      { label: "Aktiv Turi", placeholder: "Veb Ilova", type: "select", options: ["Veb Ilova", "API Manzili", "Mobil Backend", "Mikroservis"] },
     ],
   },
   {
     step: 2,
-    title: "Configure Scanning",
-    description: "Set up your scanning preferences. Choose between passive monitoring, active scanning, or full penetration testing mode.",
+    title: "Skanerlashni Sozlash",
+    description: "Skanerlash afzalliklaringizni o'rnating. Passiv kuzatuv, faol skanerlash yoki to'liq penetration testing (kirish testi) rejimi orasidan tanlang.",
     icon: Radar,
     fields: [
-      { label: "Scan Mode", placeholder: "Active Scan", type: "select", options: ["Passive Monitor", "Active Scan", "Full Pentest", "Compliance Audit"] },
-      { label: "Scan Frequency", placeholder: "Daily", type: "select", options: ["Continuous", "Daily", "Weekly", "Monthly"] },
+      { label: "Skanerlash Rejimi", placeholder: "Faol Skanerlash", type: "select", options: ["Passiv Kuzatuv", "Faol Skanerlash", "To'liq Pentest", "Muvofiqlik Auditi"] },
+      { label: "Skanerlash Chastotasi", placeholder: "Har Kuni", type: "select", options: ["Uzluksiz", "Har Kuni", "Haftalik", "Oylik"] },
     ],
   },
   {
     step: 3,
-    title: "You're All Set",
-    description: "Your first scan is queued and ready to deploy. Head to your dashboard to monitor results in real-time.",
+    title: "Hammasi Tayyor",
+    description: "Birinchi skaneringiz navbatga qo'yildi va ishga tushirishga tayyor. Natijalarni real vaqt rejimida kuzatish uchun boshqaruv paneliga o'ting.",
     icon: CheckCircle,
     fields: [],
   },
@@ -106,7 +106,7 @@ const OnboardingPage = () => {
                   onClick={() => setCurrentStep((s) => s - 1)}
                   className="flex items-center gap-2 text-sm font-semibold text-[hsl(215,15%,50%)] hover:text-white transition-colors"
                 >
-                  <ArrowLeft className="w-4 h-4" /> Back
+                  <ArrowLeft className="w-4 h-4" /> Orqaga
                 </button>
               ) : <div />}
 
@@ -115,14 +115,14 @@ const OnboardingPage = () => {
                   onClick={() => setCurrentStep((s) => s + 1)}
                   className="flex items-center gap-2 bg-gradient-primary text-on-primary-fixed font-bold text-sm px-8 py-3 rounded-lg hover:brightness-110 transition-all shadow-glow-primary"
                 >
-                  Continue <ArrowRight className="w-4 h-4" />
+                  Davom Etish <ArrowRight className="w-4 h-4" />
                 </button>
               ) : (
                 <Link
                   to="/app/dashboard"
                   className="flex items-center gap-2 bg-gradient-primary text-on-primary-fixed font-bold text-sm px-8 py-3 rounded-lg hover:brightness-110 transition-all shadow-glow-primary"
                 >
-                  Go to Dashboard <ArrowRight className="w-4 h-4" />
+                  Boshqaruv Paneliga O'tish <ArrowRight className="w-4 h-4" />
                 </Link>
               )}
             </div>

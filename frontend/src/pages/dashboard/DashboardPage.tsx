@@ -1,21 +1,19 @@
+import MetricCard from "@/components/shared/MetricCard"
+import PageHeader from "@/components/shared/PageHeader"
+import StatusBadge from "@/components/shared/StatusBadge"
+import { DashboardService } from "@/services/dashboard.service"
+import { useQuery } from "@tanstack/react-query"
 import {
-  Settings2,
-  Bug,
-  ShieldCheck,
-  Globe,
-  Cloud,
-  Database,
-  AlertTriangle,
-  FileText,
-  Zap,
-} from "lucide-react";
-import PageHeader from "@/components/shared/PageHeader";
-import MetricCard from "@/components/shared/MetricCard";
-import SeverityBadge from "@/components/shared/SeverityBadge";
-import StatusBadge from "@/components/shared/StatusBadge";
-import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { DashboardService } from "@/services/dashboard.service";
+    AlertTriangle,
+    Bug,
+    Cloud,
+    Database,
+    Globe,
+    Settings2,
+    ShieldCheck,
+    Zap
+} from "lucide-react"
+import { Link } from "react-router-dom"
 
 /* ── Mock Data Defaults (Fallback) ── */
 const recentScans = [
@@ -80,7 +78,7 @@ const DashboardPage = () => {
         name: s.target_url,
         icon: Globe,
         status: s.status.toLowerCase() as any,
-        found: s.progress === 100 ? "Done" : "--",
+        found: s.progress === 100 ? "Tugadi" : "--",
         time: new Date(s.created_at).toLocaleDateString(),
       }))
     : recentScans;
@@ -95,10 +93,10 @@ const DashboardPage = () => {
     ? (stats.critical_alerts || []).map((a: any) => ({
         id: a.id,
         title: a.title,
-        cve: a.cve_id || "NEW",
-        description: a.description || "Critical vulnerability detected affecting this endpoint.",
-        primaryAction: "Remediate Now",
-        secondaryAction: "Ignore",
+        cve: a.cve_id || "YANGI",
+        description: a.description || "Ushbu endpointda kritik zaiflik aniqlandi.",
+        primaryAction: "Hozir tuzatish",
+        secondaryAction: "E'tiborsiz qoldirish",
     }))
     : criticalAlerts;
 
@@ -113,18 +111,18 @@ const DashboardPage = () => {
   return (
     <div>
       <PageHeader
-        title="Security Overview"
-        description="Global threat landscape and real-time scanning analytics."
+        title="Xavfsizlik Xulosasi"
+        description="Global xavflar holati va real vaqt skanerlash tahlili."
         actions={
           <>
             <button className="bg-surface-container px-6 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
-              Export Report
+              Hisobotni yuklab olish
             </button>
             <Link
               to="/app/scans/new"
               className="bg-gradient-primary px-6 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-lg shadow-primary/10 hover:brightness-110 transition-all"
             >
-              New Scan Instance
+              Yangi Skanerlash
             </Link>
           </>
         }
@@ -138,7 +136,7 @@ const DashboardPage = () => {
           <div className="bg-surface-low rounded-xl p-8 border-ghost relative overflow-hidden group">
             <div className="absolute -right-12 -top-12 w-48 h-48 bg-primary/5 rounded-full blur-3xl transition-all group-hover:bg-primary/10" />
             <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-4 font-label">
-              Overall Integrity
+              Umumiy Xavfsizlik
             </p>
             <div className="flex items-baseline gap-4 mb-2">
               <span className="text-6xl font-bold font-headline text-white tracking-tighter">
@@ -159,17 +157,17 @@ const DashboardPage = () => {
             </div>
             <div className="flex justify-between items-center text-xs">
               <span className="text-[hsl(215,15%,55%)]">
-                Current Health: <span className="text-primary font-bold">EXCELLENT</span>
+                Joriy Holat: <span className="text-primary font-bold">A'LO</span>
               </span>
-              <span className="text-[hsl(215,15%,40%)]">+1.2% from last week</span>
+              <span className="text-[hsl(215,15%,40%)]">o'tgan haftaga nisbatan +1.2%</span>
             </div>
           </div>
 
           {/* Metrics Grid */}
           <div className="grid grid-cols-2 gap-6">
-            <MetricCard label="Total Scans" value={(stats?.total_scans ?? "1,284").toString()} icon={Settings2} />
+            <MetricCard label="Jami Skanerlashlar" value={(stats?.total_scans ?? "1,284").toString()} icon={Settings2} />
             <MetricCard
-              label="Open Vulns"
+              label="Ochiq Zaifliklar"
               value={(stats?.open_vulnerabilities ?? "42").toString()}
               icon={Bug}
               iconColor="text-sentinel-error"
@@ -181,9 +179,9 @@ const DashboardPage = () => {
         <div className="col-span-12 lg:col-span-8 bg-surface-low rounded-xl p-8 border-ghost flex flex-col">
           <div className="flex justify-between items-center mb-8">
             <div>
-              <h3 className="text-lg font-bold font-headline text-white">Threat Trajectory</h3>
+              <h3 className="text-lg font-bold font-headline text-white">Xavflar Traektoriyasi</h3>
               <p className="text-xs text-[hsl(215,15%,40%)]">
-                Vulnerability detection trends (Last 30 Days)
+                Zaifliklarni aniqlash tendensiyalari (Oxirgi 30 kun)
               </p>
             </div>
             <div className="flex gap-1 bg-[hsl(222,30%,6%,0.5)] p-1 rounded-lg">
@@ -223,35 +221,35 @@ const DashboardPage = () => {
               })
             ) : (
               <div className="w-full flex items-center justify-center text-[hsl(215,15%,45%)] text-sm h-full">
-                No vulnerabilities detected yet. Start a scan to build your threat trajectory.
+                Hozircha zaifliklar topilmadi. Xavflar trayektoriyasini shakllantirish uchun skanerlashni boshlang.
               </div>
             )}
           </div>
           <div className="flex justify-between mt-4 border-t border-[hsl(222,20%,12%,0.5)] pt-4">
-            <span className="text-[10px] text-[hsl(215,15%,30%)] font-semibold">30 DAYS AGO</span>
-            <span className="text-[10px] text-[hsl(215,15%,30%)] font-semibold">TODAY</span>
+            <span className="text-[10px] text-[hsl(215,15%,30%)] font-semibold">30 KUN OLDIN</span>
+            <span className="text-[10px] text-[hsl(215,15%,30%)] font-semibold">BUGUN</span>
           </div>
         </div>
 
         {/* ── Recent Scans Table ── */}
         <div className="col-span-12 lg:col-span-7 bg-surface-low rounded-xl border-ghost overflow-hidden">
           <div className="p-6 border-b border-[hsl(222,20%,12%,0.3)] flex justify-between items-center bg-surface-high/30">
-            <h3 className="font-bold font-headline text-white">Recent Activity</h3>
+            <h3 className="font-bold font-headline text-white">Oxirgi Faoliyat</h3>
             <Link
               to="/app/scans"
               className="text-xs text-primary font-semibold hover:underline"
             >
-              View All Scans
+              Barcha skanerlashlar
             </Link>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
                 <tr className="text-[10px] text-[hsl(215,15%,40%)] uppercase tracking-widest font-bold">
-                  <th className="px-6 py-4">Asset Name</th>
-                  <th className="px-6 py-4">Status</th>
-                  <th className="px-6 py-4">Found</th>
-                  <th className="px-6 py-4">Timestamp</th>
+                  <th className="px-6 py-4">Aktiv nomi</th>
+                  <th className="px-6 py-4">Holati</th>
+                  <th className="px-6 py-4">Topildi</th>
+                  <th className="px-6 py-4">Vaqti</th>
                 </tr>
               </thead>
               <tbody className="text-sm">
@@ -279,7 +277,7 @@ const DashboardPage = () => {
                 ) : (
                   <tr>
                     <td colSpan={4} className="py-8 text-center text-muted-foreground">
-                      No recent scans. Create a new scan to see activity here.
+                      Oxirgi skanerlashlar yo'q. Faoliyatni ko'rish uchun yangisiga start bering.
                     </td>
                   </tr>
                 )}
@@ -295,10 +293,10 @@ const DashboardPage = () => {
             <div className="flex justify-between items-start mb-6">
               <h3 className="font-bold font-headline text-white flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-sentinel-error" />
-                Critical Intelligence
+                Muhim Xavflar
               </h3>
               <span className="bg-error-container text-on-error-container text-[10px] font-black px-2 py-1 rounded uppercase tracking-tighter">
-                Action Required
+                Harakat talab etiladi
               </span>
             </div>
             <div className="space-y-4">
@@ -330,8 +328,8 @@ const DashboardPage = () => {
                   <div className="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mx-auto mb-3">
                     <ShieldCheck className="w-6 h-6 text-primary opacity-60" />
                   </div>
-                  <p className="text-sm text-foreground font-medium">No critical threats found</p>
-                  <p className="text-xs text-[hsl(215,15%,45%)] mt-1">Your infrastructure looks secure.</p>
+                  <p className="text-sm text-foreground font-medium">Muhim xavflar topilmadi</p>
+                  <p className="text-xs text-[hsl(215,15%,45%)] mt-1">Sizning infratuzilmangiz xavfsiz ko'rinadi.</p>
                 </div>
               )}
             </div>
@@ -344,13 +342,13 @@ const DashboardPage = () => {
                 <ShieldCheck className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <p className="text-xs font-bold text-white leading-tight">System Compliance</p>
-                <p className="text-[10px] text-[hsl(215,15%,40%)]">SOC2 Type II Standard</p>
+                <p className="text-xs font-bold text-white leading-tight">Tizim Muvofiqligi</p>
+                <p className="text-[10px] text-[hsl(215,15%,40%)]">SOC2 Type II Standarti</p>
               </div>
             </div>
             <div className="text-right">
               <p className="text-sm font-bold text-primary">{stats?.compliance_score ?? 92}%</p>
-              <p className="text-[10px] text-[hsl(215,15%,30%)] font-semibold">ADHERENCE</p>
+              <p className="text-[10px] text-[hsl(215,15%,30%)] font-semibold">QONUNIYLIK</p>
             </div>
           </div>
         </div>
@@ -359,9 +357,9 @@ const DashboardPage = () => {
       {/* ── Bottom Cards ── */}
       <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
-          { title: "Latest Coverage", value: "Network Perimeter:", highlight: "85%", suffix: " Scan Density" },
-          { title: "Threat Origin", value: "Primarily:", highlight: "Cloud Assets (62%)", suffix: "", isError: true },
-          { title: "Processing Load", value: "Cluster Alpha:", highlight: "Normal", suffix: "" },
+          { title: "Oxirgi Qamrov", value: "Tarmoq Perimetrida:", highlight: "85%", suffix: " Skanerlash Zichligi" },
+          { title: "Xavf Manbasi", value: "Asosan:", highlight: "Cloud Aktivlari (62%)", suffix: "", isError: true },
+          { title: "Qayta ishlash Yuku", value: "Alpha Klasteri:", highlight: "Normal", suffix: "" },
         ].map((card, i) => (
           <div
             key={i}

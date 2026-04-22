@@ -1,32 +1,32 @@
-import PageHeader from "@/components/shared/PageHeader";
-import { FileSearch, Brain, CheckCircle, Link2, Zap } from "lucide-react";
-import SeverityBadge from "@/components/shared/SeverityBadge";
+import PageHeader from "@/components/shared/PageHeader"
+import SeverityBadge from "@/components/shared/SeverityBadge"
+import { Brain, CheckCircle, FileSearch, Link2 } from "lucide-react"
 
 const evidenceItems = [
   {
     id: 1,
-    title: "SQL Injection Chain Analysis",
+    title: "SQL Injection Zanjirli Tahlili",
     vulns: ["CVE-2024-8192", "CVE-2024-38291"],
     confidence: 97,
-    reasoning: "Both vulnerabilities share the same authentication endpoint (/api/v2/user/auth) and exploit the session_token parameter. The attack chain suggests a single threat actor performing reconnaissance before exploitation.",
+    reasoning: "Ikkala zaiflik ham bir xil autentifikatsiya manziliga (/api/v2/user/auth) tegishli va session_token parametridan foydalanadi. Hujum zanjiri bitta tahdid ishtirokchisi ekspluatatsiyadan oldin razvedka o'tkazayotganini ko'rsatmoqda.",
     connections: 3,
     risk: "critical" as const,
   },
   {
     id: 2,
-    title: "XSS → Session Hijacking Correlation",
+    title: "XSS → Sessiyani O'g'irlash Bog'liqligi",
     vulns: ["CVE-2023-4412", "INTERNAL-882"],
     confidence: 84,
-    reasoning: "The reflected XSS in the search parameter can be chained with the session fixation vulnerability to achieve full account takeover. The attack requires user interaction but has high impact.",
+    reasoning: "Qidiruv parametridagi aks etuvchi XSS akkauntni to'liq egallash uchun sessiya fiksatsiyasi zaifligi bilan zanjirlanishi mumkin. Hujum foydalanuvchi ishtirokini talab qiladi, lekin yuqori ta'sirga ega.",
     connections: 2,
     risk: "high" as const,
   },
   {
     id: 3,
-    title: "Infrastructure Misconfiguration Pattern",
+    title: "Infratuzilma Noto'g'ri Sozlama Naqshi",
     vulns: ["POLICY-992", "HEADER-001", "HEADER-003"],
     confidence: 91,
-    reasoning: "Multiple missing security headers and weak SSL configuration suggest a systematic security hardening gap. Likely caused by using a default nginx configuration without security-focused tuning.",
+    reasoning: "Bir nechta xavfsizlik sarlavhalarining yo'qligi va kuchsiz SSL sozlamalari xavfsizlikni mustahkamlashda tizimli kamchilikni ko'rsatadi. Katta ehtimol bilan xavfsizlikka qaratilgan sozlamalarsiz standart nginx konfiguratsiyasidan foydalanish sabab bo'lgan.",
     connections: 5,
     risk: "medium" as const,
   },
@@ -36,17 +36,17 @@ const EvidenceAnalysisPage = () => {
   return (
     <div>
       <PageHeader
-        title="AI Evidence Analysis"
-        description="Deep reasoning engine that correlates vulnerability data, identifies attack chains, and provides contextual risk assessments."
-        badge={<span className="flex items-center gap-1.5 ml-3 mt-2"><FileSearch className="w-4 h-4 text-primary" /><span className="text-[10px] text-primary font-bold uppercase">AI Reasoning Active</span></span>}
+        title="AI Dalillarni Tahlil Qilish"
+        description="Zaiflik ma'lumotlarini o'zaro bog'laydigan, hujum zanjirlarini aniqlaydigan va kontekstli xavf baholashlarini taqdim etuvchi chuqur mushohada mexanizmi."
+        badge={<span className="flex items-center gap-1.5 ml-3 mt-2"><FileSearch className="w-4 h-4 text-primary" /><span className="text-[10px] text-primary font-bold uppercase">AI Mushohadasi Faol</span></span>}
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
         {[
-          { label: "Attack Chains Found", value: "3", icon: Link2 },
-          { label: "Vulns Correlated", value: "8", icon: FileSearch },
-          { label: "AI Accuracy", value: "98%", icon: Brain },
-          { label: "Auto-Verified", value: "12", icon: CheckCircle },
+          { label: "Topilgan Hujum Zanjirlari", value: "3", icon: Link2 },
+          { label: "Bog'langan Zaifliklar", value: "8", icon: FileSearch },
+          { label: "AI Aniqligi", value: "98%", icon: Brain },
+          { label: "Avtomatik Tasdiqlangan", value: "12", icon: CheckCircle },
         ].map((s) => (
           <div key={s.label} className="bg-surface-low rounded-xl p-5 border-ghost">
             <s.icon className="w-5 h-5 text-primary mb-3" />
@@ -70,11 +70,11 @@ const EvidenceAnalysisPage = () => {
                     {e.vulns.map((v) => (
                       <span key={v} className="px-2 py-0.5 bg-surface-container rounded text-[10px] font-mono text-primary">{v}</span>
                     ))}
-                    <span className="text-[10px] text-[hsl(215,15%,45%)]">• {e.connections} connected findings</span>
+                    <span className="text-[10px] text-[hsl(215,15%,45%)]">• {e.connections} ta bog'liq topilma</span>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">AI Confidence</p>
+                  <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">AI Ishonchi</p>
                   <p className="text-2xl font-bold font-headline text-primary">{e.confidence}%</p>
                 </div>
               </div>
@@ -83,7 +83,7 @@ const EvidenceAnalysisPage = () => {
               <div className="flex items-start gap-3">
                 <Brain className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-[10px] text-primary uppercase font-bold mb-2">AI Reasoning</p>
+                  <p className="text-[10px] text-primary uppercase font-bold mb-2">AI Mushohadasi</p>
                   <p className="text-sm text-[hsl(215,15%,60%)] leading-relaxed">{e.reasoning}</p>
                 </div>
               </div>

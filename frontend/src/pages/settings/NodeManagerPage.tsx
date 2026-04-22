@@ -1,23 +1,23 @@
-import { Cpu, HardDrive, MemoryStick, Server, Activity } from "lucide-react";
-import PageHeader from "@/components/shared/PageHeader";
+import PageHeader from "@/components/shared/PageHeader"
+import { Activity, Cpu, HardDrive, Server } from "lucide-react"
 
 const nodes = [
-  { id: "NODE-001", name: "Scanner Alpha", region: "US-East", status: "online", cpu: 72, memory: 68, disk: 45, uptime: "14d 6h", version: "v2.4.1", scans: 1284 },
-  { id: "NODE-002", name: "Scanner Beta", region: "EU-West", status: "online", cpu: 45, memory: 52, disk: 38, uptime: "28d 12h", version: "v2.4.1", scans: 956 },
-  { id: "NODE-003", name: "Scanner Gamma", region: "AP-South", status: "maintenance", cpu: 0, memory: 12, disk: 22, uptime: "—", version: "v2.3.8", scans: 0 },
-  { id: "NODE-004", name: "Scanner Delta", region: "US-West", status: "online", cpu: 88, memory: 91, disk: 67, uptime: "7d 3h", version: "v2.4.1", scans: 2103 },
-  { id: "NODE-005", name: "Scanner Epsilon", region: "EU-Central", status: "offline", cpu: 0, memory: 0, disk: 55, uptime: "—", version: "v2.4.0", scans: 0 },
+  { id: "NODE-001", name: "Scanner Alpha", region: "US-East", status: "onlayn", cpu: 72, memory: 68, disk: 45, uptime: "14k 6s", version: "v2.4.1", scans: 1284 },
+  { id: "NODE-002", name: "Scanner Beta", region: "EU-West", status: "onlayn", cpu: 45, memory: 52, disk: 38, uptime: "28k 12s", version: "v2.4.1", scans: 956 },
+  { id: "NODE-003", name: "Scanner Gamma", region: "AP-South", status: "texnik xizmat", cpu: 0, memory: 12, disk: 22, uptime: "—", version: "v2.3.8", scans: 0 },
+  { id: "NODE-004", name: "Scanner Delta", region: "US-West", status: "onlayn", cpu: 88, memory: 91, disk: 67, uptime: "7k 3s", version: "v2.4.1", scans: 2103 },
+  { id: "NODE-005", name: "Scanner Epsilon", region: "EU-Central", status: "oflayn", cpu: 0, memory: 0, disk: 55, uptime: "—", version: "v2.4.0", scans: 0 },
 ];
 
 const NodeManagerPage = () => {
   return (
     <div>
       <PageHeader
-        title="Internal Node Manager"
-        description="Monitor and manage distributed scanning infrastructure."
+        title="Ichki Tugunlar Boshqaruvi"
+        description="Taqsimlangan skanerlash infratuzilmasini kuzatib boring va boshqaring."
         actions={
           <button className="bg-gradient-primary px-6 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-lg shadow-primary/10 hover:brightness-110 transition-all">
-            Deploy New Node
+            Yangi Tugun Joylashtirish
           </button>
         }
       />
@@ -25,10 +25,10 @@ const NodeManagerPage = () => {
       {/* Stats */}
       <div className="grid grid-cols-4 gap-6 mb-6">
         {[
-          { label: "Total Nodes", value: "5", icon: Server },
-          { label: "Online", value: "3", icon: Activity, color: "text-primary" },
-          { label: "Avg CPU", value: "51%", icon: Cpu },
-          { label: "Total Scans", value: "4,343", icon: HardDrive },
+          { label: "Jami Tugunlar", value: "5", icon: Server },
+          { label: "Onlayn", value: "3", icon: Activity, color: "text-primary" },
+          { label: "O'rtacha CPU", value: "51%", icon: Cpu },
+          { label: "Jami Skanerlashlar", value: "4,343", icon: HardDrive },
         ].map((stat, i) => (
           <div key={i} className="bg-surface-low rounded-xl p-6 border-ghost">
             <div className="flex items-center justify-between mb-3">
@@ -43,21 +43,21 @@ const NodeManagerPage = () => {
       {/* Nodes Table */}
       <div className="bg-surface-low rounded-xl border-ghost overflow-hidden">
         <div className="p-6 border-b border-[hsl(222,20%,12%,0.3)] bg-surface-high/30">
-          <h3 className="font-bold font-headline text-white">Node Registry</h3>
+          <h3 className="font-bold font-headline text-white">Tugunlar Reestri</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
               <tr className="text-[10px] text-[hsl(215,15%,40%)] uppercase tracking-widest font-bold">
-                <th className="px-6 py-4">Node ID</th>
-                <th className="px-6 py-4">Name</th>
-                <th className="px-6 py-4">Region</th>
-                <th className="px-6 py-4">Status</th>
+                <th className="px-6 py-4">Tugun ID</th>
+                <th className="px-6 py-4">Nomi</th>
+                <th className="px-6 py-4">Mintaqa</th>
+                <th className="px-6 py-4">Holati</th>
                 <th className="px-6 py-4">CPU</th>
-                <th className="px-6 py-4">Memory</th>
-                <th className="px-6 py-4">Uptime</th>
-                <th className="px-6 py-4">Version</th>
-                <th className="px-6 py-4">Total Scans</th>
+                <th className="px-6 py-4">Xotira</th>
+                <th className="px-6 py-4">Ishlash Vaqti</th>
+                <th className="px-6 py-4">Versiya</th>
+                <th className="px-6 py-4">Jami Skanerlashlar</th>
               </tr>
             </thead>
             <tbody className="text-sm">
@@ -70,8 +70,8 @@ const NodeManagerPage = () => {
                   <td className="px-6 py-4 text-[hsl(215,15%,55%)]">{node.region}</td>
                   <td className="px-6 py-4">
                     <span className={`text-[10px] font-bold uppercase px-2 py-1 rounded ${
-                      node.status === "online" ? "bg-primary/10 text-primary" :
-                      node.status === "maintenance" ? "bg-sentinel-tertiary/10 text-sentinel-tertiary" :
+                      node.status === "onlayn" ? "bg-primary/10 text-primary" :
+                      node.status === "texnik xizmat" ? "bg-sentinel-tertiary/10 text-sentinel-tertiary" :
                       "bg-sentinel-error/10 text-sentinel-error"
                     }`}>
                       {node.status}

@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Shield } from "lucide-react";
-import { useAuth } from "@/contexts/AuthContext";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { useAuth } from "@/contexts/AuthContext"
+import { Shield } from "lucide-react"
+import { useState } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -40,16 +40,16 @@ const LoginPage = () => {
             <Shield className="w-12 h-12 text-primary relative z-10 drop-shadow-[0_0_15px_rgba(33,150,243,0.5)]" />
             <div className="absolute inset-0 bg-primary/40 blur-xl rounded-full" />
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground font-headline">Welcome Back</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-foreground font-headline">Xush Kelibsiz</h2>
           <p className="text-sm text-muted-foreground text-center">
-            Sign in to continue to Sentinel Security Scanner.
+            Sentinel Security Scanner tizimiga kirish.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
           <div className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium leading-none text-foreground">Email</label>
+              <label className="text-sm font-medium leading-none text-foreground">Elektron pochta</label>
               <Input 
                 id="email" 
                 type="email" 
@@ -62,7 +62,7 @@ const LoginPage = () => {
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-sm font-medium leading-none text-foreground">Password</label>
+                <label className="text-sm font-medium leading-none text-foreground">Parol</label>
               </div>
               <Input 
                 id="password" 
@@ -79,14 +79,14 @@ const LoginPage = () => {
             disabled={loading} 
             className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(33,150,243,0.3)] transition-all"
           >
-            {loading ? "Signing In..." : "Sign In"}
+            {loading ? "Kirilmoqda..." : "Tizimga kirish"}
           </Button>
         </form>
 
         <div className="text-center text-sm text-muted-foreground relative z-10">
-          Don't have an account?{" "}
+          Akkauntingiz yo'qmi?{" "}
           <Link to="/register" className="font-semibold text-primary hover:text-primary/80">
-            Sign up
+            Ro'yxatdan o'tish
           </Link>
         </div>
       </div>

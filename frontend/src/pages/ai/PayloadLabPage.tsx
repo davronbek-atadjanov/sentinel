@@ -1,22 +1,20 @@
-import PageHeader from "@/components/shared/PageHeader";
+import PageHeader from "@/components/shared/PageHeader"
 import {
-  Brain,
-  Play,
-  Pause,
-  RotateCcw,
-  ChevronRight,
-  Zap,
-  Code,
-  Shield,
-} from "lucide-react";
+    Brain,
+    Code,
+    Play,
+    RotateCcw,
+    Shield,
+    Zap
+} from "lucide-react"
 
 const payloads = [
   {
     id: 1,
     vector: "SQL Injection (Blind Boolean)",
     payload: "' OR 1=1-- -",
-    status: "Executed",
-    result: "Vulnerable",
+    status: "Bajarildi",
+    result: "Zaif",
     resultColor: "text-sentinel-error",
     confidence: 98,
   },
@@ -24,8 +22,8 @@ const payloads = [
     id: 2,
     vector: "XSS Reflected (Script Tag)",
     payload: '<script>alert("XSS")</script>',
-    status: "Executed",
-    result: "Blocked (WAF)",
+    status: "Bajarildi",
+    result: "Bloklandi (WAF)",
     resultColor: "text-primary",
     confidence: 72,
   },
@@ -33,8 +31,8 @@ const payloads = [
     id: 3,
     vector: "SSRF (Internal Network)",
     payload: "http://169.254.169.254/latest/meta-data/",
-    status: "Queued",
-    result: "Pending",
+    status: "Navbatda",
+    result: "Kutilmoqda",
     resultColor: "text-[hsl(35,90%,55%)]",
     confidence: null,
   },
@@ -42,8 +40,8 @@ const payloads = [
     id: 4,
     vector: "Path Traversal (LFI)",
     payload: "../../etc/passwd",
-    status: "Executed",
-    result: "Not Vulnerable",
+    status: "Bajarildi",
+    result: "Zaif Emas",
     resultColor: "text-primary",
     confidence: 95,
   },
@@ -53,23 +51,23 @@ const PayloadLabPage = () => {
   return (
     <div>
       <PageHeader
-        title="AI Payload Lab"
-        description="Automated payload generation, mutation, and execution. AI-driven attack vector testing against your target infrastructure."
+        title="AI Payload Laboratoriyasi"
+        description="Avtomatlashtirilgan payload yaratish, mutatsiya va uni bajarish. Sizning infratuzilmangizga qarshi sun'iy intellektga asoslangan hujum vektorini sinash."
         badge={
           <span className="flex items-center gap-1.5 ml-3 mt-2">
             <Brain className="w-4 h-4 text-primary" />
-            <span className="text-[10px] text-primary font-bold uppercase">AI Powered</span>
+            <span className="text-[10px] text-primary font-bold uppercase">AI Bilan Quvvatlangan</span>
           </span>
         }
         actions={
           <>
             <button className="flex items-center gap-2 bg-surface-container px-5 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
               <RotateCcw className="w-4 h-4" />
-              Reset Lab
+              Laboratoriyani Qayta O'rnatish
             </button>
             <button className="flex items-center gap-2 bg-gradient-primary px-5 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all">
               <Play className="w-4 h-4" />
-              Execute All
+              Barchasini Bajarish
             </button>
           </>
         }
@@ -82,12 +80,12 @@ const PayloadLabPage = () => {
           <div className="bg-surface-low rounded-xl p-6 border-ghost">
             <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
               <Zap className="w-4 h-4 text-primary" />
-              Target Configuration
+              Nishon Sozlamalari
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold block mb-2">
-                  Target Endpoint
+                  Maqsadli Manzil
                 </label>
                 <input
                   type="text"
@@ -97,7 +95,7 @@ const PayloadLabPage = () => {
               </div>
               <div>
                 <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold block mb-2">
-                  HTTP Method
+                  HTTP Metodi
                 </label>
                 <select className="w-full bg-surface-container border-ghost rounded-lg px-4 py-2.5 text-sm text-on-surface focus:ring-1 focus:ring-primary/30 focus:outline-none">
                   <option>POST</option>
@@ -114,20 +112,20 @@ const PayloadLabPage = () => {
             <div className="p-5 border-b border-[hsl(222,20%,12%,0.2)] flex justify-between items-center">
               <h3 className="font-bold text-white flex items-center gap-2">
                 <Code className="w-4 h-4 text-primary" />
-                Generated Payloads
+                Yaratilgan Payloadlar
               </h3>
               <span className="text-[10px] text-[hsl(215,15%,45%)] font-semibold">
-                {payloads.length} vectors
+                {payloads.length} ta vektorlar
               </span>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left">
                 <thead>
                   <tr className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold border-b border-[hsl(222,20%,12%,0.15)]">
-                    <th className="px-5 py-3">Attack Vector</th>
+                    <th className="px-5 py-3">Hujum Vektori</th>
                     <th className="px-5 py-3">Payload</th>
-                    <th className="px-5 py-3">Result</th>
-                    <th className="px-5 py-3">Confidence</th>
+                    <th className="px-5 py-3">Natija</th>
+                    <th className="px-5 py-3">Ishonch Darajasi</th>
                   </tr>
                 </thead>
                 <tbody className="text-sm">
@@ -170,27 +168,26 @@ const PayloadLabPage = () => {
           <div className="bg-surface-low rounded-xl p-6 border-ghost">
             <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
               <Brain className="w-4 h-4 text-primary" />
-              AI Analysis
+              AI Tahlili
             </h3>
             <div className="space-y-4">
               <div className="bg-[hsl(222,60%,4%)] rounded-lg p-4">
-                <p className="text-xs text-primary font-semibold mb-2">Recommendation</p>
+                <p className="text-xs text-primary font-semibold mb-2">Tavsiya</p>
                 <p className="text-xs text-[hsl(215,15%,55%)] leading-relaxed">
-                  The target endpoint shows vulnerability to blind SQL injection through the
-                  session_token parameter. Recommend expanding test coverage to include
-                  time-based and UNION-based injection vectors.
+                  Nishon manzil session_token parametri orqali yashirin (blind) SQL inyektsiyasiga zaiflikni ko'rsatmoqda.
+                  Test qamrovini vaqtga asoslangan (time-based) va UNION-asosidagi inyektsiya vektorlarini o'z ichiga oladigan tarzda kengaytirish tavsiya etiladi.
                 </p>
               </div>
               <div className="flex justify-between items-center text-xs">
-                <span className="text-[hsl(215,15%,45%)]">Model Confidence</span>
+                <span className="text-[hsl(215,15%,45%)]">Model Ishonchi</span>
                 <span className="text-primary font-bold">94.2%</span>
               </div>
               <div className="flex justify-between items-center text-xs">
-                <span className="text-[hsl(215,15%,45%)]">Vectors Tested</span>
+                <span className="text-[hsl(215,15%,45%)]">Sinalgan Vektorlar</span>
                 <span className="text-on-surface font-bold">1,284</span>
               </div>
               <div className="flex justify-between items-center text-xs">
-                <span className="text-[hsl(215,15%,45%)]">Successful Exploits</span>
+                <span className="text-[hsl(215,15%,45%)]">Muvaffaqiyatli Ekspluatatsiyalar</span>
                 <span className="text-sentinel-error font-bold">23</span>
               </div>
             </div>
@@ -199,14 +196,14 @@ const PayloadLabPage = () => {
           <div className="bg-surface-low rounded-xl p-6 border-ghost">
             <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
               <Shield className="w-4 h-4 text-primary" />
-              Defense Profile
+              Himoya Profili
             </h3>
             <div className="space-y-3">
               {[
-                { label: "WAF Detection", value: "Cloudflare", active: true },
-                { label: "Rate Limiting", value: "50 req/min", active: true },
-                { label: "CSRF Protection", value: "Token-based", active: false },
-                { label: "Input Sanitization", value: "Partial", active: false },
+                { label: "WAF Aniqlash", value: "Cloudflare", active: true },
+                { label: "Cheklash (Rate Limiting)", value: "50 talab/min", active: true },
+                { label: "CSRF Himoyasi", value: "Token-asosida", active: false },
+                { label: "Kiritishni Tozalash (Sanitization)", value: "Qisman", active: false },
               ].map((item) => (
                 <div key={item.label} className="flex justify-between items-center">
                   <span className="text-xs text-[hsl(215,15%,50%)]">{item.label}</span>

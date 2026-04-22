@@ -1,45 +1,45 @@
-import PageHeader from "@/components/shared/PageHeader";
+import PageHeader from "@/components/shared/PageHeader"
 import {
-  Users,
-  Mail,
-  Shield,
-  AlertTriangle,
-  Download,
-  Plus,
-  MoreVertical,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+    AlertTriangle,
+    ChevronLeft,
+    ChevronRight,
+    Download,
+    Mail,
+    MoreVertical,
+    Plus,
+    Shield,
+    Users,
+} from "lucide-react"
 
 const stats = [
-  { label: "Active Seats", value: "24", sub: "/ 30 available", icon: Users, bar: "w-[80%] bg-primary" },
-  { label: "Pending Invitations", value: "3", sub: "Action Required", subColor: "text-sentinel-tertiary", icon: Mail },
-  { label: "System Uptime", value: "99.9%", sub: "Last 30 days", icon: Shield },
-  { label: "Risk Exposure", value: "Low", sub: "Standard Profile", icon: AlertTriangle },
+  { label: "Faol O'rinlar", value: "24", sub: "/ 30 mavjud", icon: Users, bar: "w-[80%] bg-primary" },
+  { label: "Kutilayotgan Taklifnomalar", value: "3", sub: "Harakat Talab Qilinadi", subColor: "text-sentinel-tertiary", icon: Mail },
+  { label: "Tizim Ishlash Vaqti", value: "99.9%", sub: "So'nggi 30 kun", icon: Shield },
+  { label: "Xavf Darajasi", value: "Past", sub: "Standart Profil", icon: AlertTriangle },
 ];
 
 const users = [
-  { name: "Marcus Vance", email: "m.vance@sentinel.ai", role: "Admin", roleColor: "text-primary", status: "active", access: "2 mins ago", ip: "192.168.1.104" },
-  { name: "Sarah Chen", email: "s.chen@sentinel.ai", role: "Auditor", roleColor: "text-on-surface-variant", status: "active", access: "4 hours ago", ip: "10.0.4.82" },
-  { name: "Alex Thorne", email: "a.thorne@dev.sentinel.ai", role: "Developer", roleColor: "text-sentinel-tertiary", status: "pending", access: "Never logged in", ip: "Invite expires in 12h" },
-  { name: "Elena Rodriguez", email: "e.rodriguez@sentinel.ai", role: "Member", roleColor: "text-on-surface-variant", status: "active", access: "1 day ago", ip: "172.16.254.1" },
+  { name: "Marcus Vance", email: "m.vance@sentinel.ai", role: "Admin", roleColor: "text-primary", status: "faol", access: "2 daqiqa oldin", ip: "192.168.1.104" },
+  { name: "Sarah Chen", email: "s.chen@sentinel.ai", role: "Auditor", roleColor: "text-on-surface-variant", status: "faol", access: "4 soat oldin", ip: "10.0.4.82" },
+  { name: "Alex Thorne", email: "a.thorne@dev.sentinel.ai", role: "Dasturchi", roleColor: "text-sentinel-tertiary", status: "kutilmoqda", access: "Hech qachon kirmagan", ip: "Taklifnoma 12 soatdan keyin tugaydi" },
+  { name: "Elena Rodriguez", email: "e.rodriguez@sentinel.ai", role: "A'zo", roleColor: "text-on-surface-variant", status: "faol", access: "1 kun oldin", ip: "172.16.254.1" },
 ];
 
 const UserManagementPage = () => {
   return (
     <div>
       <PageHeader
-        title="Team Governance"
-        description="Configure Role-Based Access Control (RBAC) and manage obsidian system environment access for your security team."
+        title="Jamoani Boshqarish"
+        description="Rollar bo'yicha Kirish Boshqaruvini (RBAC) sojang va xavfsizlik jamoangiz uchun obsidian tizim mühitiga kirishni boshqaring."
         actions={
           <>
             <button className="flex items-center gap-2 bg-surface-container px-5 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
               <Download className="w-4 h-4" />
-              Download Audit Log
+              Audit Jurnalini Yuklab Olish
             </button>
             <button className="flex items-center gap-2 bg-gradient-primary px-5 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all">
               <Plus className="w-4 h-4" />
-              Invite Member
+              A'zo Taklif Qilish
             </button>
           </>
         }
@@ -70,9 +70,9 @@ const UserManagementPage = () => {
       <div className="bg-surface-low rounded-xl border-ghost overflow-hidden">
         <div className="p-6 flex justify-between items-center border-b border-[hsl(222,20%,12%,0.2)]">
           <div className="flex items-center gap-3">
-            <h3 className="font-bold font-headline text-white">Team Directory</h3>
+            <h3 className="font-bold font-headline text-white">Jamoa Katalogi</h3>
             <span className="px-2 py-0.5 bg-primary-container text-primary text-[10px] font-bold uppercase rounded">
-              RBAC Enabled
+              RBAC Yoqilgan
             </span>
           </div>
         </div>
@@ -81,11 +81,11 @@ const UserManagementPage = () => {
           <table className="w-full text-left">
             <thead>
               <tr className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold border-b border-[hsl(222,20%,12%,0.2)]">
-                <th className="px-6 py-4">User Profile</th>
-                <th className="px-6 py-4">System Role</th>
-                <th className="px-6 py-4">Status</th>
-                <th className="px-6 py-4">Access Pattern</th>
-                <th className="px-6 py-4">Actions</th>
+                <th className="px-6 py-4">Foydalanuvchi Profili</th>
+                <th className="px-6 py-4">Tizimdagi Roli</th>
+                <th className="px-6 py-4">Holati</th>
+                <th className="px-6 py-4">Kirish Shabloni</th>
+                <th className="px-6 py-4">Harakatlar</th>
               </tr>
             </thead>
             <tbody className="text-sm">
@@ -110,7 +110,7 @@ const UserManagementPage = () => {
                   </td>
                   <td className="px-6 py-5">
                     <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${
-                      u.status === "active"
+                      u.status === "faol"
                         ? "bg-primary-container text-primary"
                         : "bg-[hsl(35,80%,15%)] text-[hsl(35,90%,65%)]"
                     }`}>
@@ -119,8 +119,8 @@ const UserManagementPage = () => {
                   </td>
                   <td className="px-6 py-5">
                     <div className="text-on-surface text-sm">{u.access}</div>
-                    <div className={`text-xs mt-0.5 ${u.status === "pending" ? "text-sentinel-tertiary" : "text-[hsl(215,15%,40%)]"}`}>
-                      {u.status === "pending" ? u.ip : `From ${u.ip}`}
+                    <div className={`text-xs mt-0.5 ${u.status === "kutilmoqda" ? "text-sentinel-tertiary" : "text-[hsl(215,15%,40%)]"}`}>
+                      {u.status === "kutilmoqda" ? u.ip : `${u.ip} dan`}
                     </div>
                   </td>
                   <td className="px-6 py-5">
@@ -136,7 +136,7 @@ const UserManagementPage = () => {
 
         <div className="px-6 py-4 flex justify-between items-center border-t border-[hsl(222,20%,12%,0.15)]">
           <span className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-semibold">
-            Showing 1 to 4 of 24 Users
+            Ko'rsatilmoqda 1 dan 4 gacha, jami 24 ta Foydalanuvchi
           </span>
           <div className="flex items-center gap-2">
             <button className="w-8 h-8 rounded flex items-center justify-center text-[hsl(215,15%,45%)] hover:bg-surface-high">

@@ -1,16 +1,16 @@
-import { Link, useNavigate } from "react-router-dom";
-import { ServerCrash, Globe, Lock, Code, LayoutDashboard } from "lucide-react";
-import PageHeader from "@/components/shared/PageHeader";
-import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AssetsService } from "@/services/assets.service";
-import { toast } from "sonner";
+import PageHeader from "@/components/shared/PageHeader"
+import { AssetsService } from "@/services/assets.service"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { Code, Globe, LayoutDashboard, Lock, ServerCrash } from "lucide-react"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
 
 const assetTypes = [
-  { id: "WEB_APP", label: "Web Application", desc: "A deployed web application with internal routing.", active: true, icon: Globe },
-  { id: "API", label: "API Endpoint", desc: "REST or GraphQL API endpoints for data exchange.", icon: Code },
-  { id: "NETWORK", label: "Network Infrastructure", desc: "IP Address, Server, or Network device.", icon: ServerCrash },
-  { id: "MOBILE", label: "Mobile Application", desc: "Mobile backend infrastructure or connected service.", icon: LayoutDashboard },
+  { id: "WEB_APP", label: "Veb Ilova", desc: "Ichki marshrutlashga ega bo'lgan joylashtirilgan veb ilova.", active: true, icon: Globe },
+  { id: "API", label: "API Yakuniy Nuqtasi", desc: "Ma'lumot almashish uchun REST yoki GraphQL API yakuniy nuqtalari.", icon: Code },
+  { id: "NETWORK", label: "Tarmoq Infratuzilmasi", desc: "IP Manzil, Server yoki Tarmoq qurilmasi.", icon: ServerCrash },
+  { id: "MOBILE", label: "Mobil Ilova", desc: "Mobil backend infratuzilmasi yoki bog'langan xizmat.", icon: LayoutDashboard },
 ];
 
 const AssetConfigPage = () => {
@@ -24,22 +24,22 @@ const AssetConfigPage = () => {
   const createAssetMutation = useMutation({
     mutationFn: AssetsService.createAsset,
     onSuccess: () => {
-      toast.success("Asset successfully added");
+      toast.success("Aktiv muvaffaqiyatli qo'shildi");
       queryClient.invalidateQueries({ queryKey: ["assets"] });
       navigate("/app/assets");
     },
     onError: (err: any) => {
-      toast.error(err.response?.data?.message || err.message || "Failed to add asset");
+      toast.error(err.response?.data?.message || err.message || "Aktivni qo'shishda xatolik yuz berdi");
     }
   });
 
   const handleCreateAsset = () => {
     if (!assetName.trim()) {
-      toast.error("Asset Name is required");
+      toast.error("Aktiv nomini kiritish shart");
       return;
     }
     if (!assetUrl.trim()) {
-      toast.error("Asset URL is required");
+      toast.error("Aktiv URL manzilini kiritish shart");
       return;
     }
     
@@ -53,22 +53,22 @@ const AssetConfigPage = () => {
   return (
     <div>
       <PageHeader
-        title="Asset Configuration"
-        description="Register a new digital asset (Domain, IP, or Application) to your organization's attack surface scope."
+        title="Aktiv Sozlamasi"
+        description="Tashkilotingiz hujum yuzasi doirasiga yangi raqamli aktiv (Domen, IP yoki Ilova) ro'yxatdan o'tkazing."
         actions={
           <>
             <button 
               onClick={() => navigate("/app/assets")}
               className="bg-surface-container px-6 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors"
             >
-              Discard
+              Bekor qilish
             </button>
             <button 
               onClick={handleCreateAsset}
               disabled={createAssetMutation.isPending}
               className="bg-gradient-primary px-6 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all disabled:opacity-50"
             >
-              {createAssetMutation.isPending ? "Adding Asset..." : "Register Asset"}
+              {createAssetMutation.isPending ? "Aktiv Qo'shilmoqda..." : "Aktivni Ro'yxatdan O'tkazish"}
             </button>
           </>
         }
@@ -83,26 +83,26 @@ const AssetConfigPage = () => {
               <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                 <span className="w-3 h-3 border-2 border-primary rounded-full" />
               </span>
-              Identity & Origin
+              Identifikatsiya va Kelib Chiqish
             </h3>
 
             <div className="space-y-5">
               <div>
                 <label className="text-[10px] text-primary uppercase tracking-widest font-bold block mb-2">
-                  Asset Name (Identifier)
+                  Aktiv Nomi (Identifikator)
                 </label>
                 <input
                   type="text"
                   value={assetName}
                   onChange={(e) => setAssetName(e.target.value)}
-                  placeholder="e.g. Production Core API"
+                  placeholder="masalan, Asosiy Ishlab Chiqarish API'si"
                   className="w-full bg-surface-container border-ghost rounded-lg px-4 py-3 text-sm text-on-surface focus:ring-1 focus:ring-primary/30 focus:outline-none"
                 />
               </div>
 
               <div>
                 <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold block mb-2">
-                  Target URL / Hostname
+                  Nishon URL / Xost nomi
                 </label>
                 <input
                   type="text"
@@ -149,25 +149,25 @@ const AssetConfigPage = () => {
             <div className="flex justify-between items-center mb-6">
               <h3 className="font-bold font-headline text-white text-lg flex items-center gap-2">
                 <Lock className="w-5 h-5 text-primary" />
-                Advanced Properties (Future Release)
+                Murakkab Xususiyatlar (Kelgusi Nashrda)
               </h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold block mb-2">
-                  Environment Tags
+                  Muhit Teglari
                 </label>
                 <div className="w-full bg-surface-container border-ghost rounded-lg px-4 py-3 text-sm text-[hsl(215,15%,40%)]">
-                  Production, Staging, QA...
+                  Ishlab chiqarish, Mijoz tekshiruvi, Sifat nazorati...
                 </div>
               </div>
               <div>
                 <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold block mb-2">
-                  Owner Email Context
+                  Egasi Elektron Pochtasining Konteksti
                 </label>
                 <div className="w-full bg-surface-container border-ghost rounded-lg px-4 py-3 text-sm text-[hsl(215,15%,40%)]">
-                  secops@organization.com
+                  xavfsizlik@tashkilot.uz
                 </div>
               </div>
             </div>
@@ -177,10 +177,10 @@ const AssetConfigPage = () => {
         {/* ── Right Column: Info Panel ── */}
         <div className="col-span-12 lg:col-span-4 space-y-6">
           <div className="bg-surface-low rounded-xl p-6 border-ghost">
-            <h4 className="text-sm font-bold text-on-surface mb-2">Asset Registration Guide</h4>
+            <h4 className="text-sm font-bold text-on-surface mb-2">Aktivni Ro'yxatdan O'tkazish Bo'yicha Qo'llanma</h4>
             <p className="text-xs text-[hsl(215,15%,45%)] leading-relaxed mb-6">
-              Adding a new asset registers it into the Sentinel continuous monitoring loop. 
-              Ensure that your organization holds authorization to scan this boundary.
+              Yangi aktiv qo'shish uni Sentinel uzluksiz monitoring tsikliga ro'yxatdan o'tkazadi. 
+              Tashkilotingiz ushbu chegarani skanerlash uchun ruxsatga ega ekanligiga ishonch hosil qiling.
             </p>
 
             <ul className="space-y-4">
@@ -189,9 +189,9 @@ const AssetConfigPage = () => {
                   1
                 </div>
                 <div>
-                  <h5 className="text-sm font-bold text-on-surface mb-0.5">Resolvable URI</h5>
+                  <h5 className="text-sm font-bold text-on-surface mb-0.5">Moslashuvchan URI</h5>
                   <p className="text-xs text-[hsl(215,15%,40%)] leading-relaxed">
-                    Target hostnames must be resolvable exactly as typed.
+                    Nishon xost nomlari aynan yozilganidek aniqlanishi kerak.
                   </p>
                 </div>
               </li>
@@ -200,9 +200,9 @@ const AssetConfigPage = () => {
                   2
                 </div>
                 <div>
-                  <h5 className="text-sm font-bold text-on-surface mb-0.5">Type Accuracy</h5>
+                  <h5 className="text-sm font-bold text-on-surface mb-0.5">Turni Aniqligi</h5>
                   <p className="text-xs text-[hsl(215,15%,40%)] leading-relaxed">
-                    Engines prioritize payloads based on asset type semantics.
+                    Dvigatellar aktiv turi semantikasiga asoslangan holda ma'lumotlarni birinchi o'ringa qo'yadi.
                   </p>
                 </div>
               </li>

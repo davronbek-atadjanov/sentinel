@@ -1,18 +1,16 @@
-import { Link } from "react-router-dom";
+import PageHeader from "@/components/shared/PageHeader"
+import SeverityBadge from "@/components/shared/SeverityBadge"
+import StatusBadge from "@/components/shared/StatusBadge"
 import {
-  ChevronLeft,
-  ChevronRight,
-  Download,
-  FileText,
-  MoreVertical,
-} from "lucide-react";
-import PageHeader from "@/components/shared/PageHeader";
-import SeverityBadge from "@/components/shared/SeverityBadge";
-import StatusBadge from "@/components/shared/StatusBadge";
+    Download,
+    FileText,
+    MoreVertical
+} from "lucide-react"
+import { Link } from "react-router-dom"
 
-import { useQuery } from "@tanstack/react-query";
-import { VulnerabilitiesService } from "@/services/vulnerabilities.service";
-import { ShieldAlert } from "lucide-react";
+import { VulnerabilitiesService } from "@/services/vulnerabilities.service"
+import { useQuery } from "@tanstack/react-query"
+import { ShieldAlert } from "lucide-react"
 
 const VulnerabilitiesListPage = () => {
   const { data: vulnerabilitiesData, isLoading } = useQuery({
@@ -37,8 +35,8 @@ const VulnerabilitiesListPage = () => {
   return (
     <div>
       <PageHeader
-        title="Vulnerabilities Inventory"
-        description={`Currently tracking ${totalCount.toLocaleString()} detected vulnerabilities.`}
+        title="Zaifliklar Inventarizatsiyasi"
+        description={`Hozirda ${totalCount.toLocaleString()} ta aniqlangan zaifliklar kuzatilmoqda.`}
         badge={
           totalCount > 0 && <span className="w-2 h-2 rounded-full bg-sentinel-tertiary animate-pulse mt-2" />
         }
@@ -46,11 +44,11 @@ const VulnerabilitiesListPage = () => {
           <>
             <button className="flex items-center gap-2 bg-surface-container px-5 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
               <Download className="w-4 h-4" />
-              Export CSV
+              CSV yuklab olish
             </button>
             <button className="flex items-center gap-2 bg-surface-container px-5 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
               <FileText className="w-4 h-4" />
-              PDF Report
+              PDF Hisobot
             </button>
           </>
         }
@@ -60,9 +58,9 @@ const VulnerabilitiesListPage = () => {
       <div className="flex flex-wrap items-center gap-6 mb-8 p-4 bg-surface-low rounded-xl border-ghost">
         <div className="flex items-center gap-3">
           <span className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold">
-            Severity:
+            Jiddiylik:
           </span>
-          {["Critical", "High", "Medium"].map((sev, i) => (
+          {["Kritik", "Yuqori", "O'rtacha"].map((sev, i) => (
             <label key={sev} className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
@@ -75,12 +73,12 @@ const VulnerabilitiesListPage = () => {
         </div>
         <div className="flex items-center gap-3">
           <span className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold">
-            Status:
+            Holati:
           </span>
-          <span className="text-sm text-on-surface">All Statuses</span>
+          <span className="text-sm text-on-surface">Barcha Holatlar</span>
         </div>
         <div className="ml-auto text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-semibold">
-          Showing {displayVulns.length} of {totalCount}
+          {totalCount} ta dan {displayVulns.length} tasi ko'rsatilmoqda
         </div>
       </div>
 
@@ -90,19 +88,19 @@ const VulnerabilitiesListPage = () => {
           <table className="w-full text-left">
             <thead>
               <tr className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold border-b border-[hsl(222,20%,12%,0.3)]">
-                <th className="px-6 py-4">Severity</th>
-                <th className="px-6 py-4">Vulnerability Name</th>
-                <th className="px-6 py-4">Target URL</th>
-                <th className="px-6 py-4">Status</th>
-                <th className="px-6 py-4">Date Found</th>
-                <th className="px-6 py-4">Action</th>
+                <th className="px-6 py-4">Jiddiylik</th>
+                <th className="px-6 py-4">Zaiflik Nomi</th>
+                <th className="px-6 py-4">Maqsadli URL</th>
+                <th className="px-6 py-4">Holati</th>
+                <th className="px-6 py-4">Topilgan Sana</th>
+                <th className="px-6 py-4">Harakat</th>
               </tr>
             </thead>
             <tbody className="text-sm">
               {isLoading ? (
                 <tr>
                   <td colSpan={6} className="py-8 text-center text-muted-foreground">
-                    Loading vulnerabilities...
+                    Zaifliklar yuklanmoqda...
                   </td>
                 </tr>
               ) : displayVulns.length > 0 ? (
@@ -146,8 +144,8 @@ const VulnerabilitiesListPage = () => {
                   <td colSpan={6} className="py-12 text-center">
                     <div className="flex flex-col items-center justify-center">
                       <ShieldAlert className="w-10 h-10 text-[hsl(215,15%,35%)] mb-3" />
-                      <p className="text-[hsl(215,15%,65%)] font-semibold">No vulnerabilities detected.</p>
-                      <p className="text-[hsl(215,15%,40%)] text-sm mt-1">Your assets appear to be secure.</p>
+                      <p className="text-[hsl(215,15%,65%)] font-semibold">Zaifliklar aniqlanmadi.</p>
+                      <p className="text-[hsl(215,15%,40%)] text-sm mt-1">Sizning aktivlaringiz xavfsiz ko'rinadi.</p>
                     </div>
                   </td>
                 </tr>
@@ -159,7 +157,7 @@ const VulnerabilitiesListPage = () => {
         {/* Pagination */}
         <div className="px-6 py-4 flex justify-between items-center border-t border-[hsl(222,20%,12%,0.15)]">
           <span className="text-[10px] text-[hsl(215,15%,40%)] uppercase font-semibold">
-            ‹ Previous
+            ‹ Oldingi
           </span>
           <div className="flex items-center gap-2">
             <button className="w-8 h-8 rounded bg-primary text-on-primary-fixed text-xs font-bold flex items-center justify-center">
@@ -179,7 +177,7 @@ const VulnerabilitiesListPage = () => {
             </button>
           </div>
           <span className="text-[10px] text-[hsl(215,15%,55%)] uppercase font-semibold cursor-pointer hover:text-white">
-            Next ›
+            Keyingisi ›
           </span>
         </div>
       </div>
@@ -188,35 +186,35 @@ const VulnerabilitiesListPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-surface-low rounded-xl p-6 border-ghost">
           <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold mb-2">
-            Critical Fix Rate
+            Kritik Tuzatish Ko'rsatkichi
           </p>
           <div className="flex items-baseline gap-2">
             <span className="text-3xl font-bold font-headline text-white">{fixRate}%</span>
             <span className="text-xs text-sentinel-tertiary font-semibold hidden">-</span>
           </div>
           <p className="text-xs text-[hsl(215,15%,40%)] mt-2">
-            Based on completed threat resolution.
+            Hal etilgan xavflar asosida.
           </p>
         </div>
         <div className="bg-surface-low rounded-xl p-6 border-ghost">
           <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold mb-2">
-            Resolved Vulnerabilities
+            Hal Qilingan Zaifliklar
           </p>
           <div className="flex items-baseline gap-2">
             <span className="text-3xl font-bold font-headline text-white">{stats.resolved}</span>
             <span className="text-xs text-primary font-semibold hidden">+</span>
           </div>
           <p className="text-xs text-[hsl(215,15%,40%)] mt-2">
-            Issues successfully mitigated.
+            Muammolar muvaffaqiyatli yumshatildi.
           </p>
         </div>
         <div className="bg-surface-low rounded-xl p-6 border-ghost flex items-center justify-between">
           <div>
             <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold mb-2">
-              Active Scan Cluster
+              Faol Skanerlash Klasteri
             </p>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold font-headline text-white">{stats.total > 0 ? "Active" : "Neutral"}</span>
+              <span className="text-3xl font-bold font-headline text-white">{stats.total > 0 ? "Faol" : "Neytral"}</span>
               {stats.total > 0 && (
                 <span className="flex gap-1">
                   <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
@@ -226,7 +224,7 @@ const VulnerabilitiesListPage = () => {
               )}
             </div>
             <p className="text-xs text-[hsl(215,15%,40%)] mt-2">
-              Monitoring system status.
+              Tizim holatini kuzatish.
             </p>
           </div>
         </div>

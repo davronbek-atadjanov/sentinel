@@ -1,21 +1,21 @@
-import { Link, useNavigate } from "react-router-dom";
-import { Lock, Sliders, Calendar, Zap, Lightbulb } from "lucide-react";
-import PageHeader from "@/components/shared/PageHeader";
-import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ScansService } from "@/services/scans.service";
-import { toast } from "sonner";
+import PageHeader from "@/components/shared/PageHeader"
+import { ScansService } from "@/services/scans.service"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { Calendar, Lightbulb, Lock, Sliders, Zap } from "lucide-react"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
 
 const scanTypes = [
-  { id: "quick", label: "Quick Scan", desc: "Surface analysis of Top 10 OWASP threats.", active: true },
-  { id: "full", label: "Full Audit", desc: "Comprehensive structural & logic testing." },
-  { id: "custom", label: "Custom Profile", desc: "User-defined policy and rulesets." },
+  { id: "quick", label: "Tezkor Skanerlash", desc: "Top 10 OWASP xavflarining yuza tahlili.", active: true },
+  { id: "full", label: "To'liq Audit", desc: "Keng qamrovli tarkibiy va mantiqiy test." },
+  { id: "custom", label: "Maxsus Profil", desc: "Foydalanuvchi tomonidan belgilangan siyosat va qoidalar." },
 ];
 
 const schedules = [
-  { label: "Daily Maintenance", active: true },
-  { label: "Weekly Health Check" },
-  { label: "Monthly Compliance Audit" },
+  { label: "Kunlik Texnik Xizmat", active: true },
+  { label: "Haftalik Salomatlik Tekshiruvi" },
+  { label: "Oylik Muvofiqlik Auditi" },
 ];
 
 const ScanConfigPage = () => {
@@ -28,19 +28,19 @@ const ScanConfigPage = () => {
   const startScanMutation = useMutation({
     mutationFn: ScansService.createScan,
     onSuccess: () => {
-      toast.success("Scan successfully initiated");
+      toast.success("Skanerlash muvaffaqiyatli boshlandi");
       queryClient.invalidateQueries({ queryKey: ["scans"] });
       // Redirect to list to see progress
       navigate("/app/scans");
     },
     onError: (err: any) => {
-      toast.error(err.message || "Failed to start scan");
+      toast.error(err.message || "Skanerlashni boshlashda xatolik yuz berdi");
     }
   });
 
   const handleExecuteScan = () => {
     if (!targetUrl.trim()) {
-      toast.error("Target URL is required");
+      toast.error("Nishon URL manzili kiritilishi shart");
       return;
     }
     startScanMutation.mutate({
@@ -52,22 +52,22 @@ const ScanConfigPage = () => {
   return (
     <div>
       <PageHeader
-        title="Scan Configuration"
-        description="Initialize a new surgical target scan or modify scheduled recurring assessments."
+        title="Skanerlash Sozlamasi"
+        description="Yangi maqsadli skanerlashni boshlang yoki rejalashtirilgan takroriy baholashlarni o'zgartiring."
         actions={
           <>
             <button 
               onClick={() => navigate("/app/scans")}
               className="bg-surface-container px-6 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors"
             >
-              Discard Changes
+              O'zgarishlarni Bekor Qilish
             </button>
             <button 
               onClick={handleExecuteScan}
               disabled={startScanMutation.isPending}
               className="bg-gradient-primary px-6 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all disabled:opacity-50"
             >
-              {startScanMutation.isPending ? "Starting..." : "Execute Scan"}
+              {startScanMutation.isPending ? "Boshlanmoqda..." : "Skanerlashni Bajarish"}
             </button>
           </>
         }
@@ -82,13 +82,13 @@ const ScanConfigPage = () => {
               <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                 <span className="w-3 h-3 border-2 border-primary rounded-full" />
               </span>
-              Primary Objective
+              Asosiy Maqsad
             </h3>
 
             <div className="space-y-4">
               <div>
                 <label className="text-[10px] text-primary uppercase tracking-widest font-bold block mb-2">
-                  Target URL / Hostname
+                  Nishon URL / Xost nomi
                 </label>
                 <input
                   type="text"
@@ -131,18 +131,18 @@ const ScanConfigPage = () => {
             <div className="flex justify-between items-center mb-6">
               <h3 className="font-bold font-headline text-white text-lg flex items-center gap-2">
                 <Lock className="w-5 h-5 text-primary" />
-                Authenticated Scanning
+                Autentifikatsiyalangan Skanerlash
               </h3>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">Status:</span>
-                <span className="text-[10px] text-[hsl(215,15%,50%)] uppercase font-bold">Disabled</span>
+                <span className="text-[10px] text-[hsl(215,15%,45%)] uppercase font-bold">Holati:</span>
+                <span className="text-[10px] text-[hsl(215,15%,50%)] uppercase font-bold">O'chirilgan</span>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold block mb-2">
-                  Username / API Key
+                  Foydalanuvchi nomi / API Kaliti
                 </label>
                 <input
                   type="text"
@@ -151,7 +151,7 @@ const ScanConfigPage = () => {
               </div>
               <div>
                 <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold block mb-2">
-                  Password / Secret
+                  Parol / Maxfiy so'z
                 </label>
                 <input
                   type="password"
@@ -162,7 +162,7 @@ const ScanConfigPage = () => {
 
             <div className="mt-4">
               <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold block mb-2">
-                Login Form URL (Optional)
+                Tizimga Kirish Formasi URL (Ixtiyoriy)
               </label>
               <input
                 type="text"
@@ -176,16 +176,16 @@ const ScanConfigPage = () => {
           <div className="bg-surface-low rounded-xl p-6 border-ghost">
             <h3 className="font-bold font-headline text-white text-lg flex items-center gap-2 mb-6">
               <Sliders className="w-5 h-5 text-primary" />
-              Advanced Parameters
+              Murakkab Parametrlar
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <div className="flex justify-between mb-2">
                   <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold">
-                    Max Crawl Depth
+                    Maksimal Qidiruv Chuqurligi
                   </label>
-                  <span className="text-sm text-primary font-mono font-bold">10 Levels</span>
+                  <span className="text-sm text-primary font-mono font-bold">10 Daraja</span>
                 </div>
                 <input
                   type="range"
@@ -195,15 +195,15 @@ const ScanConfigPage = () => {
                   className="w-full h-1 bg-surface-high rounded-full appearance-none cursor-pointer accent-primary"
                 />
                 <p className="text-xs text-primary/60 mt-2">
-                  Determines how deep the spider explores the directory structure.
+                  Qidiruv botining kataloglar tuzilmasini qanchalik chuqur o'rganishini belgilaydi.
                 </p>
               </div>
               <div>
                 <div className="flex justify-between mb-2">
                   <label className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold">
-                    Request Concurrency
+                    So'rovlar Parallelizmi
                   </label>
-                  <span className="text-sm text-primary font-mono font-bold">25 req/s</span>
+                  <span className="text-sm text-primary font-mono font-bold">25 so'rov/s</span>
                 </div>
                 <input
                   type="range"
@@ -213,7 +213,7 @@ const ScanConfigPage = () => {
                   className="w-full h-1 bg-surface-high rounded-full appearance-none cursor-pointer accent-primary"
                 />
                 <p className="text-xs text-primary/60 mt-2">
-                  Adjust to prevent overwhelming target server resources.
+                  Nishon server resurslarini haddan tashqari yuklamaslik uchun sozlang.
                 </p>
               </div>
             </div>
@@ -222,15 +222,15 @@ const ScanConfigPage = () => {
               <label className="flex items-start gap-3 p-4 bg-surface-container rounded-lg cursor-pointer hover:bg-surface-high transition-colors">
                 <input type="checkbox" className="w-4 h-4 mt-0.5 rounded bg-surface-container border-outline-variant text-primary focus:ring-primary/30" />
                 <div>
-                  <span className="text-sm font-semibold text-on-surface block">Force HTTPS</span>
-                  <span className="text-xs text-[hsl(215,15%,45%)]">Automatically upgrade all insecure connections.</span>
+                  <span className="text-sm font-semibold text-on-surface block">HTTPS dan Majburiy Foydalanish</span>
+                  <span className="text-xs text-[hsl(215,15%,45%)]">Barcha xavfsiz bo'lmagan ulanishlarni avtomatik ravishda yangilaydi.</span>
                 </div>
               </label>
               <label className="flex items-start gap-3 p-4 bg-surface-container rounded-lg cursor-pointer hover:bg-surface-high transition-colors">
                 <input type="checkbox" defaultChecked className="w-4 h-4 mt-0.5 rounded bg-surface-container border-outline-variant text-primary focus:ring-primary/30" />
                 <div>
-                  <span className="text-sm font-semibold text-on-surface block">Follow Redirects</span>
-                  <span className="text-xs text-[hsl(215,15%,45%)]">Trace 301/302 status codes during discovery.</span>
+                  <span className="text-sm font-semibold text-on-surface block">Qayta Yo'naltirishlarni Kuzatish</span>
+                  <span className="text-xs text-[hsl(215,15%,45%)]">Kashfiyot davomida 301/302 status kodlarini kuzatish.</span>
                 </div>
               </label>
             </div>
@@ -244,7 +244,7 @@ const ScanConfigPage = () => {
             <div className="flex justify-between items-center mb-6">
               <h3 className="font-bold font-headline text-white flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-primary" />
-                Temporal Schedule
+                Vaqtinchalik Reja
               </h3>
               <div className="w-10 h-5 bg-surface-high rounded-full relative cursor-pointer">
                 <div className="absolute right-0.5 top-0.5 w-4 h-4 bg-on-surface-variant rounded-full" />
@@ -253,7 +253,7 @@ const ScanConfigPage = () => {
 
             <div className="space-y-1 mb-6">
               <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold mb-3">
-                Recurrence Pattern
+                Takrorlanish Qonuniyati
               </p>
               {schedules.map((s) => (
                 <div
@@ -274,7 +274,7 @@ const ScanConfigPage = () => {
 
             <div>
               <p className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold mb-3">
-                Execution Window (UTC)
+                Bajarish Oynasi (UTC)
               </p>
               <div className="flex items-center gap-3">
                 <input
@@ -282,7 +282,7 @@ const ScanConfigPage = () => {
                   defaultValue="02:00"
                   className="flex-1 bg-surface-container border-ghost rounded-lg px-4 py-2.5 text-sm text-on-surface text-center font-mono focus:ring-1 focus:ring-primary/30 focus:outline-none"
                 />
-                <span className="text-[hsl(215,15%,45%)] text-sm">to</span>
+                <span className="text-[hsl(215,15%,45%)] text-sm">gacha</span>
                 <input
                   type="text"
                   defaultValue="05:00"
@@ -290,7 +290,7 @@ const ScanConfigPage = () => {
                 />
               </div>
               <p className="text-xs text-[hsl(215,15%,40%)] mt-3">
-                System scans are optimized for low-traffic windows to maintain service integrity.
+                Xizmat butunligini saqlash uchun tizim skanerlari past trafikli vaqtlarga moslashtirilgan.
               </p>
             </div>
           </div>
@@ -298,13 +298,13 @@ const ScanConfigPage = () => {
           {/* Execution Summary */}
           <div className="bg-surface-low rounded-xl p-6 border border-primary/20">
             <p className="text-[10px] text-primary uppercase tracking-widest font-bold mb-4">
-              Execution Summary
+              Bajarilish Xulosasi
             </p>
             <div className="space-y-3">
               {[
-                { label: "Total Modules", value: "142" },
-                { label: "Estimated Duration", value: "~14 mins" },
-                { label: "Network Impact", value: "MINIMAL", valueColor: "text-primary" },
+                { label: "Jami Modullar", value: "142" },
+                { label: "Taxminiy Davomiyligi", value: "~14 daq" },
+                { label: "Tarmoqqa Ta'siri", value: "MINIMAL", valueColor: "text-primary" },
               ].map((item) => (
                 <div key={item.label} className="flex justify-between items-center">
                   <span className="text-sm text-[hsl(215,15%,55%)]">{item.label}</span>
@@ -321,9 +321,9 @@ const ScanConfigPage = () => {
             <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
               <Zap className="w-7 h-7 text-primary" />
             </div>
-            <h4 className="font-bold text-white mb-1">Ready for Deployment</h4>
+            <h4 className="font-bold text-white mb-1">Bajarishga Tayyor</h4>
             <p className="text-xs text-[hsl(215,15%,45%)]">
-              Agent "Sentinel-Alpha" on standby
+              Agent "Sentinel-Alpha" kutish rejimida
             </p>
           </div>
 
@@ -332,9 +332,9 @@ const ScanConfigPage = () => {
             <div className="flex items-start gap-3">
               <Lightbulb className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="text-sm font-bold text-white mb-1">Configuration Tip</h4>
+                <h4 className="text-sm font-bold text-white mb-1">Sozlash Maslahati</h4>
                 <p className="text-xs text-[hsl(215,15%,45%)]">
-                  Increasing concurrency beyond 50 req/s might trigger WAF rate-limiting on modern cloud environments.
+                  Parallelizm darajasining 50 so'rov/soniyadan oshishi zamonaviy bulutli muhitlarda WAF cheklovini keltirib chiqarishi mumkin.
                 </p>
               </div>
             </div>

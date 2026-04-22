@@ -1,33 +1,32 @@
-import PageHeader from "@/components/shared/PageHeader";
+import PageHeader from "@/components/shared/PageHeader"
 import {
-  Github,
-  MessageSquare,
-  Ticket,
-  Wrench,
-  Plus,
-  Webhook,
-  ExternalLink,
-  Settings2,
-} from "lucide-react";
+    ExternalLink,
+    Github,
+    MessageSquare,
+    Plus,
+    Settings2,
+    Ticket,
+    Wrench
+} from "lucide-react"
 
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { IntegrationsService } from "@/services/integrations.service";
-import { Webhook, ExternalApp } from "@/types/integrations.types";
-import { format } from "date-fns";
-import { toast } from "sonner";
-import { useState } from "react";
+import { IntegrationsService } from "@/services/integrations.service"
+import { ExternalApp } from "@/types/integrations.types"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { format } from "date-fns"
+import { useState } from "react"
+import { toast } from "sonner"
 
 const SUPPORTED_INTEGRATIONS = {
   cicd: [
-    { id: "github", name: "GitHub Actions", desc: "Automated scan triggers", icon: Github },
-    { id: "jenkins", name: "Jenkins", desc: "Legacy build orchestration", icon: Wrench },
+    { id: "github", name: "GitHub Actions", desc: "Avtomatik skanerlash tetiklari", icon: Github },
+    { id: "jenkins", name: "Jenkins", desc: "Eski tuzilmalarni boshqarish", icon: Wrench },
   ],
   alerting: [
-    { id: "slack", name: "Slack", desc: "Real-time threat alerts", icon: MessageSquare },
-    { id: "teams", name: "Microsoft Teams", desc: "Corporate communication", icon: MessageSquare },
+    { id: "slack", name: "Slack", desc: "Haqiqiy vaqtda tahdid ogohlantirishlari", icon: MessageSquare },
+    { id: "teams", name: "Microsoft Teams", desc: "Korporativ aloqa", icon: MessageSquare },
   ],
   ticketing: [
-    { id: "jira", name: "Atlassian Jira", desc: "Automated ticket creation", icon: Ticket },
+    { id: "jira", name: "Atlassian Jira", desc: "Avtomatik chipta yaratish", icon: Ticket },
   ],
 };
 
@@ -49,12 +48,12 @@ const IntegrationsPage = () => {
   const createWebhookMutation = useMutation({
     mutationFn: IntegrationsService.createWebhook,
     onSuccess: () => {
-      toast.success("Webhook endpoint successfully created");
+      toast.success("Webhook muvaffaqiyatli yaratildi");
       queryClient.invalidateQueries({ queryKey: ["integrations", "webhooks"] });
       setShowWebhookModal(false);
       setNewWebhook({ name: "", url: "", events: ["Scan.Finished"] });
     },
-    onError: () => toast.error("Failed to create webhook"),
+    onError: () => toast.error("Webhook yaratishda xatolik yuz berdi"),
   });
 
   const webhooks: Webhook[] = webhooksResponse?.data || [];
@@ -77,7 +76,7 @@ const IntegrationsPage = () => {
         status: dbApp.status,
         channel: dbApp.metadata?.channel,
         project: dbApp.metadata?.project,
-        lastSync: dbApp.status === "connected" ? "Just now" : undefined,
+        lastSync: dbApp.status === "connected" ? "Hozirgina" : undefined,
       };
     });
   };
@@ -85,14 +84,14 @@ const IntegrationsPage = () => {
   return (
     <div>
       <PageHeader
-        title="Integrations"
-        description="Sync Sentinel's vulnerability intelligence with your existing ecosystem. Orchestrate automated security gates and real-time response."
+        title="Integratsiyalar"
+        description="Sentinelning zaifliklar bazasini mavjud ekotizimingiz bilan sinxronlashtiring. Avtomatlashtirilgan xavfsizlik darvozalarini va real vaqtda javob berishni muvofiqlashtiring."
         actions={
           <button 
              onClick={() => setShowWebhookModal(true)}
              className="flex items-center gap-2 bg-gradient-primary px-5 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all">
             <Plus className="w-4 h-4" />
-            New Webhook
+            Yangi Webhook
           </button>
         }
       />
@@ -103,7 +102,7 @@ const IntegrationsPage = () => {
         <div className="col-span-12 md:col-span-4">
           <h3 className="flex items-center gap-2 text-sm font-bold text-on-surface mb-4">
             <Github className="w-5 h-5 text-primary" />
-            CI/CD Pipelines
+            CI/CD Quvurlar (Pipelines)
           </h3>
           <div className="space-y-4">
             {mapIntegrationData(SUPPORTED_INTEGRATIONS.cicd).map((int) => (
@@ -116,7 +115,7 @@ const IntegrationsPage = () => {
         <div className="col-span-12 md:col-span-4">
           <h3 className="flex items-center gap-2 text-sm font-bold text-on-surface mb-4">
             <MessageSquare className="w-5 h-5 text-[hsl(35,90%,55%)]" />
-            Alerting
+            Ogohlantirishlar
           </h3>
           <div className="space-y-4">
             {mapIntegrationData(SUPPORTED_INTEGRATIONS.alerting).map((int) => (
@@ -129,7 +128,7 @@ const IntegrationsPage = () => {
         <div className="col-span-12 md:col-span-4">
           <h3 className="flex items-center gap-2 text-sm font-bold text-on-surface mb-4">
             <Ticket className="w-5 h-5 text-primary" />
-            Ticketing
+            Chipta Tizimi
           </h3>
           <div className="space-y-4">
             {mapIntegrationData(SUPPORTED_INTEGRATIONS.ticketing).map((int) => (
@@ -139,8 +138,8 @@ const IntegrationsPage = () => {
             {/* Custom Integration */}
             <div className="bg-surface-low rounded-xl p-6 border border-dashed border-outline-variant/30 text-center">
               <Settings2 className="w-8 h-8 text-[hsl(215,15%,35%)] mx-auto mb-2" />
-              <h4 className="text-sm font-bold text-on-surface mb-1">Custom Integration</h4>
-              <p className="text-xs text-[hsl(215,15%,45%)]">Use our SDK for proprietary tools</p>
+              <h4 className="text-sm font-bold text-on-surface mb-1">Maxsus Integratsiya</h4>
+              <p className="text-xs text-[hsl(215,15%,45%)]">Xususiy vositalar uchun SDK-dan foydalaning</p>
             </div>
           </div>
         </div>
@@ -150,35 +149,35 @@ const IntegrationsPage = () => {
       <div className="bg-surface-low rounded-xl border-ghost overflow-hidden">
         <div className="p-6 flex justify-between items-center border-b border-[hsl(222,20%,12%,0.2)]">
           <div>
-            <h3 className="font-bold font-headline text-white">Webhook Management</h3>
-            <p className="text-xs text-[hsl(215,15%,45%)]">Push scan results to external endpoints in JSON format.</p>
+            <h3 className="font-bold font-headline text-white">Webhook Boshqaruvi</h3>
+            <p className="text-xs text-[hsl(215,15%,45%)]">Skanerlash natijalarini JSON formatida tashqi endpointlarga yuborish.</p>
           </div>
-          <button className="flex items-center gap-2 bg-surface-container px-4 py-2 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
-            Add Endpoint
+          <button onClick={() => setShowWebhookModal(true)} className="flex items-center gap-2 bg-surface-container px-4 py-2 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
+            Manzil Qo'shish
           </button>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
               <tr className="text-[10px] text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold">
-                <th className="px-6 py-3">Endpoint Name</th>
+                <th className="px-6 py-3">Manzil Nomi</th>
                 <th className="px-6 py-3">URL</th>
-                <th className="px-6 py-3">Events</th>
-                <th className="px-6 py-3">Latest Status</th>
+                <th className="px-6 py-3">Hodisalar</th>
+                <th className="px-6 py-3">Oxirgi Holat</th>
               </tr>
             </thead>
             <tbody className="text-sm">
               {loadingWebhooks ? (
                 <tr>
                   <td colSpan={4} className="px-6 py-8 text-center text-[hsl(215,15%,45%)] font-sans">
-                    Loading webhooks...
+                    Webhooklar yuklanmoqda...
                   </td>
                 </tr>
               ) : webhooks.length > 0 ? (
                 webhooks.map((wh) => {
                   const status = wh.latest_delivery_status?.status_code
-                    ? `${wh.latest_delivery_status.status_code} ${wh.latest_delivery_status.status_code >= 400 ? "Error" : "OK"}`
-                    : "Pending";
+                    ? `${wh.latest_delivery_status.status_code} ${wh.latest_delivery_status.status_code >= 400 ? "Xato" : "Yaxshi"}`
+                    : "Kutilmoqda";
                   const statusColor = wh.latest_delivery_status?.status_code && wh.latest_delivery_status.status_code < 400
                     ? "text-primary bg-primary" : (wh.latest_delivery_status?.status_code ? "text-sentinel-error bg-sentinel-error" : "text-[hsl(35,90%,65%)] bg-[hsl(35,90%,65%)]");
                   
@@ -186,7 +185,7 @@ const IntegrationsPage = () => {
                     <tr key={wh.name} className="hover:bg-surface-container/30 transition-colors border-b border-[hsl(222,20%,12%,0.08)]">
                       <td className="px-6 py-4">
                         <div className="font-semibold text-on-surface">{wh.name}</div>
-                        <span className="text-[10px] text-[hsl(215,15%,40%)]">Created {format(new Date(wh.created_at), "MMM d, yyyy")}</span>
+                        <span className="text-[10px] text-[hsl(215,15%,40%)]">Yaratilgan {format(new Date(wh.created_at), "MMM d, yyyy")}</span>
                       </td>
                       <td className="px-6 py-4">
                         <span className="text-primary font-mono text-xs max-w-[200px] truncate block">{wh.url}</span>
@@ -212,7 +211,7 @@ const IntegrationsPage = () => {
               ) : (
                 <tr>
                   <td colSpan={4} className="px-6 py-8 text-center text-[hsl(215,15%,45%)] font-sans">
-                    No webhooks configured yet.
+                    Hozircha hech qanday webhook sozlanmagan.
                   </td>
                 </tr>
               )}
@@ -221,7 +220,7 @@ const IntegrationsPage = () => {
         </div>
         <div className="px-6 py-3 text-center border-t border-[hsl(222,20%,12%,0.1)]">
           <button className="text-xs text-[hsl(215,15%,50%)] hover:text-on-surface flex items-center gap-1 mx-auto">
-            View full delivery logs <ExternalLink className="w-3 h-3" />
+            To'liq yetkazib berish jurnallarini ko'rish <ExternalLink className="w-3 h-3" />
           </button>
         </div>
       </div>
@@ -230,20 +229,20 @@ const IntegrationsPage = () => {
       {showWebhookModal && (
         <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
           <div className="bg-surface-low rounded-xl w-full max-w-md border border-ghost shadow-xl p-6">
-            <h3 className="text-lg font-bold text-white mb-4">Add Webhook Endpoint</h3>
+            <h3 className="text-lg font-bold text-white mb-4">Webhook Manzilini Qo'shish</h3>
             <div className="space-y-4">
               <div>
-                <label className="text-xs font-bold text-[hsl(215,15%,45%)]">Endpoint Name</label>
+                <label className="text-xs font-bold text-[hsl(215,15%,45%)]">Manzil Nomi</label>
                 <input 
                   type="text" 
                   value={newWebhook.name}
                   onChange={(e) => setNewWebhook({...newWebhook, name: e.target.value})}
                   className="w-full mt-1 bg-surface-container text-white px-4 py-2 rounded-lg text-sm border-none focus:ring-1 focus:ring-primary"
-                  placeholder="e.g. Production Alerts"
+                  placeholder="masalan: Production Ogohlantirishlari"
                 />
               </div>
               <div>
-                <label className="text-xs font-bold text-[hsl(215,15%,45%)]">Payload URL</label>
+                <label className="text-xs font-bold text-[hsl(215,15%,45%)]">Foydali Yuklama (Payload) URL</label>
                 <input 
                   type="url" 
                   value={newWebhook.url}
@@ -257,14 +256,14 @@ const IntegrationsPage = () => {
                   onClick={() => setShowWebhookModal(false)}
                   className="text-[hsl(215,15%,50%)] hover:text-white text-sm font-semibold px-4 py-2"
                 >
-                  Cancel
+                  Bekor qilish
                 </button>
                 <button 
                   onClick={() => createWebhookMutation.mutate(newWebhook)}
                   disabled={!newWebhook.name || !newWebhook.url || createWebhookMutation.isPending}
                   className="bg-primary text-on-primary-fixed disabled:opacity-50 text-sm font-bold px-6 py-2 rounded-lg hover:opacity-90"
                 >
-                  {createWebhookMutation.isPending ? "Saving..." : "Save Endpoint"}
+                  {createWebhookMutation.isPending ? "Saqlanmoqda..." : "Manzilni Saqlash"}
                 </button>
               </div>
             </div>
@@ -288,7 +287,7 @@ interface IntegrationCardProps {
 }
 
 const IntegrationCard = ({ name, desc, status, lastSync, channel, project, apiHealth, icon: Icon }: IntegrationCardProps) => {
-  const isConnected = status === "connected" || status === "active";
+  const isConnected = status === "connected" || status === "active" || status === "ulangan" || status === "faol";
 
   return (
     <div className={`bg-surface-low rounded-xl p-5 border-ghost ${isConnected ? "border-l-2 border-l-primary" : ""}`}>
@@ -307,23 +306,23 @@ const IntegrationCard = ({ name, desc, status, lastSync, channel, project, apiHe
         </span>
       </div>
 
-      {lastSync && <p className="text-xs text-[hsl(215,15%,45%)]">Last sync: {lastSync}</p>}
-      {channel && <p className="text-xs text-[hsl(215,15%,45%)]">Channels: {channel}</p>}
+      {lastSync && <p className="text-xs text-[hsl(215,15%,45%)]">Oxirgi sinxronizatsiya: {lastSync}</p>}
+      {channel && <p className="text-xs text-[hsl(215,15%,45%)]">Kanallar: {channel}</p>}
       {project && (
         <div className="flex items-center gap-4 text-xs text-[hsl(215,15%,45%)] mt-1">
-          <span>Project: {project}</span>
-          <span>API Status: <span className="text-primary">{apiHealth}</span></span>
+          <span>Loyiha: {project}</span>
+          <span>API Holati: <span className="text-primary">{apiHealth}</span></span>
         </div>
       )}
 
       <div className="mt-3">
         {isConnected ? (
           <button className="text-primary text-xs font-bold hover:underline">
-            Configure ›
+            Sozlash ›
           </button>
         ) : (
           <button className="px-4 py-2 bg-primary/10 text-primary text-xs font-bold rounded-lg hover:bg-primary/20 transition-colors w-full">
-            Connect Service
+            Xizmatni Ulash
           </button>
         )}
       </div>

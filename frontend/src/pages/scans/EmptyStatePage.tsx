@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { Radar, Plus, BookOpen } from "lucide-react";
+import { BookOpen, Plus, Radar } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const EmptyStatePage = () => {
   return (
@@ -14,11 +14,10 @@ const EmptyStatePage = () => {
         </div>
 
         <h2 className="text-2xl font-bold font-headline text-white mb-3">
-          No Active Scans Found
+          Faol Skanerlashlar Topilmadi
         </h2>
         <p className="text-body-md text-[hsl(215,15%,50%)] mb-8 leading-relaxed">
-          Your scan queue is empty. Initialize a new security assessment to begin monitoring
-          your infrastructure for vulnerabilities.
+          Skanerlash navbatingiz bo'sh. Infratuzilmangizni zaifliklarga moslashtirish uchun yangi xavfsizlik baholashini ishga tushiring.
         </p>
 
         {/* Actions */}
@@ -28,23 +27,23 @@ const EmptyStatePage = () => {
             className="flex items-center justify-center gap-2 bg-gradient-primary px-8 py-3 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all"
           >
             <Plus className="w-4 h-4" />
-            Initialize First Scan
+            Birinchi Skanerni Ishga Tushirish
           </Link>
           <button className="flex items-center justify-center gap-2 bg-surface-container px-8 py-3 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors">
             <BookOpen className="w-4 h-4" />
-            View Documentation
+            Hujjatlarni Ko'rish
           </button>
         </div>
 
         {/* Quick Tips */}
         <div className="mt-12 bg-surface-low rounded-xl p-6 border-ghost text-left">
-          <h3 className="text-sm font-bold text-white mb-4">Quick Start Guide</h3>
+          <h3 className="text-sm font-bold text-white mb-4">Tezkor Boshlash Qo'llanmasi</h3>
           <div className="space-y-3">
             {[
-              { step: "01", text: "Enter a target URL or hostname" },
-              { step: "02", text: "Select a scan profile (Quick, Full, or Custom)" },
-              { step: "03", text: "Configure authentication if needed" },
-              { step: "04", text: "Execute and monitor results in real-time" },
+              { step: "01", text: "Maqsadli URL yoki xost nomini kiriting" },
+              { step: "02", text: "Skanerlash profilini tanlang (Tezkor, To'liq yoki Moslashtirilgan)" },
+              { step: "03", text: "Agar kerak bo'lsa, autentifikatsiyani sozlang" },
+              { step: "04", text: "Ishga tushirish va natijalarni real vaqtda kuzatish" },
             ].map((item) => (
               <div key={item.step} className="flex items-start gap-3">
                 <span className="text-[10px] text-primary font-bold font-mono bg-primary/10 px-2 py-1 rounded">

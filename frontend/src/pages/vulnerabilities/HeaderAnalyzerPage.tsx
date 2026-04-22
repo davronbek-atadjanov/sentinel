@@ -1,22 +1,22 @@
-import PageHeader from "@/components/shared/PageHeader";
-import { Shield, CheckCircle, AlertTriangle, XCircle } from "lucide-react";
+import PageHeader from "@/components/shared/PageHeader"
+import { AlertTriangle, CheckCircle, Shield, XCircle } from "lucide-react"
 
 const headers = [
   { name: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains", status: "pass", recommendation: null },
-  { name: "Content-Security-Policy", value: "Not Set", status: "fail", recommendation: "Add CSP header to prevent XSS and data injection attacks." },
-  { name: "X-Frame-Options", value: "Not Set", status: "fail", recommendation: "Set to DENY or SAMEORIGIN to prevent clickjacking." },
+  { name: "Content-Security-Policy", value: "O'rnatilmagan", status: "fail", recommendation: "XSS va ma'lumotlar inyeksiyasi hujumlarining oldini olish uchun CSP sarlavhasini qo'shing." },
+  { name: "X-Frame-Options", value: "O'rnatilmagan", status: "fail", recommendation: "Klickjacking hujumlarini oldini olish uchun DENY yoki SAMEORIGIN ga o'rnating." },
   { name: "X-Content-Type-Options", value: "nosniff", status: "pass", recommendation: null },
-  { name: "X-XSS-Protection", value: "Not Set", status: "warning", recommendation: "Legacy header. Consider CSP as primary protection." },
+  { name: "X-XSS-Protection", value: "O'rnatilmagan", status: "warning", recommendation: "Eski sarlavha. Asosiy himoya sifatida CSP ni ko'rib chiqing." },
   { name: "Referrer-Policy", value: "strict-origin-when-cross-origin", status: "pass", recommendation: null },
-  { name: "Permissions-Policy", value: "Not Set", status: "warning", recommendation: "Restrict browser features like camera, microphone, geolocation." },
+  { name: "Permissions-Policy", value: "O'rnatilmagan", status: "warning", recommendation: "Kamera, mikrofon, geolokatsiya kabi brauzer xususiyatlaridan foydalanishni cheklang." },
   { name: "Cache-Control", value: "no-store, no-cache", status: "pass", recommendation: null },
-  { name: "Server", value: "nginx/1.24.0", status: "fail", recommendation: "Remove server version to prevent information disclosure." },
+  { name: "Server", value: "nginx/1.24.0", status: "fail", recommendation: "Ma'lumotlar oshkor bo'lishining oldini olish uchun server versiyasini olib tashlang." },
 ];
 
 const statusConfig = {
-  pass: { icon: CheckCircle, color: "text-primary", bg: "bg-primary/10", label: "PASS" },
-  fail: { icon: XCircle, color: "text-sentinel-error", bg: "bg-sentinel-error/10", label: "FAIL" },
-  warning: { icon: AlertTriangle, color: "text-[hsl(35,90%,55%)]", bg: "bg-[hsl(35,90%,55%,0.1)]", label: "WARN" },
+  pass: { icon: CheckCircle, color: "text-primary", bg: "bg-primary/10", label: "O'TDI" },
+  fail: { icon: XCircle, color: "text-sentinel-error", bg: "bg-sentinel-error/10", label: "XATO" },
+  warning: { icon: AlertTriangle, color: "text-[hsl(35,90%,55%)]", bg: "bg-[hsl(35,90%,55%,0.1)]", label: "OGOHLANTIRISH" },
 };
 
 const HeaderAnalyzerPage = () => {
@@ -28,8 +28,8 @@ const HeaderAnalyzerPage = () => {
   return (
     <div>
       <PageHeader
-        title="HTTP Header Analysis"
-        description="Security header configuration audit for https://api.v-scan.prod"
+        title="HTTP Sarlavhalari Tahlili"
+        description="https://api.v-scan.prod uchun xavfsizlik sarlavhalari konfiguratsiyasi auditi"
         badge={<Shield className="w-5 h-5 text-primary mt-2 ml-2" />}
       />
 
@@ -37,12 +37,12 @@ const HeaderAnalyzerPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div className="bg-surface-low rounded-xl p-6 border-ghost flex flex-col items-center justify-center">
           <p className="text-5xl font-bold font-headline text-white">{score}%</p>
-          <p className="text-[10px] text-primary uppercase tracking-widest font-bold mt-1">Header Score</p>
+          <p className="text-[10px] text-primary uppercase tracking-widest font-bold mt-1">Sarlavha Bahosi</p>
         </div>
         {[
-          { label: "Passed", value: passCount, color: "text-primary" },
-          { label: "Failed", value: failCount, color: "text-sentinel-error" },
-          { label: "Warnings", value: warnCount, color: "text-[hsl(35,90%,55%)]" },
+          { label: "O'tdi", value: passCount, color: "text-primary" },
+          { label: "Xato", value: failCount, color: "text-sentinel-error" },
+          { label: "Ogohlantirishlar", value: warnCount, color: "text-[hsl(35,90%,55%)]" },
         ].map((s) => (
           <div key={s.label} className="bg-surface-low rounded-xl p-6 border-ghost text-center">
             <p className={`text-3xl font-bold font-headline ${s.color}`}>{s.value}</p>
