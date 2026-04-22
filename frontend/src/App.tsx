@@ -1,6 +1,7 @@
 import { Toaster as Sonner } from "@/components/ui/sonner"
 import { Toaster } from "@/components/ui/toaster"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import ROUTES from "@/lib/routes"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { lazy, Suspense } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
@@ -90,17 +91,19 @@ const App = () => (
           <AuthProvider>
             <Suspense fallback={<PageLoader />}>
               <Routes>
-              {/* ── Public ── */}
-              <Route path="/" element={<Index />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/onboarding" element={<OnboardingPage />} />
-              <Route path="/quickstart" element={<QuickstartPage />} />
+              {/* ── PUBLIC ROUTES ── */}
+              <Route path={ROUTES.PUBLIC.HOME} element={<Index />} />
+              <Route path={ROUTES.PUBLIC.LOGIN} element={<LoginPage />} />
+              <Route path={ROUTES.PUBLIC.REGISTER} element={<RegisterPage />} />
+              <Route path={ROUTES.PUBLIC.ONBOARDING} element={<OnboardingPage />} />
+              <Route path={ROUTES.PUBLIC.QUICKSTART} element={<QuickstartPage />} />
 
-              {/* ── Dashboard App ── */}
+              {/* ── PROTECTED APP ROUTES ── */}
               <Route element={<ProtectedRoute />}>
-                <Route path="/app" element={<DashboardLayout />}>
-                  <Route index element={<Navigate to="/app/dashboard" replace />} />
+                <Route path={ROUTES.APP.ROOT} element={<DashboardLayout />}>
+                  <Route index element={<Navigate to={ROUTES.DASHBOARD.HOME} replace />} />
+                  
+                  {/* Dashboard */}
                   <Route path="dashboard" element={<DashboardPage />} />
                   <Route path="realtime" element={<RealTimeDashboardPage />} />
                   <Route path="notifications" element={<NotificationsPage />} />
@@ -131,7 +134,7 @@ const App = () => (
                   <Route path="reports/executive-brief" element={<ExecutiveBriefPage />} />
 
                   {/* Settings */}
-                  <Route path="settings" element={<Navigate to="/app/settings/integrations" replace />} />
+                  <Route path="settings" element={<Navigate to={ROUTES.SETTINGS.INTEGRATIONS} replace />} />
                   <Route path="settings/integrations" element={<IntegrationsPage />} />
                   <Route path="settings/users" element={<UserManagementPage />} />
                   <Route path="settings/billing" element={<BillingPage />} />
@@ -149,14 +152,15 @@ const App = () => (
                 </Route>
               </Route>
 
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </AuthProvider>
+              {/* ── 404 FALLBACK ── */}
+              <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </AuthProvider>
         </ErrorBoundary>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
-);
+)
 
-export default App;
+export default App
