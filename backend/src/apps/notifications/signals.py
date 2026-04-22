@@ -19,8 +19,8 @@ def scan_status_notification(sender, instance, created, **kwargs):
             Notification.objects.create(
                 user=instance.user,
                 level="SUCCESS",
-                title=f"Scan Completed: {instance.target.domain if instance.target else 'Target'}",
-                description=f"Scan {instance.name} has finished successfully.",
+                title=f"Scan Completed: {instance.target_url}",
+                description=f"Scan for {instance.target_url} has finished successfully.",
                 meta_data={"scan_id": instance.id}
             )
 
@@ -31,6 +31,6 @@ def critical_vuln_notification(sender, instance, created, **kwargs):
             user=instance.scan.user if instance.scan else None,
             level="CRITICAL",
             title=f"Critical Vulnerability Detected: {instance.title}",
-            description=f"A high-risk vulnerability was found on {instance.scan_target}. Immediate remediation required.",
+            description=f"A high-risk vulnerability was found on {instance.affected_url}. Immediate remediation required.",
             meta_data={"vuln_id": instance.id, "scan_id": instance.scan.id if instance.scan else None}
         )
