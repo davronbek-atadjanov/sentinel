@@ -46,42 +46,69 @@ class HeaderAnalyzer:
         },
     }
 
-    def scan(self, url: str) -> list[dict]:
-        """Scan URL for missing security headers."""
+    def scan(self, url: str, config: dict | None = None) -> list[dict]:
+        """
+        Scan URL for missing security headers.
+
+        Args:
+            url: Target URL to scan
+            config: Configuration dict with keys:
+                - force_https: bool (convert HTTP to HTTPS)
+                - follow_redirects: bool (follow 301/302 redirects)
+                - auth: dict with username/password/login_url (for authenticated requests)
+        """
+        config = config or {}
         findings = []
+
+        # Apply force_https if enabled
+        if config.get("force_https") and url.startswith("http://"):
+            url = url.replace("http://", "https://", 1)
+
+        # Build request headers with auth if provided
+        headers = {}
+        auth_tuple = None
+        if auth := config.get("auth"):
+            auth_tuple = (auth.get("username", ""), auth.get("password", ""))
+
         try:
             response = requests.head(
                 url,
                 timeout=10,
-                allow_redirects=True,
-                verify=False,  # noqa: S501
+                allow_redirects=config.get("follow_redirects", True),
+                verify=True,
+                headers=headers,
+                auth=auth_tuple,
             )
             response_headers = {k.lower(): v for k, v in response.headers.items()}
 
             for header, info in self.SECURITY_HEADERS.items():
                 if header.lower() not in response_headers:
-                    findings.append({
-                        "title": f"Missing Security Header: {header}",
-                        "description": info["description"],
-                        "severity": info["severity"],
-                        "category": "HEADERS",
-                        "affected_url": url,
-                        "evidence": f"Header '{header}' not found in response.",
-                        "remediation": info["remediation"],
-                    })
+                    findings.append(
+                        {
+                            "title": f"Missing Security Header: {header}",
+                            "description": info["description"],
+                            "severity": info["severity"],
+                            "category": "HEADERS",
+                            "affected_url": url,
+                            "evidence": f"Header '{header}' not found in response.",
+                            "remediation": info["remediation"],
+                        }
+                    )
 
             # Check for server version disclosure
             server = response_headers.get("server", "")
             if server and any(v in server.lower() for v in ["apache/", "nginx/", "iis/"]):
-                findings.append({
-                    "title": "Server Version Disclosure",
-                    "description": "Server sarlavhasi versiya ma'lumotini oshkor qiladi.",
-                    "severity": "LOW",
-                    "category": "HEADERS",
-                    "affected_url": url,
-                    "evidence": f"Server: {server}",
-                    "remediation": "Server sarlavhasidagi versiya ma'lumotini olib tashlang yoki yashiring.",
-                })
+                findings.append(
+                    {
+                        "title": "Server Version Disclosure",
+                        "description": "Server sarlavhasi versiya ma'lumotini oshkor qiladi.",
+                        "severity": "LOW",
+                        "category": "HEADERS",
+                        "affected_url": url,
+                        "evidence": f"Server: {server}",
+                        "remediation": "Server sarlavhasidagi versiya ma'lumotini olib tashlang yoki yashiring.",
+                    }
+                )
 
         except requests.RequestException as e:
             logger.error(f"Header scan failed for {url}: {e}")

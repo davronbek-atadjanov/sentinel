@@ -172,6 +172,16 @@ const AssetConfigPage = () => {
               </div>
             </div>
           </div>
+
+          {/* Quick Guide */}
+          <div className="bg-surface-low rounded-xl p-5 border-ghost border-l-4 border-l-primary/30">
+            <h4 className="text-sm font-bold text-white mb-2">Qisqa yo'riqnoma</h4>
+            <ul className="space-y-2 text-xs text-[hsl(215,15%,45%)]">
+              <li>Aktiv - skan qilinadigan domen, IP yoki ilova manzili.</li>
+              <li>Scan boshlansa, shu URL bo'yicha aktiv tekshiriladi va yo'q bo'lsa avtomatik yaratiladi.</li>
+              <li>Aktiv turi tanlansa shu qiymat ishlatiladi, aks holda /api bo'lsa API tanlanadi.</li>
+            </ul>
+          </div>
         </div>
 
         {/* ── Right Column: Info Panel ── */}

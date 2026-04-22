@@ -4,14 +4,14 @@ interface StatusBadgeProps {
 }
 
 const statusConfig = {
-  completed: { label: "Completed", styles: "bg-primary-container text-primary" },
-  running: { label: "In Progress", styles: "text-sentinel-tertiary", dot: "bg-sentinel-tertiary animate-pulse" },
-  paused: { label: "Paused", styles: "text-[hsl(35,90%,65%)]", dot: "bg-[hsl(35,90%,65%)]" },
-  failed: { label: "Failed", styles: "bg-error-container text-on-error-container" },
-  open: { label: "Open", styles: "text-sentinel-error", dot: "bg-sentinel-error" },
-  resolved: { label: "Resolved", styles: "text-primary", dot: "bg-primary" },
-  false_positive: { label: "False Positive", styles: "text-on-surface-variant", dot: "bg-on-surface-variant" },
-  pending: { label: "Pending", styles: "text-[hsl(35,90%,65%)]", dot: "bg-[hsl(35,90%,65%)]" },
+  completed: { label: "Yakunlangan", styles: "bg-primary-container text-primary" },
+  running: { label: "Jarayonda", styles: "text-sentinel-tertiary", dot: "bg-sentinel-tertiary animate-pulse" },
+  paused: { label: "To'xtatilgan", styles: "text-[hsl(35,90%,65%)]", dot: "bg-[hsl(35,90%,65%)]" },
+  failed: { label: "Muvaffaqiyatsiz", styles: "bg-error-container text-on-error-container" },
+  open: { label: "Ochiq", styles: "text-sentinel-error", dot: "bg-sentinel-error" },
+  resolved: { label: "Hal qilingan", styles: "text-primary", dot: "bg-primary" },
+  false_positive: { label: "Soxta pozitiv", styles: "text-on-surface-variant", dot: "bg-on-surface-variant" },
+  pending: { label: "Kutilmoqda", styles: "text-[hsl(35,90%,65%)]", dot: "bg-[hsl(35,90%,65%)]" },
 };
 
 const StatusBadge = ({ status, className = "" }: StatusBadgeProps) => {

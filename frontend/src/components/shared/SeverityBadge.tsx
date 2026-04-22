@@ -11,12 +11,20 @@ const severityStyles = {
   info: "bg-surface-high text-on-surface-variant",
 };
 
+const severityLabels = {
+  critical: "Kritik",
+  high: "Yuqori",
+  medium: "O'rtacha",
+  low: "Past",
+  info: "Ma'lumot",
+};
+
 const SeverityBadge = ({ severity, className = "" }: SeverityBadgeProps) => {
   return (
     <span
       className={`px-2 py-1 rounded text-label-sm font-bold uppercase tracking-wide ${severityStyles[severity]} ${className}`}
     >
-      {severity}
+      {severityLabels[severity]}
     </span>
   );
 };

@@ -31,6 +31,7 @@ const RealTimeDashboardPage = lazy(() => import("./pages/dashboard/RealTimeDashb
 
 /* ── Scans ── */
 const ScansListPage = lazy(() => import("./pages/scans/ScansListPage"));
+const ScanDetailPage = lazy(() => import("./pages/scans/ScanDetailPage"));
 const ScanConfigPage = lazy(() => import("./pages/scans/ScanConfigPage"));
 const ScanSchedulingPage = lazy(() => import("./pages/scans/ScanSchedulingPage"));
 const OwaspZapResultsPage = lazy(() => import("./pages/scans/OwaspZapResultsPage"));
@@ -107,6 +108,7 @@ const App = () => (
 
                   {/* Scans */}
                   <Route path="scans" element={<ScansListPage />} />
+                  <Route path="scans/:scanId" element={<ScanDetailPage />} />
                   <Route path="scans/new" element={<ScanConfigPage />} />
                   <Route path="scans/schedule" element={<ScanSchedulingPage />} />
                   <Route path="scans/empty" element={<EmptyStatePage />} />

@@ -171,7 +171,7 @@ const ScansListPage = () => {
                     <td className="px-6 py-5">
                       <div>
                         <Link
-                          to={`/app/scans/${scan.id}/results`}
+                          to={`/app/scans/${scan.id}`}
                           className="font-semibold text-[hsl(215,20%,85%)] hover:text-primary transition-colors"
                         >
                           {scan.target}

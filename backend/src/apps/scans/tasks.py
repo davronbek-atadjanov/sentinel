@@ -12,6 +12,11 @@ def run_scan(self, scan_id: int):
     """
     Master skan task — scan_type ga qarab tegishli skanerlarni ishlatadi.
     Progress real-time yangilanadi (0 → 100%).
+
+    Suported config parameters:
+    - auth: dict with username, password, login_url
+    - advanced: dict with depth, parallelism, force_https, follow_redirects
+    - schedule: dict with frequency, start_time, end_time (stored but not executed here)
     """
     from apps.scans.models.scans import Scan, ScanStatusChoices
 
@@ -31,13 +36,28 @@ def run_scan(self, scan_id: int):
         parsed = urlparse(target)
         hostname = parsed.hostname
 
+        # Extract config parameters
+        config = scan.config or {}
+        advanced_config = config.get("advanced", {})
+        auth_config = config.get("auth", {})
+
+        # Build scanner config dict from extracted parameters
+        scanner_config = {
+            "auth": auth_config,
+            "force_https": advanced_config.get("force_https", False),
+            "follow_redirects": advanced_config.get("follow_redirects", True),
+            "depth": advanced_config.get("depth", 10),
+            "parallelism": advanced_config.get("parallelism", 25),
+        }
+
         # ── Stage 1: Header Analysis (10%) ──
         scan.progress = 5
         scan.save(update_fields=["progress"])
         try:
             from apps.scans.services.custom_scanners.header_analyzer import HeaderAnalyzer
+
             header_scanner = HeaderAnalyzer()
-            findings = header_scanner.scan(target)
+            findings = header_scanner.scan(target, config=scanner_config)
             all_findings.extend(findings)
             logger.info(f"Scan {scan_id}: Header analysis found {len(findings)} issues.")
         except Exception as e:
@@ -49,6 +69,7 @@ def run_scan(self, scan_id: int):
         if hostname:
             try:
                 from apps.scans.services.custom_scanners.ssl_checker import SSLChecker
+
                 ssl_checker = SSLChecker()
                 findings = ssl_checker.scan(hostname)
                 all_findings.extend(findings)
@@ -62,6 +83,7 @@ def run_scan(self, scan_id: int):
         if scan.scan_type in ("FULL", "OWASP") and hostname:
             try:
                 from apps.scans.services.custom_scanners.port_scanner import PortScanner
+
                 port_scanner = PortScanner()
                 findings = port_scanner.scan(hostname)
                 all_findings.extend(findings)
@@ -75,8 +97,9 @@ def run_scan(self, scan_id: int):
         if scan.scan_type in ("FULL", "QUICK", "OWASP"):
             try:
                 from apps.scans.services.custom_scanners.xss_scanner import XSSScanner
+
                 xss_scanner = XSSScanner()
-                findings = xss_scanner.scan(target)
+                findings = xss_scanner.scan(target, config=scanner_config)
                 all_findings.extend(findings)
                 logger.info(f"Scan {scan_id}: XSS scan found {len(findings)} issues.")
             except Exception as e:
@@ -87,8 +110,9 @@ def run_scan(self, scan_id: int):
 
             try:
                 from apps.scans.services.custom_scanners.sqli_scanner import SQLiScanner
+
                 sqli_scanner = SQLiScanner()
-                findings = sqli_scanner.scan(target)
+                findings = sqli_scanner.scan(target, config=scanner_config)
                 all_findings.extend(findings)
                 logger.info(f"Scan {scan_id}: SQLi scan found {len(findings)} issues.")
             except Exception as e:
@@ -100,6 +124,7 @@ def run_scan(self, scan_id: int):
         if scan.scan_type in ("FULL", "OWASP", "CUSTOM"):
             try:
                 from apps.scans.services.nuclei_scanner import NucleiScanner
+
                 nuclei = NucleiScanner()
                 results = nuclei.run_scan(target)
                 for r in results:
@@ -114,6 +139,7 @@ def run_scan(self, scan_id: int):
         if scan.scan_type == "FULL":
             try:
                 from apps.scans.services.zap_scanner import ZAPScanner
+
                 zap = ZAPScanner()
 
                 # Spider scan
@@ -138,6 +164,7 @@ def run_scan(self, scan_id: int):
 
         # ── Stage 7: Natijalarni DB ga yozish (100%) ──
         from apps.vulnerabilities.models.vulnerabilities import Vulnerability
+
         for finding in all_findings:
             try:
                 Vulnerability.objects.create(
@@ -182,7 +209,7 @@ def run_scan(self, scan_id: int):
 @shared_task
 def process_scheduled_scans():
     """Rejalashtirilgan skanlarni tekshirish va ishga tushirish."""
-    from apps.scans.models.scans import ScanSchedule, Scan, ScanStatusChoices
+    from apps.scans.models.scans import Scan, ScanSchedule, ScanStatusChoices
 
     now = timezone.now()
     due_schedules = ScanSchedule.objects.filter(
@@ -203,6 +230,7 @@ def process_scheduled_scans():
 
         # Update next_run
         from dateutil.relativedelta import relativedelta
+
         if schedule.frequency == "DAILY":
             schedule.next_run = now + timezone.timedelta(days=1)
         elif schedule.frequency == "WEEKLY":
