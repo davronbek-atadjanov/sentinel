@@ -40,6 +40,7 @@ def run_scan(self, scan_id: int):
         config = scan.config or {}
         advanced_config = config.get("advanced", {})
         auth_config = config.get("auth", {})
+        custom_modules = config.get("custom_modules", {}) if scan.scan_type == "CUSTOM" else {}
 
         # Build scanner config dict from extracted parameters
         scanner_config = {
@@ -50,23 +51,36 @@ def run_scan(self, scan_id: int):
             "parallelism": advanced_config.get("parallelism", 25),
         }
 
-        # ── Stage 1: Header Analysis (10%) ──
-        scan.progress = 5
-        scan.save(update_fields=["progress"])
-        try:
-            from apps.scans.services.custom_scanners.header_analyzer import HeaderAnalyzer
+        # Determine which modules to run based on scan type and custom profile
+        def should_run_module(module_name: str) -> bool:
+            if scan.scan_type == "CUSTOM":
+                return custom_modules.get(module_name, False)
+            elif scan.scan_type == "QUICK":
+                return module_name in ["headerAnalysis", "xssScan", "sqliScan"]
+            elif scan.scan_type == "FULL":
+                return True  # Run all modules
+            elif scan.scan_type in ("OWASP", "API"):
+                return module_name in ["headerAnalysis", "sslCheck", "portScan", "xssScan", "sqliScan", "nucleiScan"]
+            return False
 
-            header_scanner = HeaderAnalyzer()
-            findings = header_scanner.scan(target, config=scanner_config)
-            all_findings.extend(findings)
-            logger.info(f"Scan {scan_id}: Header analysis found {len(findings)} issues.")
-        except Exception as e:
-            logger.warning(f"Scan {scan_id}: Header analysis failed: {e}")
+        # ── Stage 1: Header Analysis (10%) ──
+        if should_run_module("headerAnalysis"):
+            scan.progress = 5
+            scan.save(update_fields=["progress"])
+            try:
+                from apps.scans.services.custom_scanners.header_analyzer import HeaderAnalyzer
+
+                header_scanner = HeaderAnalyzer()
+                findings = header_scanner.scan(target, config=scanner_config)
+                all_findings.extend(findings)
+                logger.info(f"Scan {scan_id}: Header analysis found {len(findings)} issues.")
+            except Exception as e:
+                logger.warning(f"Scan {scan_id}: Header analysis failed: {e}")
         scan.progress = 10
         scan.save(update_fields=["progress"])
 
         # ── Stage 2: SSL Check (20%) ──
-        if hostname:
+        if should_run_module("sslCheck") and hostname:
             try:
                 from apps.scans.services.custom_scanners.ssl_checker import SSLChecker
 
@@ -80,7 +94,7 @@ def run_scan(self, scan_id: int):
         scan.save(update_fields=["progress"])
 
         # ── Stage 3: Port Scan (30%) — FULL va OWASP uchun ──
-        if scan.scan_type in ("FULL", "OWASP") and hostname:
+        if should_run_module("portScan") and hostname:
             try:
                 from apps.scans.services.custom_scanners.port_scanner import PortScanner
 
@@ -94,34 +108,36 @@ def run_scan(self, scan_id: int):
         scan.save(update_fields=["progress"])
 
         # ── Stage 4: XSS + SQLi Scan (50%) ──
-        if scan.scan_type in ("FULL", "QUICK", "OWASP"):
-            try:
-                from apps.scans.services.custom_scanners.xss_scanner import XSSScanner
+        if should_run_module("xssScan") or should_run_module("sqliScan"):
+            if should_run_module("xssScan"):
+                try:
+                    from apps.scans.services.custom_scanners.xss_scanner import XSSScanner
 
-                xss_scanner = XSSScanner()
-                findings = xss_scanner.scan(target, config=scanner_config)
-                all_findings.extend(findings)
-                logger.info(f"Scan {scan_id}: XSS scan found {len(findings)} issues.")
-            except Exception as e:
-                logger.warning(f"Scan {scan_id}: XSS scan failed: {e}")
+                    xss_scanner = XSSScanner()
+                    findings = xss_scanner.scan(target, config=scanner_config)
+                    all_findings.extend(findings)
+                    logger.info(f"Scan {scan_id}: XSS scan found {len(findings)} issues.")
+                except Exception as e:
+                    logger.warning(f"Scan {scan_id}: XSS scan failed: {e}")
 
             scan.progress = 40
             scan.save(update_fields=["progress"])
 
-            try:
-                from apps.scans.services.custom_scanners.sqli_scanner import SQLiScanner
+            if should_run_module("sqliScan"):
+                try:
+                    from apps.scans.services.custom_scanners.sqli_scanner import SQLiScanner
 
-                sqli_scanner = SQLiScanner()
-                findings = sqli_scanner.scan(target, config=scanner_config)
-                all_findings.extend(findings)
-                logger.info(f"Scan {scan_id}: SQLi scan found {len(findings)} issues.")
-            except Exception as e:
-                logger.warning(f"Scan {scan_id}: SQLi scan failed: {e}")
+                    sqli_scanner = SQLiScanner()
+                    findings = sqli_scanner.scan(target, config=scanner_config)
+                    all_findings.extend(findings)
+                    logger.info(f"Scan {scan_id}: SQLi scan found {len(findings)} issues.")
+                except Exception as e:
+                    logger.warning(f"Scan {scan_id}: SQLi scan failed: {e}")
         scan.progress = 50
         scan.save(update_fields=["progress"])
 
         # ── Stage 5: Nuclei Scan (70%) ──
-        if scan.scan_type in ("FULL", "OWASP", "CUSTOM"):
+        if should_run_module("nucleiScan"):
             try:
                 from apps.scans.services.nuclei_scanner import NucleiScanner
 
@@ -136,7 +152,7 @@ def run_scan(self, scan_id: int):
         scan.save(update_fields=["progress"])
 
         # ── Stage 6: ZAP Scan (90%) — faqat FULL skan uchun ──
-        if scan.scan_type == "FULL":
+        if should_run_module("zapScan"):
             try:
                 from apps.scans.services.zap_scanner import ZAPScanner
 

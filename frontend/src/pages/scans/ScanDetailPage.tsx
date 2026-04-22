@@ -259,6 +259,59 @@ const ScanDetailPage = () => {
                   </div>
                 </div>
               )}
+
+              {/* Custom Modules */}
+              {config.custom_modules && Object.keys(config.custom_modules).length > 0 && (
+                <div className="mt-6 pt-6 border-t border-outline-variant">
+                  <p className="text-xs text-[hsl(215,15%,45%)] uppercase tracking-widest font-bold mb-3">
+                    Maxsus Profil Modullar
+                  </p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {config.custom_modules.headerAnalysis && (
+                      <div className="flex items-center gap-2 text-sm">
+                        <span className="w-2 h-2 bg-primary rounded-full" />
+                        <span className="text-on-surface">HTTP Headers</span>
+                      </div>
+                    )}
+                    {config.custom_modules.sslCheck && (
+                      <div className="flex items-center gap-2 text-sm">
+                        <span className="w-2 h-2 bg-primary rounded-full" />
+                        <span className="text-on-surface">SSL/TLS</span>
+                      </div>
+                    )}
+                    {config.custom_modules.portScan && (
+                      <div className="flex items-center gap-2 text-sm">
+                        <span className="w-2 h-2 bg-primary rounded-full" />
+                        <span className="text-on-surface">Port Scan</span>
+                      </div>
+                    )}
+                    {config.custom_modules.xssScan && (
+                      <div className="flex items-center gap-2 text-sm">
+                        <span className="w-2 h-2 bg-primary rounded-full" />
+                        <span className="text-on-surface">XSS</span>
+                      </div>
+                    )}
+                    {config.custom_modules.sqliScan && (
+                      <div className="flex items-center gap-2 text-sm">
+                        <span className="w-2 h-2 bg-primary rounded-full" />
+                        <span className="text-on-surface">SQLi</span>
+                      </div>
+                    )}
+                    {config.custom_modules.nucleiScan && (
+                      <div className="flex items-center gap-2 text-sm">
+                        <span className="w-2 h-2 bg-primary rounded-full" />
+                        <span className="text-on-surface">Nuclei</span>
+                      </div>
+                    )}
+                    {config.custom_modules.zapScan && (
+                      <div className="flex items-center gap-2 text-sm">
+                        <span className="w-2 h-2 bg-primary rounded-full" />
+                        <span className="text-on-surface">OWASP ZAP</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>

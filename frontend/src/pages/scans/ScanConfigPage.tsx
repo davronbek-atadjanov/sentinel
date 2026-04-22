@@ -53,6 +53,24 @@ const ScanConfigPage = () => {
   const [scheduleStartTime, setScheduleStartTime] = useState("02:00");
   const [scheduleEndTime, setScheduleEndTime] = useState("05:00");
 
+  // Custom Profile Modules
+  const [customModules, setCustomModules] = useState({
+    headerAnalysis: true,
+    sslCheck: true,
+    portScan: true,
+    xssScan: true,
+    sqliScan: true,
+    nucleiScan: true,
+    zapScan: false,
+  });
+
+  const toggleModule = (module: keyof typeof customModules) => {
+    setCustomModules(prev => ({
+      ...prev,
+      [module]: !prev[module]
+    }));
+  };
+
   const startScanMutation = useMutation({
     mutationFn: ScansService.createScan,
     onSuccess: () => {
@@ -162,6 +180,11 @@ const ScanConfigPage = () => {
         start_time: scheduleStartTime,
         end_time: scheduleEndTime,
       };
+    }
+
+    // Custom profile modules
+    if (selectedType === "custom") {
+      config.custom_modules = customModules;
     }
 
     startScanMutation.mutate({
@@ -279,6 +302,50 @@ const ScanConfigPage = () => {
               </div>
             </div>
           </div>
+
+          {/* Custom Profile Modules */}
+          {selectedType === "custom" && (
+            <div className="bg-surface-low rounded-xl p-6 border-ghost border-l-4 border-l-primary/30">
+              <h3 className="font-bold font-headline text-white text-lg mb-6">Maxsus Profil Modullar</h3>
+              <p className="text-sm text-[hsl(215,15%,45%)] mb-4">
+                Skanerlashda qaysi modullarni ishlatishni tanlang:
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {[
+                  { key: "headerAnalysis", label: "HTTP Security Headers", desc: "Xavfsiz sarlavhalarni tahlil qilish" },
+                  { key: "sslCheck", label: "SSL/TLS Tekshiruvi", desc: "Sertifikat va shifrlash kuchini tekshirish" },
+                  { key: "portScan", label: "Port Taraflash", desc: "Ochiq portlarni va xizmatlarni aniqlash" },
+                  { key: "xssScan", label: "XSS Qidirish", desc: "Cross-Site Scripting zaifliklarini topish" },
+                  { key: "sqliScan", label: "SQL Injection Qidirish", desc: "SQL Injection zaifliklarini topish" },
+                  { key: "nucleiScan", label: "Nuclei Scanner", desc: "Biyo-ma'lumotlar bazasi bilan tahlil" },
+                  { key: "zapScan", label: "OWASP ZAP", desc: "Chuqur veb-ilova xavf tahlili (sekin)" },
+                ].map((module) => (
+                  <label
+                    key={module.key}
+                    className="flex items-start gap-3 p-3 bg-surface-container rounded-lg cursor-pointer hover:bg-surface-high transition-colors"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={customModules[module.key as keyof typeof customModules]}
+                      onChange={() => toggleModule(module.key as keyof typeof customModules)}
+                      className="w-4 h-4 mt-0.5 rounded bg-surface-low border-outline-variant text-primary focus:ring-primary/30"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <span className="text-sm font-semibold text-on-surface block">{module.label}</span>
+                      <span className="text-xs text-[hsl(215,15%,45%)]">{module.desc}</span>
+                    </div>
+                  </label>
+                ))}
+              </div>
+
+              <div className="mt-4 p-3 bg-primary/5 border border-primary/20 rounded-lg">
+                <p className="text-xs text-[hsl(215,15%,45%)]">
+                  💡 <strong>Maslahat:</strong> Barcha modulni tanlash sekinroq lekin to'liq tahlil beradi. Birinchi tekshiruv uchun asosiy modullarni tanlang.
+                </p>
+              </div>
+            </div>
+          )}
 
           {/* Authenticated Scanning */}
           <div className="bg-surface-low rounded-xl p-6 border-ghost">

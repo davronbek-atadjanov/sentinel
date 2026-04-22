@@ -162,6 +162,18 @@ class ScanCreateSerializer(serializers.ModelSerializer):
          - start_time: str (HH:MM UTC)
          - end_time: str (HH:MM UTC)
 
+    5. Custom Profile Modules (CUSTOM scan_type only):
+       - custom_modules: dict
+         - headerAnalysis: bool (HTTP security headers check)
+         - sslCheck: bool (SSL/TLS certificate and encryption strength)
+         - portScan: bool (open ports and services detection)
+         - xssScan: bool (cross-site scripting vulnerabilities)
+         - sqliScan: bool (SQL injection vulnerabilities)
+         - nucleiScan: bool (community templates scanning)
+         - zapScan: bool (OWASP ZAP deep analysis)
+         Only used when scan_type == "CUSTOM"
+         At least one module must be enabled for custom scans
+
     Auto-asset creation behavior:
     - Creates or updates Asset record based on target_url
     - Uses normalized URL with www handling (canonical no-www, but matches both variants)

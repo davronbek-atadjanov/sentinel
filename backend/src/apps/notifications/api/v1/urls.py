@@ -8,4 +8,6 @@ router.register(r"notifications", NotificationViewSet, basename="notifications")
 
 urlpatterns = [
     path("", include(router.urls)),
+    # Direct stats endpoint for notifications
+    path("stats/", NotificationViewSet.as_view({"get": "stats"}), name="notifications-stats"),
 ]
