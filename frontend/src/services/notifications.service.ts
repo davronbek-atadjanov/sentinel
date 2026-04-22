@@ -1,5 +1,5 @@
-import { api } from "@/lib/api";
-import { PaginatedResponse, ApiResponse } from "@/types/backend.types";
+import { api } from "@/lib/api"
+import { ApiResponse, PaginatedResponse } from "@/types/backend.types"
 
 export interface Notification {
   id: number;
@@ -13,7 +13,7 @@ export interface Notification {
 
 export const NotificationsService = {
   async getNotifications(params?: Record<string, any>): Promise<PaginatedResponse<Notification>> {
-    const response = await api.get("/notifications/", { params });
+    const response = await api.get("/notifications/", { params: { page_size: 50, ...params } });
     return response.data;
   },
 

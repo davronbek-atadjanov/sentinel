@@ -88,7 +88,7 @@ const ReportsPage = () => {
     }
   };
 
-  const displayReports = reportsData?.results || [];
+  const displayReports = reportsData?.data ?? reportsData?.results ?? [];
   const { data: categoryData } = useQuery({
     queryKey: ["vulnerabilities", "by-category"],
     queryFn: () => VulnerabilitiesService.getByCategory(),

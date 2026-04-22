@@ -1,5 +1,5 @@
-import { api } from "@/lib/api";
-import { PaginatedResponse, ApiResponse } from "@/types/backend.types";
+import { api } from "@/lib/api"
+import { ApiResponse, PaginatedResponse } from "@/types/backend.types"
 
 export interface Asset {
   id: number;
@@ -17,7 +17,7 @@ export interface Asset {
 
 export const AssetsService = {
   async getAssets(params?: Record<string, any>): Promise<PaginatedResponse<Asset>> {
-    const response = await api.get("/assets/", { params });
+    const response = await api.get("/assets/", { params: { page_size: 50, ...params } });
     return response.data;
   },
 

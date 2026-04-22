@@ -15,7 +15,7 @@ export interface Report {
 
 export const ReportsService = {
   async getReports(params?: Record<string, any>): Promise<PaginatedResponse<Report>> {
-    const response = await api.get("/reports/", { params });
+    const response = await api.get("/reports/", { params: { page_size: 50, ...params } });
     return response.data;
   },
 

@@ -41,7 +41,7 @@ const NotificationsPage = () => {
     },
   });
 
-  const notificationsList = notifData?.results || [];
+  const notificationsList = notifData?.data ?? notifData?.results ?? [];
   const stats = statsData?.data || { total: 0, unread: 0, by_level: {} };
 
   const activeFilterItems = [

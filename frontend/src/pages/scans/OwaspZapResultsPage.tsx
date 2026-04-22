@@ -1,11 +1,16 @@
 import PageHeader from "@/components/shared/PageHeader"
 import SeverityBadge from "@/components/shared/SeverityBadge"
 import StatusBadge from "@/components/shared/StatusBadge"
+import { useToast } from "@/hooks/use-toast"
+import { ReportsService } from "@/services/reports.service"
 import { ScansService } from "@/services/scans.service"
-import { useQuery } from "@tanstack/react-query"
-import { useParams } from "react-router-dom"
+import { useMutation, useQuery } from "@tanstack/react-query"
+import { Download, FileText } from "lucide-react"
+import { useNavigate, useParams } from "react-router-dom"
 
 const OwaspZapResultsPage = () => {
+  const { toast } = useToast();
+  const navigate = useNavigate();
   const { id } = useParams();
   const scanId = Number(id);
 
@@ -47,6 +52,80 @@ const OwaspZapResultsPage = () => {
   const maxCount = Math.max(1, ...severityCounts.map((item) => item.count));
   const progress = results?.progress ?? scan?.progress ?? 0;
   const status = results?.status || scan?.status || "UNKNOWN";
+
+  const triggerDownload = (blob: Blob, filename: string) => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  };
+
+  const generateReportMutation = useMutation({
+    mutationFn: () => ReportsService.generateReport({
+      title: scan?.target_url ? `Skan hisobot - ${scan.target_url}` : `Skan hisobot - ${scanId}`,
+      report_type: "TECHNICAL",
+      scan: scanId,
+    }),
+    onSuccess: ({ blob, filename }) => {
+      triggerDownload(blob, filename);
+      toast({
+        title: "Hisobot tayyor",
+        description: "PDF fayli yuklab olinmoqda.",
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Xatolik",
+        description: error.message || "PDF hisobotni yuklab bo'lmadi.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleExportPdf = () => {
+    if (!Number.isFinite(scanId)) {
+      toast({
+        title: "Xatolik",
+        description: "Skan ID topilmadi.",
+        variant: "destructive",
+      });
+      return;
+    }
+    generateReportMutation.mutate();
+  };
+
+  const handleExportCsv = () => {
+    if (vulnerabilities.length === 0) {
+      toast({
+        title: "Ma'lumot yo'q",
+        description: "CSV eksport uchun zaifliklar topilmadi.",
+      });
+      return;
+    }
+
+    const escapeCsv = (value: string) => `"${value.replace(/"/g, '""')}"`;
+    const headers = ["id", "title", "severity", "status", "category", "affected_url"];
+    const rows = vulnerabilities.map((vuln) => [
+      vuln.id.toString(),
+      vuln.title || "",
+      vuln.severity || "",
+      vuln.status || "",
+      vuln.category || "",
+      vuln.affected_url || "",
+    ]);
+
+    const csv = [headers, ...rows]
+      .map((row) => row.map((cell) => escapeCsv(cell)).join(","))
+      .join("\n");
+
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const filename = `scan-${scanId}-vulnerabilities.csv`;
+    triggerDownload(blob, filename);
+  };
   return (
     <div>
       <PageHeader
@@ -62,6 +141,26 @@ const OwaspZapResultsPage = () => {
               Skanerlash #{scanId}
             </span>
           )
+        }
+        actions={
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={handleExportCsv}
+              disabled={resultsLoading || vulnerabilities.length === 0}
+              className="flex items-center gap-2 bg-surface-container px-5 py-2.5 rounded-lg text-sm font-semibold text-on-surface hover:bg-surface-high transition-colors disabled:opacity-50"
+            >
+              <Download className="w-4 h-4" />
+              CSV yuklab olish
+            </button>
+            <button
+              onClick={handleExportPdf}
+              disabled={generateReportMutation.isPending || !Number.isFinite(scanId)}
+              className="flex items-center gap-2 bg-gradient-primary px-5 py-2.5 rounded-lg text-sm font-bold text-on-primary-fixed shadow-glow-primary hover:opacity-90 transition-all disabled:opacity-50"
+            >
+              <FileText className="w-4 h-4" />
+              PDF hisobot
+            </button>
+          </div>
         }
       />
 
@@ -133,7 +232,11 @@ const OwaspZapResultsPage = () => {
                 </tr>
               ) : vulnerabilities.length > 0 ? (
                 vulnerabilities.map((vuln) => (
-                  <tr key={vuln.id} className="hover:bg-surface-container/30 transition-colors border-b border-[hsl(222,20%,12%,0.08)]">
+                  <tr
+                    key={vuln.id}
+                    onClick={() => navigate(`/app/vulnerabilities/${vuln.id}`)}
+                    className="hover:bg-surface-container/30 transition-colors border-b border-[hsl(222,20%,12%,0.08)] cursor-pointer"
+                  >
                     <td className="px-5 py-4"><SeverityBadge severity={vuln.severity.toLowerCase()} /></td>
                     <td className="px-5 py-4">
                       <span className="font-semibold text-on-surface block">{vuln.title}</span>

@@ -53,8 +53,9 @@ const ScansListPage = () => {
     queryFn: () => ScansService.getStats(),
   });
 
-  const displayScans = scansData?.results
-    ? scansData.results.map((s: any) => {
+  const scansList = scansData?.data ?? scansData?.results ?? [];
+  const displayScans = scansList.length > 0
+    ? scansList.map((s: any) => {
         let threats: string[] = [];
         const sum = s.results_summary || {};
         if (sum.critical) threats.push("critical");
@@ -261,7 +262,7 @@ const ScansListPage = () => {
         </div>
         <div className="px-6 py-4 flex justify-between items-center border-t border-[hsl(222,20%,12%,0.15)]">
           <span className="text-[10px] text-[hsl(215,15%,40%)] uppercase tracking-widest font-semibold">
-            Jami {scansData?.count || 0} ta skanerlashdan {displayScans.length} tasi ko'rsatilmoqda
+            Jami {scansData?.total_items ?? scansData?.count ?? 0} ta skanerlashdan {displayScans.length} tasi ko'rsatilmoqda
           </span>
           <div className="flex items-center gap-2">
             <button className="w-8 h-8 rounded flex items-center justify-center text-[hsl(215,15%,45%)] hover:bg-surface-high">

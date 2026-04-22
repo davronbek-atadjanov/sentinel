@@ -2,9 +2,9 @@ import PageHeader from "@/components/shared/PageHeader"
 import SeverityBadge from "@/components/shared/SeverityBadge"
 import StatusBadge from "@/components/shared/StatusBadge"
 import {
-    Download,
-    FileText,
-    MoreVertical
+  Download,
+  FileText,
+  MoreVertical
 } from "lucide-react"
 import { Link } from "react-router-dom"
 
@@ -15,7 +15,7 @@ import { ShieldAlert } from "lucide-react"
 const VulnerabilitiesListPage = () => {
   const { data: vulnerabilitiesData, isLoading } = useQuery({
     queryKey: ["vulnerabilities"],
-    queryFn: () => VulnerabilitiesService.getVulnerabilities(),
+    queryFn: () => VulnerabilitiesService.getAllVulnerabilities(),
   });
 
   const { data: statsData } = useQuery({
@@ -23,9 +23,9 @@ const VulnerabilitiesListPage = () => {
     queryFn: () => VulnerabilitiesService.getStats(),
   });
 
-  const displayVulns = vulnerabilitiesData?.results || [];
+  const displayVulns = vulnerabilitiesData?.data ?? vulnerabilitiesData?.results ?? [];
   const stats = statsData?.data || { total: 0, by_severity: {}, resolved: 0 };
-  const totalCount = vulnerabilitiesData?.count || 0;
+  const totalCount = vulnerabilitiesData?.total_items ?? vulnerabilitiesData?.count ?? 0;
   
   // Calculate critical fix rate
   const criticalCount = stats.by_severity?.CRITICAL || 0;
@@ -154,32 +154,33 @@ const VulnerabilitiesListPage = () => {
           </table>
         </div>
 
-        {/* Pagination */}
-        <div className="px-6 py-4 flex justify-between items-center border-t border-[hsl(222,20%,12%,0.15)]">
-          <span className="text-[10px] text-[hsl(215,15%,40%)] uppercase font-semibold">
-            ‹ Oldingi
-          </span>
-          <div className="flex items-center gap-2">
-            <button className="w-8 h-8 rounded bg-primary text-on-primary-fixed text-xs font-bold flex items-center justify-center">
-              1
-            </button>
-            {[2, 3].map((n) => (
-              <button
-                key={n}
-                className="w-8 h-8 rounded text-[hsl(215,15%,55%)] hover:bg-surface-high text-xs font-bold flex items-center justify-center"
-              >
-                {n}
+        {totalCount > displayVulns.length && (
+          <div className="px-6 py-4 flex justify-between items-center border-t border-[hsl(222,20%,12%,0.15)]">
+            <span className="text-[10px] text-[hsl(215,15%,40%)] uppercase font-semibold">
+              ‹ Oldingi
+            </span>
+            <div className="flex items-center gap-2">
+              <button className="w-8 h-8 rounded bg-primary text-on-primary-fixed text-xs font-bold flex items-center justify-center">
+                1
               </button>
-            ))}
-            <span className="text-[hsl(215,15%,40%)] text-xs">...</span>
-            <button className="w-8 h-8 rounded text-[hsl(215,15%,55%)] hover:bg-surface-high text-xs font-bold flex items-center justify-center">
-              {Math.max(1, Math.ceil(totalCount / 10))}
-            </button>
+              {[2, 3].map((n) => (
+                <button
+                  key={n}
+                  className="w-8 h-8 rounded text-[hsl(215,15%,55%)] hover:bg-surface-high text-xs font-bold flex items-center justify-center"
+                >
+                  {n}
+                </button>
+              ))}
+              <span className="text-[hsl(215,15%,40%)] text-xs">...</span>
+              <button className="w-8 h-8 rounded text-[hsl(215,15%,55%)] hover:bg-surface-high text-xs font-bold flex items-center justify-center">
+                {Math.max(1, Math.ceil(totalCount / 10))}
+              </button>
+            </div>
+            <span className="text-[10px] text-[hsl(215,15%,55%)] uppercase font-semibold cursor-pointer hover:text-white">
+              Keyingisi ›
+            </span>
           </div>
-          <span className="text-[10px] text-[hsl(215,15%,55%)] uppercase font-semibold cursor-pointer hover:text-white">
-            Keyingisi ›
-          </span>
-        </div>
+        )}
       </div>
 
       {/* Bottom Stats */}

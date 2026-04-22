@@ -24,9 +24,9 @@ const AssetsPage = () => {
     queryFn: () => AssetsService.getAttackSurface(),
   });
 
-  const displayAssets = Array.isArray(assetsData?.data) ? assetsData.data : (assetsData?.results || []);
+  const displayAssets = assetsData?.data ?? assetsData?.results ?? [];
   const stats = attackSurfaceData?.data || { total_assets: 0, active_assets: 0, high_risk_assets: 0 };
-  const totalCount = assetsData?.total_items || assetsData?.count || 0;
+  const totalCount = assetsData?.total_items ?? assetsData?.count ?? 0;
 
   return (
     <div>

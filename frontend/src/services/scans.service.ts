@@ -33,7 +33,7 @@ export interface ScanResultsData {
 
 export const ScansService = {
   async getScans(params?: Record<string, any>): Promise<PaginatedResponse<Scan>> {
-    const response = await api.get("/scans/", { params });
+    const response = await api.get("/scans/", { params: { page_size: 50, ...params } });
     return response.data;
   },
 
