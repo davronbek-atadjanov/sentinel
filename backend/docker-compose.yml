@@ -181,6 +181,43 @@ services:
     networks:
       - backend_network
 
+  bwapp:
+    image: raesene/bwapp:latest
+    restart: unless-stopped
+    ports:
+      - "8090:80"
+    networks:
+      - backend_network
+
+  webgoat:
+    image: webgoat/goatandwolf:latest
+    restart: unless-stopped
+    ports:
+      - "8082:8080"
+      - "9090:9090"
+    environment:
+      TZ: Asia/Tashkent
+    networks:
+      - backend_network
+
+  mutillidae:
+    image: citizenstig/nowasp:latest
+    restart: unless-stopped
+    ports:
+      - "8083:80"
+    networks:
+      - backend_network
+
+  vampi:
+    image: erev0s/vampi:latest
+    restart: unless-stopped
+    ports:
+      - "5001:5000"
+    environment:
+      vulnerable: 1
+    networks:
+      - backend_network
+
 volumes:
   pg_data:
     driver: local
