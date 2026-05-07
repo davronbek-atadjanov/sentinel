@@ -165,6 +165,22 @@ services:
     networks:
       - backend_network
 
+  juice-shop:
+    image: bkimminich/juice-shop:latest
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    networks:
+      - backend_network
+
+  dvwa:
+    image: vulnerables/web-dvwa:latest
+    restart: unless-stopped
+    ports:
+      - "8088:80"
+    networks:
+      - backend_network
+
 volumes:
   pg_data:
     driver: local
