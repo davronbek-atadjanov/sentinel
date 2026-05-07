@@ -242,6 +242,32 @@ const ScanConfigPage = () => {
                   placeholder="https://..."
                   className="w-full bg-surface-container border-ghost rounded-lg px-4 py-3 text-sm text-on-surface focus:ring-1 focus:ring-primary/30 focus:outline-none"
                 />
+                <div className="mt-3">
+                  <p className="text-[10px] text-[hsl(215,15%,45%)] mb-2">
+                    Demo nishon tanlang (sinov uchun ruxsat berilgan):
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      { label: "Juice Shop (lokal)", url: "http://juice-shop:3000" },
+                      { label: "DVWA (lokal)", url: "http://dvwa:80" },
+                      { label: "bWAPP (lokal)", url: "http://bwapp:80" },
+                      { label: "WebGoat (lokal)", url: "http://webgoat:8080/WebGoat" },
+                      { label: "Mutillidae (lokal)", url: "http://mutillidae:80" },
+                      { label: "VAmPI API (lokal)", url: "http://vampi:5000" },
+                      { label: "testphp.vulnweb.com", url: "http://testphp.vulnweb.com" },
+                      { label: "scanme.nmap.org", url: "http://scanme.nmap.org" },
+                    ].map((demo) => (
+                      <button
+                        key={demo.url}
+                        type="button"
+                        onClick={() => setTargetUrl(demo.url)}
+                        className="text-[11px] px-3 py-1.5 rounded-md bg-surface-container hover:bg-primary/10 border border-ghost hover:border-primary/30 text-on-surface transition-colors"
+                      >
+                        {demo.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div>
